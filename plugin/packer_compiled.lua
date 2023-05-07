@@ -79,15 +79,15 @@ _G.packer_plugins = {
     path = "/home/ma/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["darkplus.nvim"] = {
-    loaded = true,
-    path = "/home/ma/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
-    url = "https://github.com/lunarvim/darkplus.nvim"
-  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/ma/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["melange-nvim"] = {
+    loaded = true,
+    path = "/home/ma/.local/share/nvim/site/pack/packer/start/melange-nvim",
+    url = "https://github.com/savq/melange-nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
