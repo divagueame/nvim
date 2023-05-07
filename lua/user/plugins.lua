@@ -70,7 +70,16 @@ return packer.startup(function(use)
 --  use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
 
   -- Telescope
-  -- use "nvim-telescope/telescope.nvim"
+	use {
+  	'nvim-telescope/telescope.nvim', tag = '0.1.1',
+  	requires = { {'nvim-lua/plenary.nvim'} }
+	}
+
+  -- Treesitter
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
 
 	-- ToggleTerm
 	use {"akinsho/toggleterm.nvim", tag = '*' }
