@@ -1,4 +1,5 @@
 local options = {
+  noname=meow,
   clipboard = "unnamedplus",
   fileencoding = "utf-8",
   hlsearch = true,
