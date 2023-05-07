@@ -13,7 +13,9 @@ local options = {
   splitright = true,
   termguicolors = true,
   number = true,
-  relativenumber = true  
+  relativenumber = true,
+  list = false,
+	fillchars = 'eob: '
 }
 
 for k, v in pairs(options) do

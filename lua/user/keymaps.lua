@@ -14,3 +14,6 @@ vim.g.maplocalleader = " "
 -- Insert --
 -- Press jk fast to exit insert mode 
 keymap("i", "jj", "<ESC>", opts)
+
+-- Nvimtree
+keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
