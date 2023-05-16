@@ -17,3 +17,10 @@ keymap("i", "jj", "<ESC>", opts)
 
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
+
+-- Quicksave
+keymap("n", "<S-s>", ":w<CR>", opts)
+
+-- Quicksave quit
+keymap("n", "<leader>q", ":wqa<CR>", opts)
+--- 
