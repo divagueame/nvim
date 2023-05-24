@@ -24,3 +24,5 @@ keymap("n", "<S-s>", ":w<CR>", opts)
 -- Quicksave quit
 keymap("n", "<leader>q", ":wqa<CR>", opts)
 --- 
+
+
