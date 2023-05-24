@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/home/ma/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/home/ma/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
   ["melange-nvim"] = {
     loaded = true,
     path = "/home/ma/.local/share/nvim/site/pack/packer/start/melange-nvim",
