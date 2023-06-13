@@ -27,6 +27,9 @@ require("formatter").setup({
 		yaml = {
 			require("formatter.filetypes.yaml").prettier,
 		},
+		ruby = {
+			require("formatter.filetypes.ruby").rubocop,
+		},
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace,
 		},
