@@ -117,6 +117,8 @@ return packer.startup(function(use)
 	-- Formatter
 	use { 'mhartington/formatter.nvim' }
 
+	-- Fold
+	use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 	
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
