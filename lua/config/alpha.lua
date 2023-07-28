@@ -9,6 +9,8 @@ function M.setup()
   local dashboard = require "alpha.themes.dashboard"
   local function header()
     return {
+[[                                                ]],
+[[                                                ]],
 [[     /\-/\                                      ]],
 [[    /a a  \                                 _   ]],
 [[   =\ Y  =/-~~~~~~-,_______________________/ )  ]],
@@ -16,6 +18,8 @@ function M.setup()
 [[       \           /                            ]],
 [[       ||  |---'\  \                            ]],
 [[      (_(__|   ((__|                            ]],
+[[                                                ]],
+[[                                                ]],
     }
   end
 
@@ -23,7 +27,7 @@ function M.setup()
 
   dashboard.section.buttons.val = {
     dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-    dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
+--    dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
     dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
   }
 

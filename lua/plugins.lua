@@ -6,6 +6,10 @@ function M.setup()
 
   -- packer.nvim configuration
   local conf = {
+		profile = {
+			enable = true,
+			threshold = 0,
+		},
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
@@ -35,7 +39,7 @@ function M.setup()
   -- Plugins
   local function plugins(use)
     use { "wbthomason/packer.nvim" }
-		--
+
 	  -- Load only when require
     use { "nvim-lua/plenary.nvim", module = "plenary" }
 
@@ -58,11 +62,11 @@ function M.setup()
     -- Git
     use {
       "TimUntersberger/neogit",
+			cmd = "Neogit",
       config = function()
         require("config.neogit").setup()
       end,
     }
-
 
     -- IndentLine
     use {
@@ -72,7 +76,7 @@ function M.setup()
         require("config.indentblankline").setup()
       end,
     }
-		--
+
    -- Theme: icons
     use {
       "kyazdani42/nvim-web-devicons",
@@ -109,7 +113,7 @@ function M.setup()
         require("lightspeed").setup {}
       end,
     }
-		--
+
     -- Markdown
     use {
       "iamcco/markdown-preview.nvim",
@@ -118,6 +122,35 @@ function M.setup()
       end,
       ft = "markdown",
       cmd = { "MarkdownPreview" },
+    }
+
+    -- Status line
+    use {
+      "nvim-lualine/lualine.nvim",
+      event = "VimEnter",
+      config = function()
+        require("config.lualine").setup()
+      end,
+      requires = { "nvim-web-devicons" },
+    }
+
+
+    -- Treesitter
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
+      config = function()
+        require("config.treesitter").setup()
+      end,
+    }
+
+    use {
+      "SmiteshP/nvim-gps",
+      requires = "nvim-treesitter/nvim-treesitter",
+      module = "nvim-gps",
+      config = function()
+        require("nvim-gps").setup()
+      end,
     }
 
     if packer_bootstrap then
