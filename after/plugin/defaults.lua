@@ -18,8 +18,14 @@ opt.smartcase = true -- Smart case
 opt.updatetime = 250 --Decrease update time
 opt.signcolumn = "yes" -- Always show sign column
 opt.clipboard = "unnamedplus" -- Access system clipboard
-
+opt.cmdheight = 0
+opt.path:remove "/usr/include"
+opt.path:append "**"
+-- vim.cmd [[set path=.,,,$PWD/**]] -- Alternatively set the path
 -- Highlight on yank
+opt.wildignorecase = true
+opt.wildignore:append "**/node_modules/*"
+
 vim.cmd [[
   augroup YankHighlight
     autocmd!
