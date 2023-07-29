@@ -162,9 +162,26 @@ function M.setup()
       end,
     }
 
+		
+    -- FZF
+    use { "junegunn/fzf", run = "./install --all", event = "VimEnter" }
+    use { "junegunn/fzf.vim", event = "BufEnter" }
+
 		use {
 			"ibhagwan/fzf-lua",
 			requires = { "kyazdani42/nvim-web-devicons" },
+		}
+
+
+		use {
+			"kyazdani42/nvim-tree.lua",
+			requires = {
+				"kyazdani42/nvim-web-devicons",
+			},
+			cmd = { "NvimTreeToggle", "NvimTreeClose" },
+				config = function()
+					require("config.nvimtree").setup()
+				end,
 		}
 
     if packer_bootstrap then
