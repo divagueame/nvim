@@ -144,23 +144,19 @@ function M.setup()
     }
 
 
-    -- Treesitter
-    use {
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
-      config = function()
-        require("config.treesitter").setup()
-      end,
-    }
-
-    use {
-      "SmiteshP/nvim-gps",
-      requires = "nvim-treesitter/nvim-treesitter",
-      module = "nvim-gps",
-      config = function()
-        require("nvim-gps").setup()
-      end,
-    }
+			-- Treesitter
+use {
+  "nvim-treesitter/nvim-treesitter",
+  opt = true,
+  event = "BufRead",
+  run = ":TSUpdate",
+  config = function()
+    require("config.treesitter").setup()
+  end,
+  requires = {
+    { "nvim-treesitter/nvim-treesitter-textobjects" },
+  },
+}
 
 		
     -- FZF
@@ -184,6 +180,49 @@ function M.setup()
 				end,
 		}
 
+		-- User interface
+		use {
+			"stevearc/dressing.nvim",
+			event = "BufEnter",
+			config = function()
+				require("dressing").setup {
+					select = {
+						backend = { "telescope", "fzf", "builtin" },
+					},
+				}
+			end,
+		}
+use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
+
+		-- Buffer line
+		use {
+			"akinsho/nvim-bufferline.lua",
+			event = "BufReadPre",
+			wants = "nvim-web-devicons",
+			config = function()
+				require("config.bufferline").setup()
+			end,
+		}
+
+		use {
+			 "SmiteshP/nvim-navic",
+				requires = "neovim/nvim-lspconfig"
+		}
+		use {
+			"phaazon/hop.nvim",
+			cmd = { "HopWord", "HopChar1" },
+			config = function()
+				require("hop").setup {}
+			end,
+		}
+
+		use {
+			"ggandor/lightspeed.nvim",
+			keys = { "s", "S", "f", "F", "t", "T" },
+			config = function()
+			 require("lightspeed").setup {}
+			end,
+		}
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()
