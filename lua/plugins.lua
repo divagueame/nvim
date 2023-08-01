@@ -229,6 +229,23 @@ use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
     end
   end
 
+-- Completion
+use {
+  "ms-jpq/coq_nvim",
+  branch = "coq",
+  event = "InsertEnter",
+  opt = true,
+  run = ":COQdeps",
+  config = function()
+    require("config.coq").setup()
+  end,
+  requires = {
+    { "ms-jpq/coq.artifacts", branch = "artifacts" },
+    { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
+  },
+  disable = false,
+}
+
   packer_init()
 
   local packer = require "packer"
