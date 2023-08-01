@@ -215,24 +215,10 @@ use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
 				require("hop").setup {}
 			end,
 		}
-
+		
 		use {
-			"ggandor/lightspeed.nvim",
-			keys = { "s", "S", "f", "F", "t", "T" },
-			config = function()
-			 require("lightspeed").setup {}
-			end,
-		}
-    if packer_bootstrap then
-      print "Restart Neovim required after installation!"
-      require("packer").sync()
-    end
-  end
-
--- Completion
-use {
-  "ms-jpq/coq_nvim",
-  branch = "coq",
+			"ms-jpq/coq_nvim",
+			branch = "coq",
   event = "InsertEnter",
   opt = true,
   run = ":COQdeps",
@@ -242,9 +228,23 @@ use {
   requires = {
     { "ms-jpq/coq.artifacts", branch = "artifacts" },
     { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
-  },
-  disable = false,
-}
+			}
+		}
+
+		use {
+			"ggandor/lightspeed.nvim",
+			keys = { "s", "S", "f", "F", "t", "T" },
+			config = function()
+			 require("lightspeed").setup {}
+			end,
+		}
+
+    if packer_bootstrap then
+      print "Restart Neovim required after installation!"
+      require("packer").sync()
+    end
+  end
+
 
   packer_init()
 
