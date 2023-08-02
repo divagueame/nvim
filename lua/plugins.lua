@@ -192,6 +192,7 @@ use {
 				}
 			end,
 		}
+
 use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
 
 		-- Buffer line
@@ -208,36 +209,98 @@ use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
 			 "SmiteshP/nvim-navic",
 				requires = "neovim/nvim-lspconfig"
 		}
-		use {
-			"phaazon/hop.nvim",
-			cmd = { "HopWord", "HopChar1" },
-			config = function()
-				require("hop").setup {}
-			end,
-		}
-		
-		use {
-			"ms-jpq/coq_nvim",
-			branch = "coq",
-  event = "InsertEnter",
-  opt = true,
-  run = ":COQdeps",
-  config = function()
-    require("config.coq").setup()
-  end,
-  requires = {
-    { "ms-jpq/coq.artifacts", branch = "artifacts" },
-    { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
-			}
-		}
 
-		use {
-			"ggandor/lightspeed.nvim",
-			keys = { "s", "S", "f", "F", "t", "T" },
-			config = function()
-			 require("lightspeed").setup {}
-			end,
-		}
+
+    -- Completion
+    use {
+      "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
+      opt = true,
+      config = function()
+        require("config.cmp").setup()
+      end,
+      wants = { "LuaSnip" },
+      requires = {
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lua",
+        "ray-x/cmp-treesitter",
+        "hrsh7th/cmp-cmdline",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        -- "onsails/lspkind-nvim",
+        -- "hrsh7th/cmp-calc",
+        -- "f3fora/cmp-spell",
+        -- "hrsh7th/cmp-emoji",
+        {
+          "L3MON4D3/LuaSnip",
+          wants = { "friendly-snippets", "vim-snippets" },
+          config = function()
+            require("config.snip").setup()
+          end,
+        },
+        "rafamadriz/friendly-snippets",
+        "honza/vim-snippets",
+      },
+    }
+
+-- Auto pairs
+use {
+  "windwp/nvim-autopairs",
+  wants = "nvim-treesitter",
+  module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
+  config = function()
+    require("config.autopairs").setup()
+  end,
+}
+
+use {
+    "williamboman/mason.nvim"
+}
+
+
+    -- LSP
+    use {
+      "neovim/nvim-lspconfig",
+      opt = true,
+      -- event = "VimEnter",
+      event = { "BufReadPre" },
+      -- keys = { "<leader>l", "<leader>f" },
+      -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "cmp-nvim-lsp" },
+      wants = {
+        "nvim-lsp-installer",
+        "cmp-nvim-lsp",
+        "lua-dev.nvim",
+        "vim-illuminate",
+        "null-ls.nvim",
+        "schemastore.nvim",
+        -- "nvim-lsp-ts-utils",
+        "typescript.nvim",
+      },
+      config = function()
+        require("config.lsp").setup()
+      end,
+      requires = {
+        "williamboman/nvim-lsp-installer",
+        "folke/lua-dev.nvim",
+        "RRethy/vim-illuminate",
+        "jose-elias-alvarez/null-ls.nvim",
+        {
+          "j-hui/fidget.nvim",
+          config = function()
+            require("fidget").setup {}
+          end,
+        },
+        "b0o/schemastore.nvim",
+        -- "jose-elias-alvarez/nvim-lsp-ts-utils",
+        "jose-elias-alvarez/typescript.nvim",
+        -- "ray-x/lsp_signature.nvim",
+      },
+    }
+
+
+
 
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
