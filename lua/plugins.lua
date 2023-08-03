@@ -44,12 +44,13 @@ function M.setup()
     use { "nvim-lua/plenary.nvim", module = "plenary" }
 
     -- Colorscheme
-    use {
-      "sainnhe/everforest",
-      config = function()
-        vim.cmd "colorscheme everforest"
-      end,
-    }
+		use({
+	  'rose-pine/neovim',
+	  as = 'rose-pine',
+	  config = function()
+		  vim.cmd('colorscheme rose-pine')
+	  end
+  })
 
     -- Startup screen
     use {
@@ -193,7 +194,7 @@ use {
 			end,
 		}
 
-use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
+		use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
 
 		-- Buffer line
 		use {
@@ -210,97 +211,30 @@ use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
 				requires = "neovim/nvim-lspconfig"
 		}
 
+	 use {
+	  'VonHeikemen/lsp-zero.nvim',
+	  branch = 'v1.x',
+	  requires = {
+		  -- LSP Support
+		  {'neovim/nvim-lspconfig'},
+		  {'williamboman/mason.nvim'},
+		  {'williamboman/mason-lspconfig.nvim'},
 
-    -- Completion
-    use {
-      "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      opt = true,
-      config = function()
-        require("config.cmp").setup()
-      end,
-      wants = { "LuaSnip" },
-      requires = {
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-nvim-lua",
-        "ray-x/cmp-treesitter",
-        "hrsh7th/cmp-cmdline",
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-        -- "onsails/lspkind-nvim",
-        -- "hrsh7th/cmp-calc",
-        -- "f3fora/cmp-spell",
-        -- "hrsh7th/cmp-emoji",
-        {
-          "L3MON4D3/LuaSnip",
-          wants = { "friendly-snippets", "vim-snippets" },
-          config = function()
-            require("config.snip").setup()
-          end,
-        },
-        "rafamadriz/friendly-snippets",
-        "honza/vim-snippets",
-      },
-    }
+		  -- Autocompletion
+		  {'hrsh7th/nvim-cmp'},
+		  {'hrsh7th/cmp-buffer'},
+		  {'hrsh7th/cmp-path'},
+		  {'saadparwaiz1/cmp_luasnip'},
+		  {'hrsh7th/cmp-nvim-lsp'},
+		  {'hrsh7th/cmp-nvim-lua'},
 
--- Auto pairs
-use {
-  "windwp/nvim-autopairs",
-  wants = "nvim-treesitter",
-  module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
-  config = function()
-    require("config.autopairs").setup()
-  end,
-}
+		  -- Snippets
+		  {'L3MON4D3/LuaSnip'},
+		  {'rafamadriz/friendly-snippets'},
+	  }
+  }
 
-use {
-    "williamboman/mason.nvim"
-}
-
-
-    -- LSP
-    use {
-      "neovim/nvim-lspconfig",
-      opt = true,
-      -- event = "VimEnter",
-      event = { "BufReadPre" },
-      -- keys = { "<leader>l", "<leader>f" },
-      -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "cmp-nvim-lsp" },
-      wants = {
-        "nvim-lsp-installer",
-        "cmp-nvim-lsp",
-        "lua-dev.nvim",
-        "vim-illuminate",
-        "null-ls.nvim",
-        "schemastore.nvim",
-        -- "nvim-lsp-ts-utils",
-        "typescript.nvim",
-      },
-      config = function()
-        require("config.lsp").setup()
-      end,
-      requires = {
-        "williamboman/nvim-lsp-installer",
-        "folke/lua-dev.nvim",
-        "RRethy/vim-illuminate",
-        "jose-elias-alvarez/null-ls.nvim",
-        {
-          "j-hui/fidget.nvim",
-          config = function()
-            require("fidget").setup {}
-          end,
-        },
-        "b0o/schemastore.nvim",
-        -- "jose-elias-alvarez/nvim-lsp-ts-utils",
-        "jose-elias-alvarez/typescript.nvim",
-        -- "ray-x/lsp_signature.nvim",
-      },
-    }
-
-
-
+  use("folke/zen-mode.nvim")
 
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
