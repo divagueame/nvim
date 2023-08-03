@@ -20,6 +20,7 @@ function M.setup()
 [[      (_(__|   ((__|                            ]],
 [[                                                ]],
 [[                                                ]],
+
     }
   end
 
@@ -32,10 +33,11 @@ function M.setup()
   }
 
   local function footer()
-    local datetime = os.date "%d-%m-%Y | %H:%M:%S"
-    local plugins_text = "\t"  .. datetime
+--    local datetime = os.date "%d-%m-%Y | %H:%M:%S"
+--    local plugins_text = "\t"  .. datetime
 
-    return plugins_text .. "\n" .. "Always Chiki" 
+ --   return plugins_text .. "\n" .. "Always Chiki" 
+		return "🐕😺🐕" .. "\n" .. "Chiki" 
   end
 
   dashboard.section.footer.val = footer()

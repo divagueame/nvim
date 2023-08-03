@@ -1,1 +1,2 @@
+print("🐕😺🐕")
 require("plugins").setup()
