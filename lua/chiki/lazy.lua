@@ -15,8 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     { import = 'chiki.plugins' },
     { 'numToStr/Comment.nvim', opts = {} },
-    'tpope/vim-sleuth'
-
+    'tpope/vim-sleuth',
+    'puremourning/vimspector'
 })
 
 
