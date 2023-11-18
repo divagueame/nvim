@@ -110,6 +110,28 @@ local servers = {
   },
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- Setup neovim lua configuration
 require('neodev').setup()
 
@@ -202,3 +224,52 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local lspconfig = require('lspconfig')
+local configs = require 'lspconfig.configs'
+
+if not configs.fuzzy_ls then
+  configs.fuzzy_ls = {
+    default_config = {
+      cmd = {'fuzzy'};
+      filetypes = {'ruby'};
+      root_dir = function(fname)
+        return lspconfig.util.find_git_ancestor(fname)
+      end;
+      settings = {};
+      init_options = {
+        allocationType = "ram",
+        indexGems = true,
+        reportDiagnostics = true
+      };
+    };
+  }
+end
+
+lspconfig.fuzzy_ls.setup {
+    on_attach = on_attach
+}
+
+

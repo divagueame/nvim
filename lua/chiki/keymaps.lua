@@ -16,7 +16,6 @@ keymap("n", "<S-l>", ":bnext<CR>", default_opts)
 keymap('n', '<Leader>w', [[:wa<CR>]], default_opts)
 -- keymap('i', '<Leader>w', [[<Esc><CR>:wa<CR>i]], default_opts)
 
-pollas
 keymap('n', '<Leader>q', [[:wa<CR>:qa<CR>]], default_opts)
 -- keymap('i', '<Leader>wf', [[<Esc><CR>:wa<CR>:qa<CR>]], default_opts)
  
