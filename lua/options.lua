@@ -1,4 +1,6 @@
-print("options")
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Line number
 vim.opt.number = true
@@ -28,8 +30,9 @@ vim.opt.inccommand = "split"
 -- Ignore case when search / :commands
 vim.opt.ignorecase = true
 
+-- Set highlight on search
+vim.o.hlsearch = false
+
 -- 
 vim.opt.termguicolors = true
-
-
 

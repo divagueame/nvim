@@ -13,12 +13,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    -- Colorscheme
     {
         "rebelot/kanagawa.nvim",
         config = function()
             vim.cmd.colorscheme("kanagawa-dragon")
         end
     },
+    -- Tree sitter
     {
         "nvim-treesitter/nvim-treesitter",
         config = function()
@@ -30,7 +32,27 @@ require("lazy").setup({
                 }
             })
         end
+    },
+    -- Telescope:
+    {
+    'nvim-telescope/telescope.nvim', tag = '0.1.5',
+      dependencies = { 'nvim-lua/plenary.nvim' }
+    },
+    -- nvim-tree
+    {
+        "nvim-tree/nvim-tree.lua",
+        version = "*",
+        lazy = false,
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            require("nvim-tree").setup {
+            view = {
+                width = 30,
+            }
+            }
+        end
     }
-
 })
 
