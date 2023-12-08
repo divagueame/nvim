@@ -36,3 +36,12 @@ vim.o.hlsearch = false
 -- 
 vim.opt.termguicolors = true
 
+-- Signs columns width
+vim.opt.signcolumn="yes"
+
+-- enable persistent undo
+vim.opt.undofile=true
+
+vim.opt.guifont="monospace:h17"               
+
+-- vim.cmd "set whichwrap+=<,>,[,],h,l"
