@@ -1,3 +1,19 @@
+local function my_on_attach(bufnr)
+  local api = require "nvim-tree.api"
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  -- default mappings
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- custom mappings
+  vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
+  vim.keymap.set('n', '<leader>fe', api.tree.toggle ,                  opts('Help'))
+
+end
+
 print("lazy init")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -50,7 +66,8 @@ require("lazy").setup({
             require("nvim-tree").setup {
             view = {
                 width = 30,
-            }
+            },
+             on_attach = my_on_attach
             }
         end
     },
