@@ -41,3 +41,7 @@ keymap.set('n', '<Tab>i', ":buffers<CR>", opts)
 -- Move half page
 keymap.set('n', '<C-j>', ':normal! 20j<CR>', opts)
 keymap.set('n', '<C-k>', ':normal! 20k<CR>', opts)
+
+-- Move 6 lines
+keymap.set('n', '<C-n>', ':normal! 5j<CR>', opts)
+keymap.set('n', '<C-m>', ':normal! 5k<CR>', opts)
