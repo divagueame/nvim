@@ -45,3 +45,21 @@ keymap.set('n', '<C-k>', ':normal! 20k<CR>', opts)
 -- Move 6 lines
 keymap.set('n', '<C-n>', ':normal! 5j<CR>', opts)
 keymap.set('n', '<C-m>', ':normal! 5k<CR>', opts)
+
+-- Resize panes
+keymap.set('n', '<leader>wk', function()
+  vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
+end, opts)
+
+keymap.set('n', '<leader>wj', function()
+  vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
+end, opts)
+
+keymap.set('n', '<leader>wh', function()
+  vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
+end, opts)
+
+keymap.set('n', '<leader>wl', function()
+  vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
+end, opts)
+
