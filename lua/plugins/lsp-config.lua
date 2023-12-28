@@ -25,7 +25,7 @@ end
       lspconfig.lua_ls.setup({})
       lspconfig.tsserver.setup {}
       lspconfig.rust_analyzer.setup {}
-      lspconfig.intelephense.setup {}
+      lspconfig.phpactor.setup{}
 
       -- Keymaps
       vim.keymap.set('n', '<leader>ek', vim.lsp.buf.hover, {})
