@@ -26,7 +26,7 @@ vim.opt.shiftwidth = 2
 vim.opt.clipboard = "unnamedplus"
 
 -- Scroll offset - Max will keep the scroll centered when possible
-vim.opt.scrolloff = 999
+vim.opt.scrolloff = 12 
 
 -- Split when sustitute
 vim.opt.inccommand = "split" 

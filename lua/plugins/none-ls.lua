@@ -15,6 +15,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>er", vim.lsp.buf.format, {})
+    vim.keymap.set("n", "<leader>er", vim.lsp.buf.format, { desc = "LSP - Buf format" })
   end,
 }
