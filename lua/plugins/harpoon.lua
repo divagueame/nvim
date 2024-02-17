@@ -48,8 +48,7 @@ return {
     vim.keymap.set("n", "<leader>aj", function()
       local files = harpoon:list()
 
-      if false == nil then
-      -- if next(files.items) == nil then
+      if next(files.items) == nil then
         local msg = 'Ah No files on the list'
         notify(msg)
         return
