@@ -24,19 +24,14 @@ keymap.set("n", "<C-a>", "gg<S-v>G")
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
 
--- Close buffer
-keymap.set({ "i", "v", "n" }, "<C-c>", "<cmd>bd<cr><esc>", opts)
-
 -- Close all other splits and focus on the current one
-keymap.set('n', 'so', '<C-w>o', { noremap = true, silent = true })
-
+keymap.set('n', '<C-w>o', { noremap = true, silent = true })
 
 -- Buffer navigation
 keymap.set('n', '<Tab>j', ":bnext<CR>", opts)
 keymap.set('n', '<Tab>k', ":bprev<CR>", opts)
-keymap.set('n', '<Tab>u', ":bd<CR>", opts)
+keymap.set({ "i", "v", "n" }, '<Tab>u', ":bd<CR>", opts)
 keymap.set('n', '<Tab>i', ":buffers<CR>", opts)
-
 
 -- Move half page
 keymap.set('n', '<C-j>', ':normal! 20j<CR>', opts)
@@ -45,6 +40,7 @@ keymap.set('n', '<C-k>', ':normal! 20k<CR>', opts)
 -- Move 6 lines
 keymap.set('n', '<C-n>', ':normal! 5j<CR>', opts)
 keymap.set('n', '<C-m>', ':normal! 5k<CR>', opts)
+
 
 -- Resize panes
 keymap.set('n', '<leader>wk', function()
