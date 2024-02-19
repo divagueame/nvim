@@ -25,7 +25,7 @@ keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
 
 -- Close all other splits and focus on the current one
-keymap.set('n', '<C-w>o', { noremap = true, silent = true })
+keymap.set('n', '<C-w>o', '', { noremap = true, silent = true })
 
 -- Buffer navigation
 keymap.set('n', '<Tab>j', ":bnext<CR>", opts)
