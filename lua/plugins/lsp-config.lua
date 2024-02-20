@@ -37,6 +37,9 @@ return {
       lspconfig.stimulus_ls.setup{
         capabilities = capabilities
       }
+      lspconfig.solargraph.setup{
+        capabilities = capabilities
+      }
       -- lspconfig.tsserver.setup {
       --   capabilities = capabilities
       -- }
