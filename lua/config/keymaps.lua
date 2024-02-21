@@ -59,3 +59,13 @@ keymap.set('n', '<leader>wl', function()
   vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
 end, opts)
 
+-- Toggle Diagnostics
+local diagnostics_active = true
+vim.keymap.set('n', '<leader>d', function()
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.diagnostic.show()
+  else
+    vim.diagnostic.hide()
+  end
+end)
