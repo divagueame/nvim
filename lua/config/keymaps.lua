@@ -69,3 +69,8 @@ vim.keymap.set('n', '<leader>d', function()
     vim.diagnostic.hide()
   end
 end)
+
+-- Undo / Redo
+keymap.set('n', 'U', ':redo<cr>', opts)
+keymap.set('n', '<C-r>', ':echo "Use U / u instead to do / redo"<cr>', opts)
+
