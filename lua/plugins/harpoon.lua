@@ -1,31 +1,89 @@
-local function notify(msg)
-  local arg_type = type(msg)
+local status_timer
+local status_window
+local disappear_delay = 1200
+local uiInfoHighlightGroup = 'Normal:UfoCursorFoldedLine'
+-- local uiInfoHighlightGroup = 'Normal:Visual'
+-- local highlightGroup = 'Normal:StatusLine'
 
-  if arg_type == 'string' then
-    local output = 'echohl Normal | echohl ErrorMsg | echo "' .. msg .. '" | echohl None'
-    vim.api.nvim_command(output)
-  elseif arg_type == 'table' then
-    local current_file = vim.fn.bufname()
-    local color = ""
-    local text = ""
-    local file_list = {}
-
-    for _, item in ipairs(msg) do
-      if item.value  == current_file then
-        text = " *" .. " " .. item.value .. " "
-        color = "ModeMsg"
-      else
-        text = " | " .. item.value .. " | "
-        color = "CursorLineSign"
-      end
-      table.insert(file_list, {text, color})
-    end
-
-    vim.api.nvim_echo(file_list, false, {})
-    vim.defer_fn(function() vim.api.nvim_command("echo") end, 2500) -- Clear message timer
+local function close_status_window()
+  if status_window then
+    vim.api.nvim_win_close(status_window, true)
+    status_timer = nil
   end
 end
 
+local function get_harpooned_files()
+  local harpoon = require("harpoon")
+  local file_list = {}
+
+  for _, item in ipairs(harpoon:list().items) do
+    table.insert(file_list, " " .. item.value)
+  end
+
+  return file_list
+end
+
+local function get_current_index()
+  local current_file = vim.fn.bufname()
+
+  for index, item in ipairs(require("harpoon"):list().items) do
+    if item.value  == current_file then
+      return index
+    end
+  end
+end
+
+local function show_status_ui()
+  local buf = vim.api.nvim_create_buf(false, true)
+
+  local content = get_harpooned_files()
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, content)
+
+  local current_index = get_current_index()
+
+  for idx, _ in ipairs(content) do
+    local color = 'MoreMsg'
+    if idx == current_index then
+      color = 'ModeMsg'
+      vim.api.nvim_buf_add_highlight(buf, -1, color, idx - 1, 0, -1)
+    end
+  end
+
+  local height = math.min(#content, vim.o.lines - 3)
+  local width = 0
+  for _, line in pairs(content) do
+    width = math.max(width, #line)
+  end
+  width = math.min(width + 2, vim.o.columns - 2)
+
+  local opts = {
+    relative = 'win',
+    anchor= "SE",
+    col = vim.o.columns,
+    row = 11110,
+    width = 42,
+    height = height,
+    focusable = false,
+    style = 'minimal',
+    -- border = "solid",
+  }
+
+  status_window = vim.api.nvim_open_win(buf, false, opts)
+
+  vim.api.nvim_win_set_option(status_window, 'winhl', uiInfoHighlightGroup)
+end
+
+local function custom_harpoon_select(target)
+  require("harpoon"):list():select(target)
+
+  if status_timer then
+    vim.fn.timer_stop(status_timer)
+    close_status_window()
+  end
+
+  show_status_ui()
+  status_timer = vim.fn.timer_start(disappear_delay, close_status_window)
+end
 
 return {
   "ThePrimeagen/harpoon",
@@ -33,42 +91,15 @@ return {
   requires = { {"nvim-lua/plenary.nvim"} },
   config =  function()
     local harpoon = require("harpoon")
-
     harpoon:setup()
 
-    vim.keymap.set("n", "<leader>aa", function() harpoon:list():append() end)
-    vim.keymap.set("n", "<leader>ah", function() harpoon:list():remove() end)
-    vim.keymap.set("n", "<leader>au", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-    vim.keymap.set("n", "su", function() harpoon:list():select(1) end)
-    vim.keymap.set("n", "si", function() harpoon:list():select(2) end)
-    vim.keymap.set("n", "so", function() harpoon:list():select(3) end)
-    vim.keymap.set("n", "sp", function() harpoon:list():select(4) end)
+    vim.keymap.set("n", "s7", function() harpoon:list():append() end)
+    vim.keymap.set("n", "s8", function() harpoon:list():remove() end)
+    vim.keymap.set("n", "s9", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
-    vim.keymap.set("n", "<leader>ak", function() harpoon:list():prev() end)
-    vim.keymap.set("n", "<leader>aj", function()
-      local files = harpoon:list()
-
-      if next(files.items) == nil then
-        local msg = 'Ah No files on the list'
-        notify(msg)
-        return
-      else
-        notify(files.items)
-
-        local current_file = vim.fn.bufname()
-        local last_value
-
-        for _, item in ipairs(harpoon:list().items) do
-          last_value = item.value
-        end
-
-        if last_value == current_file then
-          harpoon:list():select(1)
-        else
-          harpoon:list():next()
-        end
-      end
-
-    end)
+    vim.keymap.set("n", "su", function() custom_harpoon_select(1) end)
+    vim.keymap.set("n", "si", function() custom_harpoon_select(2) end)
+    vim.keymap.set("n", "so", function() custom_harpoon_select(3) end)
+    vim.keymap.set("n", "sp", function() custom_harpoon_select(4) end)
   end
 }
