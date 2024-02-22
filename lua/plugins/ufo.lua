@@ -27,3 +27,7 @@ return {
     require('ufo').setup(opts)
   end,
 }
+-- zM : fold all
+-- zR : unfold all
+-- zA : toogle all blocks recursivly behind the cursor
+-- za : toogle the block under the cursor non recursivly
