@@ -55,13 +55,14 @@ local function show_status_ui()
     width = math.max(width, #line)
   end
   width = math.min(width + 2, vim.o.columns - 2)
+  local row = vim.o.lines - height
 
   local opts = {
     relative = 'win',
     anchor= "SE",
     col = vim.o.columns,
-    row = 11110,
-    width = 42,
+    row = row,
+    width = width,
     height = height,
     focusable = false,
     style = 'minimal',
