@@ -102,5 +102,7 @@ return {
     vim.keymap.set("n", "si", function() custom_harpoon_select(2) end)
     vim.keymap.set("n", "so", function() custom_harpoon_select(3) end)
     vim.keymap.set("n", "sp", function() custom_harpoon_select(4) end)
+    vim.keymap.set("n", "s[", function() custom_harpoon_select(5) end)
+    -- vim.keymap.set("n", "s]", function() custom_harpoon_select(6) end)
   end
 }
