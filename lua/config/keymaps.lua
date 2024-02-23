@@ -2,11 +2,11 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 -- Save like your are used to
-keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent = true, desc = "Save file" })
 keymap.set({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<Return>", { desc = "Save all buffers and quit" })
 
 -- Exit insert mode
-keymap.set("i", "jj", "<Esc>", { desc = "Exit Insert Mode" })
+-- keymap.set("i", "jj", "<Esc>", { desc = "Exit Insert Mode" })
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
 
 -- Move lines
