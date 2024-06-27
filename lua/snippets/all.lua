@@ -29,15 +29,15 @@
 -- hiwaw
 return {
   -- A snippet that expands the trigger "hi" into the string "Hello, world!".
-  require("luasnip").snippet(
-    { trig = "hiwaw" },
-    { t("Hello, world!") }
-  ),
+  -- require("luasnip").snippet(
+  --   { trig = "hiwaw" },
+  --   { t("Hello, world!") }
+  -- ),
 
   -- To return multiple snippets, use one `return` statement per snippet file
   -- and return a table of Lua snippets.
-  require("luasnip").snippet(
-    { trig = "himeow" },
-    { t("Another snippet.") }
-  ),
+  -- require("luasnip").snippet(
+  --   { trig = "himeow" },
+  --   { t("Another snippet.") }
+  -- ),
 }
