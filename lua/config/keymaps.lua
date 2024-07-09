@@ -5,6 +5,9 @@ local opts = { noremap = true, silent = true }
 keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent = true, desc = "Save file" })
 keymap.set({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<Return>", { desc = "Save all buffers and quit" })
 
+-- Prevent losing yanked worked when pasting
+keymap.set("v", "p", '"_dP', { noremap = true })
+
 -- Exit insert mode
 -- keymap.set("i", "jj", "<Esc>", { desc = "Exit Insert Mode" })
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
@@ -31,7 +34,7 @@ keymap.set('n', '<C-w>o', '', { noremap = true, silent = true })
 keymap.set('n', '<Tab>j', ":bnext<CR>", opts)
 keymap.set('n', '<Tab>k', ":bprev<CR>", opts)
 keymap.set({ "i", "v", "n" }, '<Tab>u', ":bd<CR>", opts)
-keymap.set('n', '<Tab>i', ":buffers<CR>", opts)
+keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
 
 -- Move half page
 keymap.set('n', '<C-j>', ':normal! 20j<CR>', opts)
