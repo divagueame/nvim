@@ -1,7 +1,7 @@
 local status_timer
 local status_window
 local disappear_delay = 1200
-local uiInfoHighlightGroup = 'Normal:UfoCursorFoldedLine'
+local uiInfoHighlightGroup = "Normal:UfoCursorFoldedLine"
 -- local uiInfoHighlightGroup = 'Normal:Visual'
 -- local highlightGroup = 'Normal:StatusLine'
 
@@ -27,7 +27,7 @@ local function get_current_index()
   local current_file = vim.fn.bufname()
 
   for index, item in ipairs(require("harpoon"):list().items) do
-    if item.value  == current_file then
+    if item.value == current_file then
       return index
     end
   end
@@ -42,9 +42,9 @@ local function show_status_ui()
   local current_index = get_current_index()
 
   for idx, _ in ipairs(content) do
-    local color = 'MoreMsg'
+    local color = "MoreMsg"
     if idx == current_index then
-      color = 'ModeMsg'
+      color = "ModeMsg"
       vim.api.nvim_buf_add_highlight(buf, -1, color, idx - 1, 0, -1)
     end
   end
@@ -58,20 +58,20 @@ local function show_status_ui()
   local row = vim.o.lines - height
 
   local opts = {
-    relative = 'win',
-    anchor= "SE",
+    relative = "win",
+    anchor = "SE",
     col = vim.o.columns,
     row = row,
     width = width,
     height = height,
     focusable = false,
-    style = 'minimal',
+    style = "minimal",
     -- border = "solid",
   }
 
   status_window = vim.api.nvim_open_win(buf, false, opts)
 
-  vim.api.nvim_win_set_option(status_window, 'winhl', uiInfoHighlightGroup)
+  vim.api.nvim_win_set_option(status_window, "winhl", uiInfoHighlightGroup)
 end
 
 local function custom_harpoon_select(target)
@@ -89,20 +89,38 @@ end
 return {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
-  requires = { {"nvim-lua/plenary.nvim"} },
-  config =  function()
+  requires = { { "nvim-lua/plenary.nvim" } },
+  config = function()
     local harpoon = require("harpoon")
     harpoon:setup()
 
-    vim.keymap.set("n", "s7", function() harpoon:list():append() end)
-    vim.keymap.set("n", "s8", function() harpoon:list():remove() end)
-    vim.keymap.set("n", "s9", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+    vim.keymap.set("n", "s7", function()
+      harpoon:list():append()
+    end)
+    vim.keymap.set("n", "s8", function()
+      harpoon:list():remove()
+    end)
+    vim.keymap.set("n", "s9", function()
+      harpoon.ui:toggle_quick_menu(harpoon:list())
+    end)
 
-    vim.keymap.set("n", "su", function() custom_harpoon_select(1) end)
-    vim.keymap.set("n", "si", function() custom_harpoon_select(2) end)
-    vim.keymap.set("n", "so", function() custom_harpoon_select(3) end)
-    vim.keymap.set("n", "sp", function() custom_harpoon_select(4) end)
-    vim.keymap.set("n", "s[", function() custom_harpoon_select(5) end)
-    vim.keymap.set("n", "s]", function() custom_harpoon_select(6) end)
-  end
+    vim.keymap.set("n", "su", function()
+      custom_harpoon_select(1)
+    end)
+    vim.keymap.set("n", "si", function()
+      custom_harpoon_select(2)
+    end)
+    vim.keymap.set("n", "so", function()
+      custom_harpoon_select(3)
+    end)
+    vim.keymap.set("n", "sp", function()
+      custom_harpoon_select(4)
+    end)
+    vim.keymap.set("n", "s[", function()
+      custom_harpoon_select(5)
+    end)
+    vim.keymap.set("n", "s]", function()
+      custom_harpoon_select(6)
+    end)
+  end,
 }
