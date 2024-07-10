@@ -1,0 +1,102 @@
+return {
+	-- {
+	-- 	"mfussenegger/nvim-dap",
+	-- 	dependencies = {
+	-- 		"rcarriga/nvim-dap-ui",
+	-- 		"theHamsta/nvim-dap-virtual-text",
+	-- 		"nvim-neotest/nvim-nio",
+	-- 		"williamboman/mason.nvim",
+	-- 		"suketa/nvim-dap-ruby",
+	-- 	},
+	-- 	config = function()
+	-- 		local dap = require("dap")
+	-- 		local ui = require("dapui")
+	-- 		require("dapui").setup()
+	-- 		require("nvim-dap-virtual-text").setup({})
+	-- 		require("dap-ruby").setup()
+	--
+	-- 		-- Configure Ruby/Rails adapter
+	-- 		dap.adapters.ruby = function(callback, config)
+	-- 			local rails_path = vim.fn.getcwd() .. "/bin/rails"
+	-- 			local debugger_port = 12345
+	--
+	-- 			-- Start the debugger in the background
+	-- 			vim.fn.jobstart(
+	-- 				string.format("bundle exec rdbg -n --open --port %d -c -- %s s", debugger_port, rails_path),
+	-- 				{
+	-- 					on_exit = function(job_id, exit_code, event_type)
+	-- 						print(string.format("Debugger exited with code %d", exit_code))
+	-- 					end,
+	-- 				}
+	-- 			)
+	--
+	-- 			-- Wait a bit for the debugger to start
+	-- 			vim.defer_fn(function()
+	-- 				callback({
+	-- 					type = "server",
+	-- 					host = "127.0.0.1",
+	-- 					port = debugger_port,
+	-- 				})
+	-- 			end, 2000) -- 2000ms delay
+	-- 		end
+	--
+	-- 		dap.configurations.ruby = {
+	-- 			{
+	-- 				type = "ruby",
+	-- 				name = "Rails server",
+	-- 				request = "attach",
+	-- 				cwd = "${workspaceFolder}",
+	-- 				remoteHost = "127.0.0.1",
+	-- 				remotePort = 12345,
+	-- 				showDebugOutput = true,
+	-- 				localfs = true,
+	-- 			},
+	-- 		}
+	--
+	-- 		local function start_rails_debugger()
+	-- 			dap.run(dap.configurations.ruby[1])
+	-- 		end
+	--
+	-- 		vim.api.nvim_create_user_command("StartRailsDebugger", start_rails_debugger, {})
+	-- 		vim.g.dap_log_level = "DEBUG"
+	-- 		dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
+	-- 		dap.defaults.fallback.focus_terminal = true
+	-- 		dap.defaults.fallback.auto_continue_if_many_stopped = false
+	-- 		dap.defaults.ruby = {
+	-- 			exception_breakpoints = {},
+	-- 			connect_timeout = 5000, -- 5 seconds
+	-- 		}
+	--
+	-- 		vim.keymap.set("n", "<space>b", dap.toggle_breakpoint)
+	-- 		vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
+	-- 		vim.keymap.set("n", "<space>gn", dap.continue)
+	--
+	-- 		-- Eval var under cursor
+	-- 		-- vim.keymap.set("n", "<space>?", function()
+	-- 		-- 	require("dapui").eval(nil, { enter = true })
+	-- 		-- end)
+	--
+	-- 		-- vim.keymap.set("n", "<F1>", dap.continue)
+	-- 		-- vim.keymap.set("n", "<Tab>dj", start_rails_debugger)
+	-- 		-- vim.keymap.set("n", "<F1>", start_rails_debugger)
+	-- 		-- vim.keymap.set("n", "<F2>", dap.step_into)
+	-- 		-- vim.keymap.set("n", "<F3>", dap.step_over)
+	-- 		-- vim.keymap.set("n", "<F4>", dap.step_out)
+	-- 		-- vim.keymap.set("n", "<F5>", dap.step_back)
+	-- 		-- vim.keymap.set("n", "<F13>", dap.restart)
+	--
+	-- 		dap.listeners.before.attach.dapui_config = function()
+	-- 			ui.open()
+	-- 		end
+	-- 		dap.listeners.before.launch.dapui_config = function()
+	-- 			ui.open()
+	-- 		end
+	-- 		dap.listeners.before.event_terminated.dapui_config = function()
+	-- 			ui.close()
+	-- 		end
+	-- 		dap.listeners.before.event_exited.dapui_config = function()
+	-- 			ui.close()
+	-- 		end
+	-- 	end,
+	-- },
+}
