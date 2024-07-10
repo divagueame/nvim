@@ -38,6 +38,7 @@ return {
         capabilities = capabilities,
       })
       lspconfig.stimulus_ls.setup({
+        cmd = { "node", "/home/ma/web/source/stimulus-lsp/server/out/server.js", "--stdio" },
         capabilities = capabilities,
       })
       lspconfig.solargraph.setup({
