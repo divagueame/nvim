@@ -1,11 +1,15 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     dependencies = {
       { "windwp/nvim-ts-autotag" },
     },
     config = function()
       require("nvim-treesitter.configs").setup({
+        modules = {},
+        sync_install = false,
+        ignore_install = {},
         ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "http", "json", "ruby", "php" },
         auto_install = true,
         highlight = {
@@ -21,7 +25,6 @@ return {
             node_decremental = "sk",
           },
         },
-
         autotag = {
           enable = true,
         },
@@ -32,6 +35,9 @@ return {
     "nvim-treesitter/playground",
     config = function()
       require("nvim-treesitter.configs").setup({
+        modules = {},
+        sync_install = false,
+        ignore_install = {},
         playground = {
           enable = true,
           disable = {},
@@ -48,6 +54,46 @@ return {
             update = "R",
             goto_node = "<cr>",
             show_help = "?",
+          },
+        },
+      })
+    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+            },
+          },
+          move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+              ["]m"] = "@function.outer",
+              ["]]"] = "@class.outer",
+            },
+            goto_next_end = {
+              ["]M"] = "@function.outer",
+              ["]["] = "@class.outer",
+            },
+            goto_previous_start = {
+              ["[m"] = "@function.outer",
+              ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+              ["[M"] = "@function.outer",
+              ["[]"] = "@class.outer",
+            },
           },
         },
       })
