@@ -47,37 +47,53 @@ keymap.set("n", "<C-j>", ":normal! 20j<CR>", opts)
 keymap.set("n", "<C-k>", ":normal! 20k<CR>", opts)
 
 -- Move 6 lines
-keymap.set("n", "<C-n>", ":normal! 5j<CR>", opts)
-keymap.set("n", "<C-m>", ":normal! 5k<CR>", opts)
+-- keymap.set("n", "<C-n>", ":normal! 5j<CR>", opts)
+-- keymap.set("n", "<C-m>", ":normal! 5k<CR>", opts)
 
 -- Resize panes
 keymap.set("n", "<leader>wk", function()
-	vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
+  vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
 end, opts)
 
 keymap.set("n", "<leader>wj", function()
-	vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
+  vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
 end, opts)
 
 keymap.set("n", "<leader>wh", function()
-	vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
+  vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
 end, opts)
 
 keymap.set("n", "<leader>wl", function()
-	vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
+  vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
 end, opts)
 
 -- Toggle Diagnostics
 local diagnostics_active = true
 vim.keymap.set("n", "<leader>d", function()
-	diagnostics_active = not diagnostics_active
-	if diagnostics_active then
-		vim.diagnostic.show()
-	else
-		vim.diagnostic.hide()
-	end
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.diagnostic.show()
+  else
+    vim.diagnostic.hide()
+  end
 end)
 
 -- Undo / Redo
 keymap.set("n", "U", ":redo<cr>", opts)
 keymap.set("n", "<C-r>", ':echo "Use U / u instead to do / redo"<cr>', opts)
+
+-- Quickfix
+vim.keymap.set("n", "<leader>qo", ":copen<CR>", { desc = "Open quickfix list" })
+vim.keymap.set("n", "<leader>qc", ":cclose<CR>", { desc = "Close quickfix list" })
+
+vim.keymap.set("n", "]q", ":cnext<CR>", { desc = "Next quickfix item" })
+vim.keymap.set("n", "[q", ":cprev<CR>", { desc = "Previous quickfix item" })
+
+-- Execute a command on each item in the quickfix list
+vim.keymap.set("n", "<leader>qd", ":cdo ", { desc = "Execute command on quickfix items" })
+
+-- Clear quickfix list
+vim.keymap.set("n", "<leader>qx", function()
+  vim.fn.setqflist({})
+  print("Quickfix list cleared")
+end, { desc = "Clear quickfix list" })
