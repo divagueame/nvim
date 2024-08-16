@@ -37,6 +37,12 @@ local function show_status_ui()
 	local buf = vim.api.nvim_create_buf(false, true)
 
 	local content = get_harpooned_files()
+    -- if #content == 0 then
+    --     print("No harpooned files")
+    --     return
+    -- end
+
+
 	vim.api.nvim_buf_set_lines(buf, 0, -1, false, content)
 
 	local current_index = get_current_index()
@@ -49,7 +55,8 @@ local function show_status_ui()
 		end
 	end
 
-	local height = math.min(#content, vim.o.lines - 3)
+  local height = math.max(1, math.min(#content, vim.o.lines - 3))
+
 	local width = 0
 	for _, line in pairs(content) do
 		width = math.max(width, #line)
