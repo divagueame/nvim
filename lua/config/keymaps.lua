@@ -52,31 +52,31 @@ keymap.set("n", "<C-k>", ":normal! 20k<CR>", opts)
 
 -- Resize panes
 keymap.set("n", "<leader>wk", function()
-  vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
-end, opts)
+	vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
+end, vim.tbl_extend("force", opts, { desc = " + window height" }))
 
 keymap.set("n", "<leader>wj", function()
-  vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
-end, opts)
+	vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
+end, vim.tbl_extend("force", opts, { desc = " - window height" }))
 
 keymap.set("n", "<leader>wh", function()
-  vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
-end, opts)
+	vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
+end, vim.tbl_extend("force", opts, { desc = " + window width" }))
 
 keymap.set("n", "<leader>wl", function()
-  vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
-end, opts)
+	vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
+end, vim.tbl_extend("force", opts, { desc = " - window width" }))
 
 -- Toggle Diagnostics
 local diagnostics_active = true
 vim.keymap.set("n", "<leader>d", function()
-  diagnostics_active = not diagnostics_active
-  if diagnostics_active then
-    vim.diagnostic.show()
-  else
-    vim.diagnostic.hide()
-  end
-end)
+	diagnostics_active = not diagnostics_active
+	if diagnostics_active then
+		vim.diagnostic.show()
+	else
+		vim.diagnostic.hide()
+	end
+end, vim.tbl_extend("force", opts, { desc = "Hide/Show Diagnostics" }))
 
 -- Undo / Redo
 keymap.set("n", "U", ":redo<cr>", opts)
@@ -94,6 +94,6 @@ vim.keymap.set("n", "<leader>qd", ":cdo ", { desc = "Execute command on quickfix
 
 -- Clear quickfix list
 vim.keymap.set("n", "<leader>qx", function()
-  vim.fn.setqflist({})
-  print("Quickfix list cleared")
+	vim.fn.setqflist({})
+	print("Quickfix list cleared")
 end, { desc = "Clear quickfix list" })
