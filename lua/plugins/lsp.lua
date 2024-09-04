@@ -79,6 +79,12 @@ return {
 					vim.lsp.buf.code_action,
 					vim.tbl_extend("force", opts, { desc = "LSP - Code action" })
 				)
+				vim.keymap.set(
+					"n",
+					"<space>ji",
+					vim.lsp.buf.rename,
+					vim.tbl_extend("force", opts, { desc = "LSP - Rename Reference" })
+				)
 			end
 
 			local servers = {
