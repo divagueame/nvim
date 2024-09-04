@@ -16,8 +16,21 @@ return {
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		config = function()
+			local file_ignore_patterns = {
+				"yarn%.lock",
+				"node_modules/",
+				"raycast/",
+				"dist/",
+				"%.next",
+				"%.git/",
+				"%.gitlab/",
+				"build/",
+				"target/",
+				"package%-lock%.json",
+			}
+
 			require("telescope").setup({
-				file_ignore_patterns = { "node_modules" },
+				file_ignore_patterns = file_ignore_patterns,
 				defaults = {
 					ripgrep_arguments = {
 						"rg",
