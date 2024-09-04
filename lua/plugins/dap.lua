@@ -1,102 +1,246 @@
+-- local function start_ruby_debugger()
+--   local dap = require("dap")
+--   vim.fn.setenv("RUBYOPT", "-rdebug/open")
+--   dap.continue()
+-- end
+
 return {
-	-- {
-	-- 	"mfussenegger/nvim-dap",
-	-- 	dependencies = {
-	-- 		"rcarriga/nvim-dap-ui",
-	-- 		"theHamsta/nvim-dap-virtual-text",
-	-- 		"nvim-neotest/nvim-nio",
-	-- 		"williamboman/mason.nvim",
-	-- 		"suketa/nvim-dap-ruby",
-	-- 	},
-	-- 	config = function()
-	-- 		local dap = require("dap")
-	-- 		local ui = require("dapui")
-	-- 		require("dapui").setup()
-	-- 		require("nvim-dap-virtual-text").setup({})
-	-- 		require("dap-ruby").setup()
-	--
-	-- 		-- Configure Ruby/Rails adapter
-	-- 		dap.adapters.ruby = function(callback, config)
-	-- 			local rails_path = vim.fn.getcwd() .. "/bin/rails"
-	-- 			local debugger_port = 12345
-	--
-	-- 			-- Start the debugger in the background
-	-- 			vim.fn.jobstart(
-	-- 				string.format("bundle exec rdbg -n --open --port %d -c -- %s s", debugger_port, rails_path),
-	-- 				{
-	-- 					on_exit = function(job_id, exit_code, event_type)
-	-- 						print(string.format("Debugger exited with code %d", exit_code))
-	-- 					end,
-	-- 				}
-	-- 			)
-	--
-	-- 			-- Wait a bit for the debugger to start
-	-- 			vim.defer_fn(function()
-	-- 				callback({
-	-- 					type = "server",
-	-- 					host = "127.0.0.1",
-	-- 					port = debugger_port,
-	-- 				})
-	-- 			end, 2000) -- 2000ms delay
-	-- 		end
-	--
-	-- 		dap.configurations.ruby = {
-	-- 			{
-	-- 				type = "ruby",
-	-- 				name = "Rails server",
-	-- 				request = "attach",
-	-- 				cwd = "${workspaceFolder}",
-	-- 				remoteHost = "127.0.0.1",
-	-- 				remotePort = 12345,
-	-- 				showDebugOutput = true,
-	-- 				localfs = true,
-	-- 			},
-	-- 		}
-	--
-	-- 		local function start_rails_debugger()
-	-- 			dap.run(dap.configurations.ruby[1])
-	-- 		end
-	--
-	-- 		vim.api.nvim_create_user_command("StartRailsDebugger", start_rails_debugger, {})
-	-- 		vim.g.dap_log_level = "DEBUG"
-	-- 		dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
-	-- 		dap.defaults.fallback.focus_terminal = true
-	-- 		dap.defaults.fallback.auto_continue_if_many_stopped = false
-	-- 		dap.defaults.ruby = {
-	-- 			exception_breakpoints = {},
-	-- 			connect_timeout = 5000, -- 5 seconds
-	-- 		}
-	--
-	-- 		vim.keymap.set("n", "<space>b", dap.toggle_breakpoint)
-	-- 		vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
-	-- 		vim.keymap.set("n", "<space>gn", dap.continue)
-	--
-	-- 		-- Eval var under cursor
-	-- 		-- vim.keymap.set("n", "<space>?", function()
-	-- 		-- 	require("dapui").eval(nil, { enter = true })
-	-- 		-- end)
-	--
-	-- 		-- vim.keymap.set("n", "<F1>", dap.continue)
-	-- 		-- vim.keymap.set("n", "<Tab>dj", start_rails_debugger)
-	-- 		-- vim.keymap.set("n", "<F1>", start_rails_debugger)
-	-- 		-- vim.keymap.set("n", "<F2>", dap.step_into)
-	-- 		-- vim.keymap.set("n", "<F3>", dap.step_over)
-	-- 		-- vim.keymap.set("n", "<F4>", dap.step_out)
-	-- 		-- vim.keymap.set("n", "<F5>", dap.step_back)
-	-- 		-- vim.keymap.set("n", "<F13>", dap.restart)
-	--
-	-- 		dap.listeners.before.attach.dapui_config = function()
-	-- 			ui.open()
-	-- 		end
-	-- 		dap.listeners.before.launch.dapui_config = function()
-	-- 			ui.open()
-	-- 		end
-	-- 		dap.listeners.before.event_terminated.dapui_config = function()
-	-- 			ui.close()
-	-- 		end
-	-- 		dap.listeners.before.event_exited.dapui_config = function()
-	-- 			ui.close()
-	-- 		end
-	-- 	end,
-	-- },
+  "mfussenegger/nvim-dap",
+  dependencies = {
+    "nvim-neotest/nvim-nio",
+    "rcarriga/nvim-dap-ui",
+    "suketa/nvim-dap-ruby",
+    "mxsdev/nvim-dap-vscode-js",
+    "leoluz/nvim-dap-go",
+    -- lazy spec to build "microsoft/vscode-js-debug" from source
+    {
+      "microsoft/vscode-js-debug",
+      -- version = "1.*",
+      -- build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+      -- build = "npm i --legacy-peer-deps && npm run compile vsDebugServerBundle && mv dist out",
+    },
+  },
+  config = function()
+    local dap, dapui = require("dap"), require("dapui")
+
+    require("dap-go").setup()
+    -- require("dap-ruby").setup()
+    -- require("dap-go").setup()
+    -- dap.set_log_level("TRACE")
+
+    require("dap-vscode-js").setup({
+      debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
+      -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+      -- debugger_path = "(runtimedir)/site/pack/packer/opt/vscode-js-debug", -- Path to vscode-js-debug installation.
+      -- debugger_cmd = { "extension" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+      adapters = {
+        "chrome",
+        "pwa-node",
+        "pwa-chrome",
+        "pwa-msedge",
+        "node-terminal",
+        "pwa-extensionHost",
+        "node",
+        "chrome",
+      }, -- which adapters to register in nvim-dap
+      -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
+      -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
+      -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
+    })
+
+    local js_based_languages = { "typescript", "javascript", "typescriptreact" }
+
+    for _, language in ipairs(js_based_languages) do
+      require("dap").configurations[language] = {
+        {
+          type = "pwa-node",
+          request = "launch",
+          name = "Launch file",
+          program = "${file}",
+          cwd = "${workspaceFolder}",
+        },
+        {
+          type = "pwa-node",
+          request = "attach",
+          name = "Attach",
+          processId = require("dap.utils").pick_process,
+          cwd = "${workspaceFolder}",
+        },
+        {
+          type = "pwa-chrome",
+          request = "launch",
+          name = 'Start Chrome with "localhost"',
+          url = "http://localhost:3000",
+          webRoot = "${workspaceFolder}",
+          userDataDir = "${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir",
+        },
+      }
+    end
+
+    dap.adapters.ruby = function(callback, config)
+      callback({
+        type = "server",
+        host = "127.0.0.1",
+        port = "38698",
+        executable = {
+          command = "bundle",
+          args = {
+            "exec",
+            "rdbg",
+            "-n",
+            "--open",
+            "--port",
+            "38698",
+            "-c",
+            "--",
+            "bundle",
+            "exec",
+            config.command,
+            config.script,
+          },
+        },
+      })
+    end
+
+    dap.configurations.ruby = {
+      {
+        type = "ruby",
+        name = "debug current file",
+        request = "attach",
+        localfs = true,
+        command = "ruby",
+        script = "${file}",
+      },
+      {
+        type = "ruby",
+        name = "run current spec file",
+        request = "attach",
+        localfs = true,
+        command = "rspec",
+        script = "${file}",
+      },
+    }
+
+    -- Set custom signs for DAP
+    vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+    vim.fn.sign_define(
+      "DapBreakpointCondition",
+      { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" }
+    )
+    vim.fn.sign_define(
+      "DapBreakpointRejected",
+      { text = "●", texthl = "DapBreakpointRejected", linehl = "", numhl = "" }
+    )
+    vim.fn.sign_define("DapStopped", { text = "▶", texthl = "DapStopped", linehl = "", numhl = "" })
+
+    -- Highlight groups
+    vim.cmd("highlight DapBreakpoint guifg=#882230 guibg=NONE gui=bold")
+    vim.cmd("highlight DapBreakpointCondition guifg=#882230 guibg=NONE gui=bold")
+    vim.cmd("highlight DapBreakpointRejected guifg=#FF0000 guibg=NONE gui=bold")
+    vim.cmd("highlight DapStopped guifg=#44dd99 guibg=NONE gui=bold")
+
+    dapui.setup({})
+    -- dapui.setup({
+    --   layouts = {
+    --     {
+    --       elements = {
+    --         {
+    --           id = "scopes",
+    --           size = 0.50,
+    --         },
+    --         -- {
+    --         --   id = "breakpoints",
+    --         --   size = 0.25,
+    --         -- },
+    --         {
+    --           id = "stacks",
+    --           size = 0.50,
+    --         },
+    --         -- {
+    --         --   id = "watches",
+    --         --   size = 0.25,
+    --         -- },
+    --       },
+    --       position = "left",
+    --       size = 42,
+    --     },
+    --     {
+    --       elements = {
+    --         {
+    --           id = "repl",
+    --           size = 1,
+    --         },
+    --         -- {
+    --         --   id = "console",
+    --         --   size = 0.5,
+    --         -- },
+    --       },
+    --       position = "bottom",
+    --       size = 10,
+    --     },
+    --   },
+    -- })
+
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open({})
+    end
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open({})
+    end
+
+    dap.listeners.after.event_initialized.dapui_config = function()
+      dapui.open({})
+      vim.cmd("colorscheme " .. vim.g.colors_name)
+    end
+
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+      vim.defer_fn(function()
+        dapui.open()
+        dap.restart()
+      end, 100)
+    end
+
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close({})
+    end
+
+    vim.keymap.set("n", "<leader>dd", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+    vim.keymap.set("n", "<leader>ui", require("dapui").toggle)
+
+    vim.api.nvim_set_keymap(
+      "n",
+      "<leader>dv",
+      "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('[Condition] > '))<CR>",
+      { noremap = true, silent = true, desc = "Set Conditional Breakpoint" }
+    )
+    -- vim.keymap.set("n", "<leader>d0", function()
+    --   local filetype = vim.bo.filetype
+    --   if filetype == "ruby" then
+    --     start_ruby_debugger()
+    --   else
+    --     require("dap").continue()
+    --   end
+    -- end, { desc = "Start debugging" })
+
+    -- }
+    -- vim.keymap.set('n', '<F5>', require 'dap'.continue)
+    -- vim.keymap.set('n', '<F10>', require 'dap'.step_over)
+    -- vim.keymap.set('n', '<F11>', require 'dap'.step_into)
+    -- vim.keymap.set('n', '<F12>', require 'dap'.step_out)
+    -- vim.keymap.set('n', '<leader>b', require 'dap'.toggle_breakpoint)
+    -- vim.keymap.set('n', '<leader>B', function()
+    --   require 'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+    -- end)
+    vim.keymap.set("n", "<leader>df", dap.continue, { desc = "Continue debugging" })
+    vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step into" })
+    vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step over" })
+    vim.keymap.set("n", "<leader>dr", dap.restart, { desc = "Restart" })
+
+    vim.keymap.set("n", "<leader>dw", function()
+      require("dap.ui.widgets").hover()
+    end, { desc = "Widget hover" })
+
+    vim.keymap.set("n", "<leader>de", dap.terminate, { desc = "End debug session" })
+  end,
 }
