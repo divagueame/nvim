@@ -15,6 +15,7 @@ end, {})
 vim.keymap.set("n", "<Tab><leader>", function()
 	print("pin")
 end, {})
+
 vim.keymap.set("n", "<leader><Tab>", function()
-	print("pong")
+	print("pong iiji")
 end, {})
