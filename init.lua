@@ -2,20 +2,20 @@ require("config.options")
 require("config.lazy")
 
 vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		require("config.keymaps")
-		require("config.autocmd")
-	end,
+  pattern = "VeryLazy",
+  callback = function()
+    require("config.keymaps")
+    require("config.autocmd")
+  end,
 })
 
 vim.keymap.set("n", "<Tab>n", function()
-	print("woof")
+  print("woof")
 end, {})
 vim.keymap.set("n", "<Tab><leader>", function()
-	print("pin")
+  print("pin")
 end, {})
 
 vim.keymap.set("n", "<leader><Tab>", function()
-	print("pong iiji")
+  print("pong test")
 end, {})
