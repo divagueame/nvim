@@ -39,7 +39,8 @@ return {
         -- lualine_x = { 'fileformat', 'filetype'},
         lualine_x = {},
         lualine_y = { "progress" },
-        lualine_z = { "location" },
+        -- lualine_z = { "location" },
+        lualine_z = { "branch" },
       },
       inactive_sections = {
         lualine_a = {},
