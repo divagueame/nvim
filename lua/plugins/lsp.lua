@@ -6,7 +6,6 @@ return {
       require("mason").setup()
     end,
   },
-
   -- Mason lspconfig
   {
     "williamboman/mason-lspconfig.nvim",
