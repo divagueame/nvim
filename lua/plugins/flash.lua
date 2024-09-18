@@ -5,7 +5,7 @@ return {
   opts = {},
   keys = {
     {
-      "<leader>s",
+      "e",
       mode = { "n", "x", "o" },
       function()
         require("flash").jump()
@@ -13,7 +13,7 @@ return {
       desc = "Flash",
     },
     {
-      "S",
+      "Ee",
       mode = { "n", "x", "o" },
       function()
         require("flash").treesitter()
@@ -21,7 +21,7 @@ return {
       desc = "Flash Treesitter",
     },
     {
-      "r",
+      "EE",
       mode = "o",
       function()
         require("flash").remote()
@@ -37,7 +37,7 @@ return {
       desc = "Treesitter Search",
     },
     {
-      "<c-s>",
+      "<s-t>",
       mode = { "c" },
       function()
         require("flash").toggle()
