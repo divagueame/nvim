@@ -8,7 +8,7 @@ return {
         theme = "auto",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
-        disabled_filetypes = {
+         fisabled_filetypes = {
           statusline = {},
           winbar = {},
         },
@@ -22,7 +22,8 @@ return {
         },
       },
       sections = {
-        lualine_a = { "mode" },
+        -- lualine_a = { "mode" },
+        lualine_a = {""},
         -- lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_b = {},
         lualine_c = {
