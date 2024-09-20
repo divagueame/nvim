@@ -2,17 +2,16 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 -- Save like your are used to
-keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent = true, desc = "Save file" })
-keymap.set({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<Return>", { desc = "Save all buffers and quit" })
+-- keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent = true, desc = "Save file" })
+-- keymap.set({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<Return>", { desc = "Save all buffers and quit" })
 
--- Prevent losing yanked worked when pasting
-keymap.set("v", "p", '"_dP', { noremap = true })
+-- Exit Neovim Enter + q
+vim.api.nvim_set_keymap('n', '<CR>q', ':q<CR>', { noremap = true, silent = true })
 
 -- Exit insert mode
--- keymap.set("i", "jj", "<Esc>", { desc = "Exit Insert Mode" })
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
 
--- Move lines
+-- Move lines up and down
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true })
 keymap.set("i", "JJ", "<Esc>:m .+1<CR>==gi", { noremap = true })
@@ -52,30 +51,30 @@ keymap.set("n", "<C-k>", ":normal! 20k<CR>", opts)
 
 -- Resize panes
 keymap.set("n", "<leader>wk", function()
-	vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
+  vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
 end, vim.tbl_extend("force", opts, { desc = " + window height" }))
 
 keymap.set("n", "<leader>wj", function()
-	vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
+  vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
 end, vim.tbl_extend("force", opts, { desc = " - window height" }))
 
 keymap.set("n", "<leader>wh", function()
-	vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
+  vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
 end, vim.tbl_extend("force", opts, { desc = " + window width" }))
 
 keymap.set("n", "<leader>wl", function()
-	vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
+  vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
 end, vim.tbl_extend("force", opts, { desc = " - window width" }))
 
 -- Toggle Diagnostics
 local diagnostics_active = true
 vim.keymap.set("n", "<leader>d", function()
-	diagnostics_active = not diagnostics_active
-	if diagnostics_active then
-		vim.diagnostic.show()
-	else
-		vim.diagnostic.hide()
-	end
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.diagnostic.show()
+  else
+    vim.diagnostic.hide()
+  end
 end, vim.tbl_extend("force", opts, { desc = "Hide/Show Diagnostics" }))
 
 -- Undo / Redo
@@ -94,9 +93,18 @@ vim.keymap.set("n", "<leader>qd", ":cdo ", { desc = "Execute command on quickfix
 
 -- Clear quickfix list
 vim.keymap.set("n", "<leader>qx", function()
-	vim.fn.setqflist({})
-	print("Quickfix list cleared")
+  vim.fn.setqflist({})
+  print("Quickfix list cleared")
 end, { desc = "Clear quickfix list" })
 
 -- Deletes without adding to register
 vim.api.nvim_set_keymap("n", "dd", '"_dd', { noremap = true })
+
+-- Prevent losing yanked worked when pasting
+keymap.set("v", "p", '"_dP', { noremap = true })
+
+-- Start/Stop recording register
+vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
+vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true }) -- Disable the default 'q' binding
+
+vim.keymap.set("n", "qj", ":lua print('yay')", { desc = "Execute command on quickfix items" })
