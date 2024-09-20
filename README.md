@@ -4,7 +4,7 @@
 
 #### 1
 
-q
+qq -> Start recording register / Stop
 w -> Move forward
 e
 r -> Replace
