@@ -13,7 +13,9 @@ t
 #### 2
 
 a -> Append
-s
+##### s
+ss -> Split horizontal
+sv -> Split vertical
 d -> Delete
 f
 g
@@ -57,3 +59,10 @@ m
 ,
 . -> Repeat action
 / -> Search
+
+
+## Other
+
+Enter + q -> Quit NeoVim
+
+Tab + u -> Close buffer

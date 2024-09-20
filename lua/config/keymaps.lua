@@ -6,7 +6,7 @@ local opts = { noremap = true, silent = true }
 -- keymap.set({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<Return>", { desc = "Save all buffers and quit" })
 
 -- Exit Neovim Enter + q
-vim.api.nvim_set_keymap('n', '<CR>q', ':q<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<CR>q', ':qa<CR>', { noremap = true, silent = true })
 
 -- Exit insert mode
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
@@ -108,3 +108,18 @@ vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true }) -- Disable the default 'q' binding
 
 vim.keymap.set("n", "qj", ":lua print('yay')", { desc = "Execute command on quickfix items" })
+
+---------------------------------------------------
+-- Map CapsLock (F13) + g to some action
+--
+-- Add these lines to ~/.Xmodmap and run 
+--
+-- remove Lock = Caps_Lock
+-- keycode 66 = F13
+--
+-- Add this line to i3 config:
+-- exec --no-startup-id xmodmap -e 'clear Lock' -e 'keycode 66 = F13'
+---------------------------------------------------
+vim.api.nvim_set_keymap('n', '<F13>g', ':echo "CapsLock + g Pressed"<CR>', { noremap = true, silent = true })
+
+
