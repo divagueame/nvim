@@ -1,6 +1,6 @@
 -- Leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' ' 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- disable netrw at the very start of your init.lua to allow nvim-tree
 vim.g.loaded_netrw = 1
@@ -43,11 +43,16 @@ vim.o.hlsearch = false
 vim.opt.termguicolors = true
 
 -- Signs columns width
-vim.opt.signcolumn="yes"
+vim.opt.signcolumn = "yes"
 
 -- enable persistent undo
-vim.opt.undofile=true
+vim.opt.undofile = true
 
-vim.opt.guifont="monospace:h17"
+vim.opt.guifont = "monospace:h17"
 
 -- vim.cmd "set whichwrap+=<,>,[,],h,l"
+
+-- sync buffers automatically
+vim.opt.autoread = true
+-- disable neovim generating a swapfile and showing the error
+vim.opt.swapfile = false
