@@ -1,10 +1,14 @@
 return {
-  "divagueame/aws-sam.nvim",
-  -- dir = "/home/ma/web/plugins/aws-sam.nvim",
+  -- "divagueame/aws-sam.nvim",
+  dir = "/home/ma/web/plugins/aws-sam.nvim",
   dependencies = {
-    "rcarriga/nvim-notify",
+{
+      -- "stevearc/resession.nvim"
+}
+    -- "rcarriga/nvim-notify",
   },
-  -- dev = true,
+  -- event = "BufReadPost",
+  dev = true,
   config = function()
     require("aws-sam").setup({
       keymaps = true,
