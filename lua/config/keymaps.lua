@@ -120,6 +120,27 @@ vim.keymap.set("n", "qj", ":lua print('yay')", { desc = "Execute command on quic
 -- Add this line to i3 config:
 -- exec --no-startup-id xmodmap -e 'clear Lock' -e 'keycode 66 = F13'
 ---------------------------------------------------
-vim.api.nvim_set_keymap('n', '<F13>g', ':echo "CapsLock + g Pressed"<CR>', { noremap = true, silent = true })
 
+-- Change Ctrl+w + o to call the print function
+vim.api.nvim_set_keymap('n', '<C-w>o', ':lua require("config.utils").Display_error("CAPS + v")<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F13>v', ':only<CR>', { noremap = true, silent = true, desc= 'Remove all splits' })
+
+
+-- Move focus to the left split with CAPS + j
+vim.api.nvim_set_keymap('n', '<C-w>h', ':lua require("config.utils").Display_error("CAPS + j")<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F13>h', ':wincmd h<CR>', { noremap = true, silent = true, desc = 'Move focus to the left split' })
+
+-- Move focus to the left split with CAPS + k
+vim.api.nvim_set_keymap('n', '<C-w>l', ':lua require("config.utils").Display_error("CAPS + l")<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F13>l', ':wincmd l<CR>', { noremap = true, silent = true, desc = 'Move focus to the right split' })
+
+-- Move focus to the top split with CAPS + k
+vim.api.nvim_set_keymap('n', '<C-w>k', ':lua require("config.utils").Display_error("CAPS + k")<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F13>k', ':wincmd k<CR>', { noremap = true, silent = true, desc = 'Move focus to the top split' })
+
+-- Move focus to the bottom split with CAPS + k
+vim.api.nvim_set_keymap('n', '<C-w>j', ':lua require("config.utils").Display_error("CAPS + J")<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F13>j', ':wincmd j<CR>', { noremap = true, silent = true, desc = 'Move focus to the top split' })
+
+vim.api.nvim_set_keymap('n', '<C-q>', ':lua require("config.utils").Display_error("ENTER + q")<CR>', { noremap = true, silent = true })
 
