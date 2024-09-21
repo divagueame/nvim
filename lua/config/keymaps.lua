@@ -144,3 +144,5 @@ vim.api.nvim_set_keymap('n', '<F13>j', ':wincmd j<CR>', { noremap = true, silent
 
 vim.api.nvim_set_keymap('n', '<C-q>', ':lua require("config.utils").Display_error("ENTER + q")<CR>', { noremap = true, silent = true })
 
+-- Toggle diagnostics
+vim.api.nvim_set_keymap('n', '<C-b>', ':lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>', { noremap = true, silent = true })
