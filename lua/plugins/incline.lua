@@ -2,7 +2,8 @@ return {
   'b0o/incline.nvim',
   config = function()
 
-    vim.api.nvim_set_hl(0, 'CustomInclineHighlight', { fg = "#ffffff", bg = "#333333", bold = true })
+    vim.api.nvim_set_hl(0, 'CustomInclineHighlight', { fg = "#ffffff", bg = "", bold = true })
+    vim.api.nvim_set_hl(0, 'CustomInclineInactiveHighlight', { fg = "#8c8c8c", bg = "", bold = true })
 
     require('incline').setup {
       highlight = {
@@ -43,12 +44,12 @@ return {
         winhighlight = {
           active = {
             EndOfBuffer = "None",
-            Normal = "InclineNormal",
+            Normal = "CustomInclineHighlight",
             Search = "None"
           },
           inactive = {
             EndOfBuffer = "None",
-            Normal = "InclineNormalNC",
+            Normal = "CustomInclineInactiveHighlight",
             Search = "None"
           }
         },
