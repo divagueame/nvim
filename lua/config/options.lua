@@ -58,4 +58,4 @@ vim.opt.autoread = true
 vim.opt.swapfile = false
 
 -- Remove 'file saved message'
-vim.opt.shortmess:append("a")
+vim.opt.shortmess:append("ac")
