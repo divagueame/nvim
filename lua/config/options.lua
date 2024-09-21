@@ -56,3 +56,6 @@ vim.opt.guifont = "monospace:h17"
 vim.opt.autoread = true
 -- disable neovim generating a swapfile and showing the error
 vim.opt.swapfile = false
+
+-- Remove 'file saved message'
+vim.opt.shortmess:append("a")

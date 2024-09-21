@@ -2,11 +2,11 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 -- Save like your are used to
--- keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent = true, desc = "Save file" })
+keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent = true, desc = "Save file" })
 -- keymap.set({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<Return>", { desc = "Save all buffers and quit" })
 
 -- Exit Neovim Enter + q
-vim.api.nvim_set_keymap('n', '<CR>q', ':qa<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<CR>q', ':wqa<CR>', { noremap = true, silent = true })
 
 -- Exit insert mode
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
