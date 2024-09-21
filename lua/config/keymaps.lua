@@ -100,6 +100,3 @@ end, { desc = "Clear quickfix list" })
 
 -- Deletes without adding to register
 vim.api.nvim_set_keymap("n", "dd", '"_dd', { noremap = true })
-
-
- vim.keymap.set("n", "<leader>er", vim.diagnostic.setqflist)
