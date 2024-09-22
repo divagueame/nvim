@@ -64,5 +64,6 @@ m
 ## Other
 
 Enter + q -> Quit NeoVim
+Enter + f -> Toggle ZenMode
 
 Tab + u -> Close buffer
