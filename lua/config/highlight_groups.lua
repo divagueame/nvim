@@ -16,3 +16,5 @@ vim.api.nvim_set_hl(0, 'HarpoonFilesPanelHL', { fg = "#f0f00f", bg = "NONE", bol
 
 -- Set the color of the title/tag at the top of floating windows
 vim.api.nvim_set_hl(0, "Title", { fg = "#fabd2f", bg = "#1d2021", bold = true })  -- Gruvbox yellow on dark bg
+vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })

@@ -36,13 +36,5 @@ return {
       end,
       desc = "Treesitter Search",
     },
-    {
-      "<s-t>",
-      mode = { "c" },
-      function()
-        require("flash").toggle()
-      end,
-      desc = "Toggle Flash Search",
-    },
   },
 }

@@ -21,10 +21,20 @@ return {
       stages = "static",
       render = "wrapped-compact",
       -- render = "minimal",
-      timeout = 4000,
-      on_open = function(win) end,
+      timeout = 8000,
+      on_open = function(win)
+
+        local dismiss = function ()
+          require('notify').dismiss({})
+        end
+        vim.keymap.set('',  '<Esc>', dismiss, {silent = true})
+      end,
     })
+
   end,
   keys = {
+    {
+      '<F13>i', ':Telescope notify theme=dropdown<CR>', { noremap = true, silent = true }
+    }
   },
 }
