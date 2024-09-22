@@ -1,11 +1,11 @@
+-- return {}
 return {
   -- "divagueame/aws-sam.nvim",
-  dir = "/home/ma/web/plugins/aws-sam.nvim",
+  dir = os.getenv("HOME") .. "/web/plugins/aws-sam.nvim",
   dependencies = {
-{
-      -- "stevearc/resession.nvim"
-}
-    -- "rcarriga/nvim-notify",
+    {
+      "rcarriga/nvim-notify",
+    }
   },
   -- event = "BufReadPost",
   dev = true,

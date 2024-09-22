@@ -37,7 +37,11 @@ keymap.set("n", "sv", ":vsplit<Return>", opts)
 -- Buffer navigation
 keymap.set("n", "<Tab>j", ":bnext<CR>", opts)
 keymap.set("n", "<Tab>k", ":bprev<CR>", opts)
-keymap.set({ "i", "v", "n" }, "<Tab>u", ":bd<CR>", opts)
+function SaveAndCloseBuffer()
+  vim.cmd('silent! write')
+  vim.cmd('silent! bdelete')
+end
+keymap.set({ "i", "v", "n" }, "<Tab>u", SaveAndCloseBuffer, opts)
 -- keymap.set("n", "<Tab>i", ":buffers<CR>", opts)
 keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
 

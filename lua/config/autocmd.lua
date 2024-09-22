@@ -29,6 +29,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 vim.api.nvim_create_autocmd(
   {
     "FocusLost",
+    "BufLeave",
     -- "ModeChanged",
     -- "TextChanged",
     -- "BufEnter"
