@@ -125,4 +125,9 @@ return {
 			})
 		end,
 	},
+  {
+    "chrisgrieser/nvim-various-textobjs",
+    event = "UIEnter",
+    opts = { useDefaultKeymaps = true },
+  },
 }
