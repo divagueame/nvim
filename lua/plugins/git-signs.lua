@@ -21,6 +21,8 @@ return {
 
 			vim.keymap.set("n", "<leader>sk", function()
 				require("gitsigns").stage_hunk()
+
+				require("gitsigns").nav_hunk("next")
 			end, { desc = "Stage hunk" })
 
 			vim.keymap.set("n", "<leader>su", function()

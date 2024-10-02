@@ -6,6 +6,7 @@ return {
   keys = {
     {
       "e",
+      -- "<F19>",
       mode = { "n", "x", "o" },
       function()
         require("flash").jump()
@@ -36,5 +37,13 @@ return {
       end,
       desc = "Treesitter Search",
     },
+    -- {
+    --   "<s-t>",
+    --   mode = { "c" },
+    --   function()
+    --     require("flash").toggle()
+    --   end,
+    --   desc = "Toggle Flash Search",
+    -- },
   },
 }
