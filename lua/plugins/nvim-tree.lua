@@ -49,9 +49,23 @@ return {
         ignore = false,
       },
     })
+    local is_large = false
 
-    -- set keymaps
+    -- Function to toggle Nvim Tree size
+    local function toggle_nvim_tree_size()
+      print("Toggling Nvim Tree size")  -- Debugging output
+      if is_large then
+        vim.cmd("NvimTreeResize 35")  -- Change this to your small width
+        print("Nvim Tree size set to small")  -- Debugging output
+        is_large = false
+      else
+        vim.cmd("NvimTreeResize 500")  -- Change this to your large width
+        print("Nvim Tree size set to large")  -- Debugging output
+        is_large = true
+      end
+    end    -- set keymaps
     local keymap = vim.keymap -- for conciseness
+    keymap.set("n", "<leader>eb", toggle_nvim_tree_size, { desc = "Make side tree bigger" }) -- refresh file explorer
 
     keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
     keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" }) -- toggle file explorer on current file

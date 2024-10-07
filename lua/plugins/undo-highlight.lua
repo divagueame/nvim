@@ -1,4 +1,5 @@
-return {
-	"tzachar/highlight-undo.nvim",
-	opts = {},
-}
+return {}
+-- return {
+-- 	"tzachar/highlight-undo.nvim",
+-- 	opts = {},
+-- }
