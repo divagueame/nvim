@@ -48,8 +48,22 @@ return {
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
 
-					-- Jump to the definition of the word under your cursor.
-					--  This is where a variable was first declared, or where a function is defined, etc.
+
+    -- local lint = require("lint")
+          -- lint.try_lint()
+          vim.keymap.set("n", "<space><space>l", function()
+            local command = "npx eslint . --fix"
+            vim.fn.system(command)
+            vim.cmd('silent! edit!')
+          end, { desc = "Lint project" })
+          vim.keymap.set("n", "<space>l", function()
+            local file = vim.fn.expand('%')  -- Get the current file path
+            print('Linting ' .. file)
+            local command = "npx eslint " .. file .. " --fix"
+            vim.fn.system(command)
+            vim.cmd('silent! edit!')
+            print('Linting complete for ' .. file)
+          end, { desc = "Trigger linting for current file" })
 					--  To jump back, press <C-t>.
 					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
