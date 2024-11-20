@@ -3,7 +3,6 @@ local opts = { noremap = true, silent = true }
 
 -- Save like your are used to
 keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent = true, desc = "Save file" })
--- keymap.set({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<Return>", { desc = "Save all buffers and quit" })
 
 -- Exit Neovim Enter + q
 vim.api.nvim_set_keymap("n", "<CR>q", ":wqa<CR>", { noremap = true, silent = true })
@@ -29,29 +28,33 @@ keymap.set("n", "sv", ":vsplit<Return>", opts)
 -- Close all other splits and focus on the current one
 -- keymap.set('n', '<C-w>o', '', { noremap = true, silent = true })
 
--- Buffer keybindings
--- keymap.set("n", "<C-p>", "<cmd>echo 'meow'<CR>", opts)
--- keymap.set("n", "<C-[>", "<cmd>echo 'meow'<CR>", opts)
--- keymap.set("n", "<C-h>", "<cmd>echo 'meow'<CR>", opts)
-
 -- Buffer navigation
 keymap.set("n", "<Tab>j", ":bnext<CR>", opts)
 keymap.set("n", "<Tab>k", ":bprev<CR>", opts)
+
 function SaveAndCloseBuffer()
 	vim.cmd("silent! write")
 	vim.cmd("silent! bdelete")
 end
+
 keymap.set({ "v", "n" }, "<Tab>u", SaveAndCloseBuffer, opts)
--- keymap.set("n", "<Tab>i", ":buffers<CR>", opts)
 keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
+
+-- Delete all buffers but the current one
+vim.keymap.set(
+	"n",
+	"<leader>bq",
+	'<Esc>:%bdelete|edit #|normal`"<Return>',
+	{ desc = "Delete other buffers but the current one" }
+)
 
 -- Move half page
 keymap.set("n", "<C-j>", ":normal! 20j<CR>", opts)
 keymap.set("n", "<C-k>", ":normal! 20k<CR>", opts)
 
--- Move 6 lines
--- keymap.set("n", "<C-n>", ":normal! 5j<CR>", opts)
--- keymap.set("n", "<C-m>", ":normal! 5k<CR>", opts)
+-- Position cursor at the middle of the screen after scrolling half page
+vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Scroll down half a page and center the cursor
+vim.keymap.set("n", "<C-u>", "<C-u>zz") -- Scroll up half a page and center the cursor
 
 -- Resize panes
 keymap.set("n", "<leader>wk", function()
@@ -148,13 +151,6 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true, desc = "Move focus to the left split" }
 )
 
--- Move focus to the left split with CAPS + k
--- vim.api.nvim_set_keymap(
--- 	"n",
--- 	"<C-w>l",
--- 	':lua require("config.utils").Display_error("CAPS + l")<CR>',
--- 	{ noremap = true, silent = true }
--- )
 vim.api.nvim_set_keymap(
 	"n",
 	"<F13>l",
@@ -162,13 +158,6 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true, desc = "Move focus to the right split" }
 )
 
--- Move focus to the top split with CAPS + k
--- vim.api.nvim_set_keymap(
--- 	"n",
--- 	"<C-w>k",
--- 	':lua require("config.utils").Display_error("CAPS + k")<CR>',
--- 	{ noremap = true, silent = true }
--- )
 vim.api.nvim_set_keymap(
 	"n",
 	"<F13>k",
@@ -176,26 +165,12 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
 
--- Move focus to the bottom split with CAPS + k
--- vim.api.nvim_set_keymap(
--- 	"n",
--- 	"<C-w>j",
--- 	':lua require("config.utils").Display_error("CAPS + J")<CR>',
--- 	{ noremap = true, silent = true }
--- )
 vim.api.nvim_set_keymap(
 	"n",
 	"<F13>j",
 	":wincmd j<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
-
--- vim.api.nvim_set_keymap(
--- 	"n",
--- 	"<C-q>",
--- 	':lua require("config.utils").Display_error("ENTER + q")<CR>',
--- 	{ noremap = true, silent = true }
--- )
 
 -- Toggle diagnostics
 vim.api.nvim_set_keymap(
@@ -204,12 +179,6 @@ vim.api.nvim_set_keymap(
 	":lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>",
 	{ noremap = true, silent = true }
 )
-
--- vim.keymap.set("n", "<C-k>", "<C-w>K", { noremap = true, silent = true })
--- vim.keymap.set("n", "<C-j>", "<C-w>J", { noremap = true, silent = true })
--- vim.keymap.set("n", "<C-h>", "<C-w>H", { noremap = true, silent = true })
--- vim.keymap.set("n", "<C-l>", "<C-w>L", { noremap = true, silent = true })
---
 
 -- Move focus to the left split with Shift + F1 (F13)
 vim.keymap.set("n", "<F13>t", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Move focus to the left split" })
@@ -239,3 +208,6 @@ vim.keymap.set("n", "<leader>tw", function()
 		print("Wrap disabled.")
 	end
 end, { desc = "Toggle Wrap with Right-Side Padding" })
+
+-- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
+vim.keymap.set("i", "<C-b>", "<C-o>de")
