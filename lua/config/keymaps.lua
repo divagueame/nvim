@@ -150,3 +150,16 @@ vim.api.nvim_set_keymap('n', '<C-q>', ':lua require("config.utils").Display_erro
 
 -- Toggle diagnostics
 vim.api.nvim_set_keymap('n', '<C-b>', ':lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>', { noremap = true, silent = true })
+-- Toggle Wrap
+vim.keymap.set("n", "<leader>tw", function()
+	vim.wo.wrap = not vim.wo.wrap -- Toggle the wrap setting
+	vim.wo.linebreak = vim.wo.wrap -- Enable linebreak only when wrap is enabled
+
+	if vim.wo.wrap then
+		-- vim.opt.colorcolumn = "80" -- Add a visual boundary to mimic padding
+		print("Wrap enabled with right-side padding.")
+	else
+		vim.opt.colorcolumn = "" -- Remove the boundary when wrap is disabled
+		print("Wrap disabled.")
+	end
+end, { desc = "Toggle Wrap with Right-Side Padding" })
