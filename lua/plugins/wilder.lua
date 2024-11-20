@@ -1,6 +1,5 @@
-return {
-	"gelguy/wilder.nvim",
-	config = function()
-		-- config goes here
-	end,
-}
+-- return {
+-- 	"gelguy/wilder.nvim",
+-- 	config = function() end,
+-- }
+return {}
