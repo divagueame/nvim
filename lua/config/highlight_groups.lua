@@ -15,6 +15,19 @@ vim.api.nvim_set_hl(0, 'HarpoonFilesPanelHL', { fg = "#f0f00f", bg = "NONE", bol
 -- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#1d2021", fg = "#afff8f" }) -- Border with a softer color
 
 -- Set the color of the title/tag at the top of floating windows
-vim.api.nvim_set_hl(0, "Title", { fg = "#fabd2f", bg = "#1d2021", bold = true })  -- Gruvbox yellow on dark bg
+-- vim.api.nvim_set_hl(0, "Title", { fg = "#fabd2f", bg = "#1d2021", bold = true })  -- Gruvbox yellow on dark bg
+-- vim.api.nvim_set_hl(0, "Title", { fg = "#fabd2f", bg = "#0f3094", bold = true })  -- Gruvbox yellow on dark bg
+-- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#003093",fg = "#0f3093" })
+vim.api.nvim_set_hl(0, "NormalFloatCustom", { bg = "#003093",fg = "#0f3093" })
+
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#003093",fg = "#dfdfdf" })
+-- vim.api.nvim_set_hl(0, "FloatTitle", { bg = "#003093",fg = "#ff00cc" })
+-- vim.api.nvim_set_hl(0, "FloatFooter", { bg = "#003093",fg = "#0f3093" })
+--
+--
+
+-- Link FloatBorder to Normal
 vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+
+-- Link NormalFloat to Normal
 vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })

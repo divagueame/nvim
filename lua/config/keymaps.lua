@@ -6,7 +6,7 @@ keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent 
 -- keymap.set({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<Return>", { desc = "Save all buffers and quit" })
 
 -- Exit Neovim Enter + q
-vim.api.nvim_set_keymap('n', '<CR>q', ':wqa<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<CR>q", ":wqa<CR>", { noremap = true, silent = true })
 
 -- Exit insert mode
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
@@ -38,8 +38,8 @@ keymap.set("n", "sv", ":vsplit<Return>", opts)
 keymap.set("n", "<Tab>j", ":bnext<CR>", opts)
 keymap.set("n", "<Tab>k", ":bprev<CR>", opts)
 function SaveAndCloseBuffer()
-  vim.cmd('silent! write')
-  vim.cmd('silent! bdelete')
+	vim.cmd("silent! write")
+	vim.cmd("silent! bdelete")
 end
 keymap.set({ "v", "n" }, "<Tab>u", SaveAndCloseBuffer, opts)
 -- keymap.set("n", "<Tab>i", ":buffers<CR>", opts)
@@ -55,30 +55,30 @@ keymap.set("n", "<C-k>", ":normal! 20k<CR>", opts)
 
 -- Resize panes
 keymap.set("n", "<leader>wk", function()
-  vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
+	vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
 end, vim.tbl_extend("force", opts, { desc = " + window height" }))
 
 keymap.set("n", "<leader>wj", function()
-  vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
+	vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
 end, vim.tbl_extend("force", opts, { desc = " - window height" }))
 
 keymap.set("n", "<leader>wh", function()
-  vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
+	vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
 end, vim.tbl_extend("force", opts, { desc = " + window width" }))
 
 keymap.set("n", "<leader>wl", function()
-  vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
+	vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
 end, vim.tbl_extend("force", opts, { desc = " - window width" }))
 
 -- Toggle Diagnostics
 local diagnostics_active = true
 vim.keymap.set("n", "<leader>d", function()
-  diagnostics_active = not diagnostics_active
-  if diagnostics_active then
-    vim.diagnostic.show()
-  else
-    vim.diagnostic.hide()
-  end
+	diagnostics_active = not diagnostics_active
+	if diagnostics_active then
+		vim.diagnostic.show()
+	else
+		vim.diagnostic.hide()
+	end
 end, vim.tbl_extend("force", opts, { desc = "Hide/Show Diagnostics" }))
 
 -- Undo / Redo
@@ -97,8 +97,8 @@ vim.keymap.set("n", "<leader>qd", ":cdo ", { desc = "Execute command on quickfix
 
 -- Clear quickfix list
 vim.keymap.set("n", "<leader>qx", function()
-  vim.fn.setqflist({})
-  print("Quickfix list cleared")
+	vim.fn.setqflist({})
+	print("Quickfix list cleared")
 end, { desc = "Clear quickfix list" })
 
 -- Deletes without adding to register
@@ -116,7 +116,7 @@ vim.keymap.set("n", "qj", ":lua print('yay')", { desc = "Execute command on quic
 ---------------------------------------------------
 -- Map CapsLock (F13) + g to some action
 --
--- Add these lines to ~/.Xmodmap and run 
+-- Add these lines to ~/.Xmodmap and run
 --
 -- remove Lock = Caps_Lock
 -- keycode 66 = F13
@@ -126,31 +126,107 @@ vim.keymap.set("n", "qj", ":lua print('yay')", { desc = "Execute command on quic
 ---------------------------------------------------
 
 -- Change Ctrl+w + o to call the print function
-vim.api.nvim_set_keymap('n', '<C-w>o', ':lua require("config.utils").Display_error("CAPS + v")<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F13>v', ':only<CR>', { noremap = true, silent = true, desc= 'Remove all splits' })
-
+vim.api.nvim_set_keymap(
+	"n",
+	"<C-w>o",
+	':lua require("config.utils").Display_error("CAPS + v")<CR>',
+	{ noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap("n", "<F13>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
 
 -- Move focus to the left split with CAPS + j
-vim.api.nvim_set_keymap('n', '<C-w>h', ':lua require("config.utils").Display_error("CAPS + j")<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F13>h', ':wincmd h<CR>', { noremap = true, silent = true, desc = 'Move focus to the left split' })
+vim.api.nvim_set_keymap(
+	"n",
+	"<C-w>h",
+	':lua require("config.utils").Display_error("CAPS + j")<CR>',
+	{ noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<F13>h",
+	":wincmd h<CR>",
+	{ noremap = true, silent = true, desc = "Move focus to the left split" }
+)
 
 -- Move focus to the left split with CAPS + k
-vim.api.nvim_set_keymap('n', '<C-w>l', ':lua require("config.utils").Display_error("CAPS + l")<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F13>l', ':wincmd l<CR>', { noremap = true, silent = true, desc = 'Move focus to the right split' })
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"<C-w>l",
+-- 	':lua require("config.utils").Display_error("CAPS + l")<CR>',
+-- 	{ noremap = true, silent = true }
+-- )
+vim.api.nvim_set_keymap(
+	"n",
+	"<F13>l",
+	":wincmd l<CR>",
+	{ noremap = true, silent = true, desc = "Move focus to the right split" }
+)
 
 -- Move focus to the top split with CAPS + k
-vim.api.nvim_set_keymap('n', '<C-w>k', ':lua require("config.utils").Display_error("CAPS + k")<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F13>k', ':wincmd k<CR>', { noremap = true, silent = true, desc = 'Move focus to the top split' })
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"<C-w>k",
+-- 	':lua require("config.utils").Display_error("CAPS + k")<CR>',
+-- 	{ noremap = true, silent = true }
+-- )
+vim.api.nvim_set_keymap(
+	"n",
+	"<F13>k",
+	":wincmd k<CR>",
+	{ noremap = true, silent = true, desc = "Move focus to the top split" }
+)
 
 -- Move focus to the bottom split with CAPS + k
-vim.api.nvim_set_keymap('n', '<C-w>j', ':lua require("config.utils").Display_error("CAPS + J")<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F13>j', ':wincmd j<CR>', { noremap = true, silent = true, desc = 'Move focus to the top split' })
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"<C-w>j",
+-- 	':lua require("config.utils").Display_error("CAPS + J")<CR>',
+-- 	{ noremap = true, silent = true }
+-- )
+vim.api.nvim_set_keymap(
+	"n",
+	"<F13>j",
+	":wincmd j<CR>",
+	{ noremap = true, silent = true, desc = "Move focus to the top split" }
+)
 
-vim.api.nvim_set_keymap('n', '<C-q>', ':lua require("config.utils").Display_error("ENTER + q")<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"<C-q>",
+-- 	':lua require("config.utils").Display_error("ENTER + q")<CR>',
+-- 	{ noremap = true, silent = true }
+-- )
 
 -- Toggle diagnostics
-vim.api.nvim_set_keymap('n', '<C-b>', ':lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>', { noremap = true, silent = true })
--- Toggle Wrap
+vim.api.nvim_set_keymap(
+	"n",
+	"<C-b>",
+	":lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>",
+	{ noremap = true, silent = true }
+)
+
+-- vim.keymap.set("n", "<C-k>", "<C-w>K", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<C-j>", "<C-w>J", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<C-h>", "<C-w>H", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<C-l>", "<C-w>L", { noremap = true, silent = true })
+--
+
+-- Move focus to the left split with Shift + F1 (F13)
+vim.keymap.set("n", "<F13>t", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Move focus to the left split" })
+vim.keymap.set(
+	"n",
+	"<F13>r",
+	":wincmd j<CR>",
+	{ noremap = true, silent = true, desc = "Move focus to the bottom split" }
+)
+-- Move focus to the right split with Shift + F2 (F14)
+-- vim.keymap.set("n", "<C-F13>l", ":wincmd l<CR>", { noremap = true, silent = true, desc = "Move focus to the right split" })
+
+-- Move focus to the top split with Shift + F3 (F15)
+-- vim.keymap.set("n", "<C-F13>k", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Move focus to the top split" })
+
+vim.api.nvim_set_keymap("n", "<F13>m", ":messages<CR>", { noremap = true, silent = true })
+
 vim.keymap.set("n", "<leader>tw", function()
 	vim.wo.wrap = not vim.wo.wrap -- Toggle the wrap setting
 	vim.wo.linebreak = vim.wo.wrap -- Enable linebreak only when wrap is enabled

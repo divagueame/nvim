@@ -1,152 +1,185 @@
-return {
-  'neovim/nvim-lspconfig',
-  --cmd = { 'LspInfo', 'LspLog', 'LspRestart', 'LspStart', 'LspStop' },
-
-  dependencies = {
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/nvim-cmp',
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
-    'j-hui/fidget.nvim',
-  },
-
-  config = function()
-    local cmp = require('cmp')
-    local cmp_lsp = require('cmp_nvim_lsp')
-    local capabilities = vim.tbl_deep_extend(
-      'force',
-      {},
-      vim.lsp.protocol.make_client_capabilities(),
-      cmp_lsp.default_capabilities())
-
-    require('fidget').setup({})
-    require('mason').setup()
-    require('mason-lspconfig').setup({
-      ensure_installed = {
-        'lua_ls',
-        'tailwindcss',
-        'volar',
-        'ts_ls',
-        'rust_analyzer',
-        -- 'gopls',
-      },
-      handlers = {
-        function(server_name)
-          require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach = function(client, bufnr)
-              local opts = { noremap = true, silent = true, buffer = bufnr }
-              vim.keymap.set(
-                "n",
-                "<leader>jk",
-                vim.lsp.buf.hover,
-                vim.tbl_extend("force", opts, { desc = "LSP - Hover info" })
-              )
-              vim.keymap.set(
-                "n",
-                "<leader>jj",
-                vim.lsp.buf.definition,
-                vim.tbl_extend("force", opts, { desc = "LSP - Definition" })
-              )
-              vim.keymap.set(
-                "n",
-                "<leader>jl",
-                "<cmd>Telescope lsp_references<cr>",
-                vim.tbl_extend("force", opts, { desc = "LSP - References (Telescope)" })
-              )
-              vim.keymap.set(
-                "n",
-                "<leader>j<CR>",
-                vim.lsp.buf.code_action,
-                vim.tbl_extend("force", opts, { desc = "LSP - Code action" })
-              )
-              vim.keymap.set(
-                "n",
-                "<space>ji",
-                vim.lsp.buf.rename,
-                vim.tbl_extend("force", opts, { desc = "LSP - Rename Reference" })
-              )
-
-
-            end
-          }
-        end,
-        ['ts_ls'] = function ()
-          local mason_registry = require('mason-registry')
-          local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
-
-          local lspconfig = require('lspconfig')
-
-          lspconfig.ts_ls.setup {
-            init_options = {
-              plugins = {
-                {
-                  name = '@vue/typescript-plugin',
-                  location = vue_language_server_path,
-                  languages = { 'vue' },
-                },
-              },
-            },
-            filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-          }
-        end,
-        ['lua_ls'] = function()
-          local lspconfig = require('lspconfig')
-          lspconfig.lua_ls.setup {
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                runtime = { version = 'Lua 5.1' },
-                diagnostics = {
-                  globals = { 'bit', 'vim', 'it', 'describe', 'before_each', 'after_each' },
-                }
-              }
-            }
-          }
-        end,
-        ['gopls'] = function ()
-          local lspconfig = require('lspconfig')
-          lspconfig.gopls.setup{}
-        end,
-      }
-    })
-
-    local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-    cmp.setup({
-      snippet = {
-        expand = function(args)
-          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        end,
-      },
-      mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-Space>'] = cmp.mapping.complete(),
-      }),
-      sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' }, -- For luasnip users.
-      }, {
-          { name = 'buffer' },
-        })
-    })
-
-
-    vim.diagnostic.config({
-      virtual_text = {
-        prefix = '⚠️',
-        format = function(diagnostic)
-          return diagnostic.message:sub(1, 50)  -- Limit to the first 40 characters
-        end,
-      },
-    })
-
-  end
-}
+return {}
+-- local border = {
+--   { '┌', 'FloatBorder' },
+--   { '─', 'FloatBorder' },
+--   { '┐', 'FloatBorder' },
+--   { '│', 'FloatBorder' },
+--   { '┘', 'FloatBorder' },
+--   { '─', 'FloatBorder' },
+--   { '└', 'FloatBorder' },
+--   { '│', 'FloatBorder' },
+-- }
+--
+-- local handlers = {
+--   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+--     border = border,
+--
+--     width = 800,
+--   }),
+--   ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+--     border = border ,
+--     width = 80,
+--   }),
+-- }
+--
+--
+-- return {
+--   'neovim/nvim-lspconfig',
+--   --cmd = { 'LspInfo', 'LspLog', 'LspRestart', 'LspStart', 'LspStop' },
+--   dependencies = {
+--     'williamboman/mason.nvim',
+--     'williamboman/mason-lspconfig.nvim',
+--     'hrsh7th/cmp-nvim-lsp',
+--     'hrsh7th/cmp-buffer',
+--     'hrsh7th/cmp-path',
+--     'hrsh7th/cmp-cmdline',
+--     'hrsh7th/nvim-cmp',
+--     'L3MON4D3/LuaSnip',
+--     'saadparwaiz1/cmp_luasnip',
+--     'j-hui/fidget.nvim',
+--   },
+--
+--   config = function()
+--     local cmp = require('cmp')
+--     local cmp_lsp = require('cmp_nvim_lsp')
+--     local capabilities = vim.tbl_deep_extend(
+--       'force',
+--       {},
+--       vim.lsp.protocol.make_client_capabilities(),
+--       cmp_lsp.default_capabilities())
+--
+--     require('fidget').setup({})
+--     require('mason').setup()
+--     -- require('mason-lspconfig').setup({
+--     --   ensure_installed = {
+--     --     'lua_ls',
+--     --     'tailwindcss',
+--     --     'volar',
+--     --     'ts_ls',
+--     --     'yamlls',
+--     --     'rust_analyzer',
+--     --     'pyright',
+--     --     -- 'gopls',
+--     --   },
+--     --   handlers = {
+--     --     function(server_name)
+--     --       require('lspconfig')[server_name].setup {
+--     --         capabilities = capabilities,
+--     --         handlers = handlers,
+--     --         on_attach = function(client, bufnr)
+--     --           local opts = { noremap = true, silent = true, buffer = bufnr }
+--     --           vim.keymap.set(
+--     --             "n",
+--     --             "<leader>jk",
+--     --             vim.lsp.buf.hover,
+--     --             vim.tbl_extend("force", opts, { desc = "LSP - Hover info" })
+--     --           )
+--     --           vim.keymap.set(
+--     --             "n",
+--     --             "<leader>jj",
+--     --             vim.lsp.buf.definition,
+--     --             vim.tbl_extend("force", opts, { desc = "LSP - Definition" })
+--     --           )
+--     --           vim.keymap.set(
+--     --             "n",
+--     --             "<leader>jl",
+--     --             "<cmd>Telescope lsp_references<cr>",
+--     --             vim.tbl_extend("force", opts, { desc = "LSP - References (Telescope)" })
+--     --           )
+--     --           vim.keymap.set(
+--     --             "n",
+--     --             "<leader>j<CR>",
+--     --             vim.lsp.buf.code_action,
+--     --             vim.tbl_extend("force", opts, { desc = "LSP - Code action" })
+--     --           )
+--     --           vim.keymap.set(
+--     --             "n",
+--     --             "<space>ji",
+--     --             vim.lsp.buf.rename,
+--     --             vim.tbl_extend("force", opts, { desc = "LSP - Rename Reference" })
+--     --           )
+--     --
+--     --           -- return {
+--     --           -- ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+--     --           -- ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+--     --           -- }
+--     --
+--     --         end
+--     --       }
+--     --     end,
+--     --     ['ts_ls'] = function ()
+--     --       local mason_registry = require('mason-registry')
+--     --       local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+--     --
+--     --       local lspconfig = require('lspconfig')
+--     --
+--     --       lspconfig.ts_ls.setup {
+--     --         handlers = handlers,
+--     --         init_options = {
+--     --           plugins = {
+--     --             {
+--     --               name = '@vue/typescript-plugin',
+--     --               location = vue_language_server_path,
+--     --               languages = { 'vue' },
+--     --             },
+--     --           },
+--     --         },
+--     --         filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+--     --       }
+--     --     end,
+--     --     ['lua_ls'] = function()
+--     --       local lspconfig = require('lspconfig')
+--     --       lspconfig.lua_ls.setup {
+--     --         capabilities = capabilities,
+--     --         settings = {
+--     --           Lua = {
+--     --             runtime = { version = 'Lua 5.1' },
+--     --             diagnostics = {
+--     --               globals = { 'bit', 'vim', 'it', 'describe', 'before_each', 'after_each' },
+--     --             }
+--     --           }
+--     --         }
+--     --       }
+--     --     end,
+--     --     ['gopls'] = function ()
+--     --       local lspconfig = require('lspconfig')
+--     --       lspconfig.gopls.setup{
+--     --         handlers = handlers,
+--     --       }
+--     --     end,
+--     --   }
+--     -- })
+--     --
+--     local cmp_select = { behavior = cmp.SelectBehavior.Select }
+--
+--     cmp.setup({
+--       snippet = {
+--         expand = function(args)
+--           require('luasnip').lsp_expand(args.body)
+--         end,
+--       },
+--       mapping = cmp.mapping.preset.insert({
+--         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+--         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+--         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+--         ['<C-Space>'] = cmp.mapping.complete(),
+--       }),
+--       sources = cmp.config.sources({
+--         { name = 'nvim_lsp' },
+--         { name = 'luasnip' },
+--       }, {
+--           { name = 'buffer' },
+--         })
+--     })
+--
+--     vim.diagnostic.config({
+--       virtual_text = {
+--         prefix = '⚠️',
+--         format = function(diagnostic)
+--           return diagnostic.message:sub(1, 50)  -- Limit to the first 40 characters
+--         end,
+--       },
+--     })
+--
+--   end
+-- }

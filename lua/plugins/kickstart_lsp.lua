@@ -48,22 +48,21 @@ return {
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
 
-
-    -- local lint = require("lint")
-          -- lint.try_lint()
-          vim.keymap.set("n", "<space><space>l", function()
-            local command = "npx eslint . --fix"
-            vim.fn.system(command)
-            vim.cmd('silent! edit!')
-          end, { desc = "Lint project" })
-          vim.keymap.set("n", "<space>l", function()
-            local file = vim.fn.expand('%')  -- Get the current file path
-            print('Linting ' .. file)
-            local command = "npx eslint " .. file .. " --fix"
-            vim.fn.system(command)
-            vim.cmd('silent! edit!')
-            print('Linting complete for ' .. file)
-          end, { desc = "Trigger linting for current file" })
+					-- local lint = require("lint")
+					-- lint.try_lint()
+					vim.keymap.set("n", "<space><space>l", function()
+						local command = "npx eslint . --fix"
+						vim.fn.system(command)
+						vim.cmd("silent! edit!")
+					end, { desc = "Lint project" })
+					vim.keymap.set("n", "<space>l", function()
+						local file = vim.fn.expand("%") -- Get the current file path
+						print("Linting " .. file)
+						local command = "npx eslint " .. file .. " --fix"
+						vim.fn.system(command)
+						vim.cmd("silent! edit!")
+						print("Linting complete for " .. file)
+					end, { desc = "Trigger linting for current file" })
 					--  To jump back, press <C-t>.
 					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
@@ -249,7 +248,27 @@ return {
 			})
 		end,
 	},
-
+	{
+		"stevearc/conform.nvim",
+		event = "BufWritepre",
+		opts = {
+			notify_on_error = true,
+			formatters = {},
+			formatters_by_ft = {
+				sh = { "beautysh" },
+				bash = { "beautysh" },
+				zsh = { "beautysh" },
+				lua = { "stylua" },
+				json = { "prettier" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				python = { "ruff", "black" },
+				markdown = { "prettier" },
+				sql = { "sqlfmt" },
+			},
+			format_on_save = { timeout_ms = 2000 },
+		},
+	},
 	-- { -- Autoformat
 	-- 	"stevearc/conform.nvim",
 	-- 	event = { "BufWritePre" },
