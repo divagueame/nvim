@@ -23,3 +23,13 @@ vim.api.nvim_create_user_command("ToggleWrap", function()
 	vim.wo.wrap = not vim.wo.wrap
 	print("Line wrap is now " .. (vim.wo.wrap and "on" or "off"))
 end, {})
+
+--- Open Help window on a full buffer
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = "*",
+	callback = function(event)
+		if vim.bo[event.buf].filetype == "help" then
+			vim.cmd.only()
+		end
+	end,
+})
