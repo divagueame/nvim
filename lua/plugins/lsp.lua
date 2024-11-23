@@ -108,6 +108,8 @@ return {
 						vim.cmd("write")
 					end, "[G]oto [D]eclaration")
 
+					map("<leader>gm", vim.diagnostic.open_float, "diagnostic on a window")
+
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
 					--    See `:help CursorHold` for information about when this is executed
