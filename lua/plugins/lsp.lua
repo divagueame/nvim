@@ -1,5 +1,39 @@
 return {
 	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		opts = {
+			ensure_installed = {
+				"prettier",
+				"stylua",
+				"isort",
+				"black",
+				"pylint",
+				"eslint",
+				"eslint_d",
+				"stylua",
+				"shfmt",
+			},
+		},
+	},
+	{
+		"williamboman/mason.nvim",
+		opts = {
+			ensure_installed = {
+				"volar",
+				"ts_ls",
+				"yamlls",
+				"rust_analyzer",
+				"pyright",
+				"html",
+				"cssls",
+				"tailwindcss",
+				"lua_ls",
+				"emmet_ls",
+				"gopls",
+			},
+		},
+	},
+	{
 		"folke/lazydev.nvim",
 		ft = "lua",
 		opts = {
@@ -14,14 +48,11 @@ return {
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
-
-			-- Useful status updates for LSP.
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", opts = {} },
 			"hrsh7th/cmp-nvim-lsp", -- Allows extra capabilities provided by nvim-cmp
 		},
 		config = function()
+			-- LspAttach
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
@@ -123,6 +154,7 @@ return {
 				end,
 			})
 
+			--- Capabilitieskj
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.foldingRange = {
 				dynamicRegistration = false,
@@ -157,6 +189,7 @@ return {
 				.. "/node_modules/@vue/language-server"
 
 			local servers = {
+				gopls = {},
 				ts_ls = {
 					handlers = handlers,
 					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
@@ -187,15 +220,6 @@ return {
 					},
 				},
 			}
-
-			require("mason").setup()
-
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
-				"shfmt",
-			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
 				handlers = {
