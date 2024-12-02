@@ -18,7 +18,12 @@ vim.api.nvim_create_autocmd({
 }, { desc = "autosave", pattern = "*", command = "silent! update" })
 
 -- Toggle line wrapping
-vim.api.nvim_set_keymap("n", "<leader>t", ":set wrap!<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>lw",
+	":set wrap!<CR>",
+	{ noremap = true, silent = true, desc = "Toggle Line Wrap" }
+)
 vim.api.nvim_create_user_command("ToggleWrap", function()
 	vim.wo.wrap = not vim.wo.wrap
 	print("Line wrap is now " .. (vim.wo.wrap and "on" or "off"))
