@@ -85,13 +85,13 @@ return {
 					map("gR", vim.lsp.buf.rename, "LSP Rename")
 					map("ga", vim.lsp.buf.code_action, "LSP - Action", { "n", "x" })
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					map("gdw", vim.diagnostic.open_float, "diagnostic on a window")
 
 					map("gF", function()
 						vim.lsp.buf.format({ async = true })
 						vim.cmd("write")
 					end, "LSP - Format")
 
-					map("<leader>dw", vim.diagnostic.open_float, "diagnostic on a window")
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.

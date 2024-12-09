@@ -29,15 +29,18 @@ keymap.set("n", "sv", ":vsplit<Return>", opts)
 -- keymap.set('n', '<C-w>o', '', { noremap = true, silent = true })
 
 -- Buffer navigation
-keymap.set("n", "<Tab>j", ":bnext<CR>", opts)
-keymap.set("n", "<Tab>k", ":bprev<CR>", opts)
+vim.keymap.set("n", "<Tab>j", ":bnext<CR>", { desc = "Go to the next buffer" })
+vim.keymap.set("n", "<Tab>k", ":bprev<CR>", { desc = "Go to the previous buffer" })
 
+vim.keymap.set("n", "<Tab>m", ":tabnext<CR>", { desc = "Go to the next tab" })
+vim.keymap.set("n", "<Tab>n", ":tabnew<CR>", { desc = "Open a new tab" })
+vim.keymap.set("n", "<Tab>b", ":tabclose<CR>", { desc = "Close the current tab" })
 function SaveAndCloseBuffer()
 	vim.cmd("silent! write")
 	vim.cmd("silent! bdelete")
 end
 
-keymap.set({ "v", "n" }, "<Tab>u", SaveAndCloseBuffer, opts)
+keymap.set({ "v", "n" }, "<Tab>u", SaveAndCloseBuffer, { noremap = true, silent = true, desc = "Save & Close buffer" })
 keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
 
 -- Delete all buffers but the current one
