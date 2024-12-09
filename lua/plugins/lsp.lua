@@ -66,7 +66,7 @@ return {
 						vim.fn.system(command)
 						vim.cmd("silent! edit!")
 					end, { desc = "Lint project" })
-					vim.keymap.set("n", "<space>l", function()
+					vim.keymap.set("n", "<space>ll", function()
 						local file = vim.fn.expand("%") -- Get the current file path
 						print("Linting " .. file)
 						local command = "npx eslint " .. file .. " --fix"
@@ -75,44 +75,23 @@ return {
 						print("Linting complete for " .. file)
 					end, { desc = "Trigger linting for current file" })
 					--  To jump back, press <C-t>.
-					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-
-					map("gK", vim.lsp.buf.hover, "HOVER LSP")
-					--
-					-- Find references for the word under your cursor.
-					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-
-					-- Jump to the implementation of the word under your cursor.
-					--  Useful when your language has ways of declaring types without an actual implementation.
-					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-
-					-- Jump to the type of the word under your cursor.
-					--  Useful when you're not sure what type a variable is and you want to see
-					--  the definition of its *type*, not where it was *defined*.
-					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-
-					-- Fuzzy find all the symbols in your current document.
-					--  Symbols are things like variables, functions, types, etc.
-					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-
-					-- Fuzzy find all the symbols in your current workspace.
-					--  Similar to document symbols, except searches over your entire project.
-					map(
-						"<leader>ws",
-						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"[W]orkspace [S]ymbols"
-					)
-
-					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+					map("gd", require("telescope.builtin").lsp_definitions, "LSP Definition")
+					map("gh", vim.lsp.buf.hover, "LSP Hover")
+					map("gr", require("telescope.builtin").lsp_references, "LSP References")
+					map("gI", require("telescope.builtin").lsp_implementations, "LSP - Implementation")
+					map("gt", require("telescope.builtin").lsp_type_definitions, "LSP - Type Definition")
+					map("gds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+					map("gws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+					map("gR", vim.lsp.buf.rename, "LSP Rename")
+					map("ga", vim.lsp.buf.code_action, "LSP - Action", { "n", "x" })
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-					map("<leader>m", function()
+					map("gF", function()
 						vim.lsp.buf.format({ async = true })
 						vim.cmd("write")
-					end, "[G]oto [D]eclaration")
+					end, "LSP - Format")
 
-					map("<leader>gm", vim.diagnostic.open_float, "diagnostic on a window")
+					map("<leader>dw", vim.diagnostic.open_float, "diagnostic on a window")
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
@@ -154,7 +133,7 @@ return {
 				end,
 			})
 
-			--- Capabilitieskj
+			--- Capabilities
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.foldingRange = {
 				dynamicRegistration = false,
