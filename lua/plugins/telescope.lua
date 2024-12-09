@@ -61,25 +61,8 @@ return {
 						width = 290,
 						vertical = {
 							prompt_position = "top",
-							-- mirror = true,
 						},
 					},
-					-- sorting_strategy = "ascending",
-					--  layout_strategy = "center",
-					--  border = false,
-					--  prompt_title = "",
-					--  results_title = "",
-					--  preview_title = "",
-					--  prompt_prefix = "",
-					--  selection_caret = "",
-					--  entry_prefix = "",
-					--  multi_icon = "",
-					--  color_devicons = false,
-					--  preview = { msg_bg_fillchar = ' ' },
-					--  layout_config = {
-					--    anchor = "N",
-					--    width = 99
-					--  },
 					ripgrep_arguments = {
 						"rg",
 						"--hidden",
@@ -91,10 +74,9 @@ return {
 					},
 				},
 				extensions = {
+					fzf = {},
 					["ui-select"] = {
-						require("telescope.themes").get_dropdown({
-							-- even more opts
-						}),
+						require("telescope.themes").get_dropdown({}),
 					},
 				},
 			})
