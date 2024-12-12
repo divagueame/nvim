@@ -5,7 +5,7 @@ local opts = { noremap = true, silent = true }
 keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent = true, desc = "Save file" })
 
 -- Exit Neovim Enter + q
-vim.api.nvim_set_keymap("n", "<CR>q", ":wqa<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<CR>q", ":wqa<CR>", { noremap = true, silent = true, desc = "Save and Exit" })
 
 -- Exit insert mode
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
@@ -19,7 +19,7 @@ keymap.set("n", "J", ":m .+1<CR>==", { noremap = true })
 keymap.set("n", "K", ":m .-2<CR>==", { noremap = true })
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
