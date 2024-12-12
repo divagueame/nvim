@@ -7,7 +7,7 @@ return {
 		bigfile = { enabled = true },
 		dashboard = { enabled = true },
 		indent = { enabled = true },
-		input = { enabled = true },
+		-- input = { enabled = true },
 		notifier = {
 			enabled = true,
 			timeout = 3000,
@@ -123,15 +123,15 @@ return {
 		-- 	desc = "Next Reference",
 		-- 	mode = { "n", "t" },
 		-- },
-		{
-			"<C-o>",
-			function()
-				print("meow")
-				-- Snacks.words.jump(vim.v.count1)
-			end,
-			desc = "Next Reference",
-			mode = { "n", "t" },
-		},
+		-- {
+		-- 	"<C-o>",
+		-- 	function()
+		-- 		print("meow")
+		-- 		-- Snacks.words.jump(vim.v.count1)
+		-- 	end,
+		-- 	desc = "Next Reference",
+		-- 	mode = { "n", "t" },
+		-- },
 		{
 			"<F13>u",
 			function()
@@ -182,9 +182,9 @@ return {
 					.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
 					:map("<leader>uc")
 				Snacks.toggle.treesitter():map("<leader>uT")
-				Snacks.toggle
-					.option("background", { off = "light", on = "dark", name = "Dark Background" })
-					:map("<leader>ub")
+				-- Snacks.toggle
+				-- 	.option("background", { off = "light", on = "dark", name = "Dark Background" })
+				-- 	:map("<leader>ub")
 				Snacks.toggle.inlay_hints():map("<leader>uh")
 				Snacks.toggle.indent():map("<leader>ug")
 				Snacks.toggle.dim():map("<leader>uD")
