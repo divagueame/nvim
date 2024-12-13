@@ -58,20 +58,20 @@ return {
 		-- 	end,
 		-- 	desc = "Delete Buffer",
 		-- },
-		{
-			"<leader>gB",
-			function()
-				Snacks.gitbrowse()
-			end,
-			desc = "Git Browse",
-		},
-		{
-			"<leader>gb",
-			function()
-				Snacks.git.blame_line()
-			end,
-			desc = "Git Blame Line",
-		},
+		-- {
+		-- 	"<leader>gB",
+		-- 	function()
+		-- 		Snacks.gitbrowse()
+		-- 	end,
+		-- 	desc = "Git Browse",
+		-- },
+		-- {
+		-- 	"<leader>gb",
+		-- 	function()
+		-- 		Snacks.git.blame_line()
+		-- 	end,
+		-- 	desc = "Git Blame Line",
+		-- },
 		{
 			"<leader>gf",
 			function()
