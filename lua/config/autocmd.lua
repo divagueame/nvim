@@ -28,3 +28,11 @@ vim.api.nvim_create_user_command("ToggleWrap", function()
 	vim.wo.wrap = not vim.wo.wrap
 	print("Line wrap is now " .. (vim.wo.wrap and "on" or "off"))
 end, {})
+
+-- Help full window
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "help",
+	callback = function()
+		vim.cmd("only") -- Close all other splits
+	end,
+})
