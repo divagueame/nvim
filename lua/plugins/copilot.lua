@@ -28,23 +28,6 @@ return {
 	-- GitHub Copilot plugin
 	{ "github/copilot.vim" }, -- Load the GitHub Copilot plugin
 
-	-- Which-key plugin configuration
-	{
-		"folke/which-key.nvim", -- Load the which-key plugin
-		optional = true, -- This plugin is optional
-		opts = {
-			spec = {
-				{ "<leader>c", group = "ai" }, -- Define a group for AI-related commands
-				{ "gm", group = "+Copilot chat" }, -- Define a group for Copilot chat commands
-				{ "gmh", desc = "Show help" }, -- Keybinding to show help
-				{ "gmd", desc = "Show diff" }, -- Keybinding to show diff
-				{ "gmp", desc = "Show system prompt" }, -- Keybinding to show system prompt
-				{ "gms", desc = "Show selection" }, -- Keybinding to show selection
-				{ "gmy", desc = "Yank diff" }, -- Keybinding to yank diff
-			},
-		},
-	},
-
 	-- Copilot Chat plugin configuration
 	{
 		"CopilotC-Nvim/CopilotChat.nvim", -- Load the Copilot Chat plugin
