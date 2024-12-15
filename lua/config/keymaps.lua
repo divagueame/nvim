@@ -215,6 +215,7 @@ end, { desc = "Toggle Wrap with Right-Side Padding" })
 -- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
 vim.keymap.set("i", "<C-b>", "<C-o>de")
 
+-- Accessories
 -- Toggle display mode for cursor location
 local display_cursor_mode = false
 function ToggleCursorLocation()
@@ -234,4 +235,16 @@ function ToggleCursorLocation()
 		print("Cursor location display: OFF")
 	end
 end
-vim.keymap.set("n", "<leader>sc", ToggleCursorLocation, { desc = "Toggle cursor location display" })
+vim.keymap.set("n", "<leader>ac", ToggleCursorLocation, { desc = "Toggle cursor location display" })
+
+-- Toggle line wrapping
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>al",
+	":set wrap!<CR>",
+	{ noremap = true, silent = true, desc = "Toggle Line Wrap" }
+)
+vim.api.nvim_create_user_command("ToggleWrap", function()
+	vim.wo.wrap = not vim.wo.wrap
+	print("Line wrap is now " .. (vim.wo.wrap and "on" or "off"))
+end, {})
