@@ -34,7 +34,7 @@ return {
 		optional = true, -- This plugin is optional
 		opts = {
 			spec = {
-				{ "<leader>a", group = "ai" }, -- Define a group for AI-related commands
+				{ "<leader>c", group = "ai" }, -- Define a group for AI-related commands
 				{ "gm", group = "+Copilot chat" }, -- Define a group for Copilot chat commands
 				{ "gmh", desc = "Show help" }, -- Keybinding to show help
 				{ "gmd", desc = "Show diff" }, -- Keybinding to show diff
@@ -136,7 +136,7 @@ return {
 		event = "VeryLazy", -- Load this plugin on the 'VeryLazy' event
 		keys = {
 			{
-				"<leader>ah",
+				"<leader>ch",
 				function()
 					local actions = require("CopilotChat.actions")
 					require("CopilotChat.integrations.telescope").pick(actions.help_actions())
@@ -144,7 +144,7 @@ return {
 				desc = "CopilotChat - Help actions",
 			},
 			{
-				"<leader>ap",
+				"<leader>cp",
 				function()
 					local actions = require("CopilotChat.actions")
 					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
@@ -152,20 +152,20 @@ return {
 				desc = "CopilotChat - Prompt actions",
 			},
 			{
-				"<leader>ap",
+				"<leader>cp",
 				":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
 				mode = "x",
 				desc = "CopilotChat - Prompt actions",
 			},
-			{ "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-			{ "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-			{ "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-			{ "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-			{ "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
-			{ "<leader>av", ":CopilotChatVisual", mode = "x", desc = "CopilotChat - Open in vertical split" },
-			{ "<leader>ax", ":CopilotChatInline<cr>", mode = "x", desc = "CopilotChat - Inline chat" },
+			{ "<leader>ce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+			{ "<leader>ct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+			{ "<leader>cr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
+			{ "<leader>cR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
+			{ "<leader>cn", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
+			{ "<leader>cv", ":CopilotChatVisual", mode = "x", desc = "CopilotChat - Open in vertical split" },
+			{ "<leader>cx", ":CopilotChatInline<cr>", mode = "x", desc = "CopilotChat - Inline chat" },
 			{
-				"<leader>ai",
+				"<leader>ci",
 				function()
 					local input = vim.fn.input("Ask Copilot: ")
 					if input ~= "" then
@@ -175,17 +175,17 @@ return {
 				desc = "CopilotChat - Ask input",
 			},
 			{
-				"<leader>am",
+				"<leader>cm",
 				"<cmd>CopilotChatCommit<cr>",
 				desc = "CopilotChat - Generate commit message for all changes",
 			},
 			{
-				"<leader>aM",
+				"<leader>cM",
 				"<cmd>CopilotChatCommitStaged<cr>",
 				desc = "CopilotChat - Generate commit message for staged changes",
 			},
 			{
-				"<leader>aq",
+				"<leader>cq",
 				function()
 					local input = vim.fn.input("Quick Chat: ")
 					if input ~= "" then
@@ -194,11 +194,11 @@ return {
 				end,
 				desc = "CopilotChat - Quick chat",
 			},
-			{ "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
-			{ "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
-			{ "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
-			{ "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
-			{ "<leader>a?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
+			{ "<leader>cd", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
+			{ "<leader>cf", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "CopilotChat - Fix Diagnostic" },
+			{ "<leader>cl", "<cmd>CopilotChatReset<cr>", desc = "CopilotChat - Clear buffer and chat history" },
+			{ "<leader>cv", "<cmd>CopilotChatToggle<cr>", desc = "CopilotChat - Toggle" },
+			{ "<leader>c?", "<cmd>CopilotChatModels<cr>", desc = "CopilotChat - Select Models" },
 		},
 	},
 }

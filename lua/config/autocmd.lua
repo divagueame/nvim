@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({
 -- Toggle line wrapping
 vim.api.nvim_set_keymap(
 	"n",
-	"<leader>lw",
+	"<leader>al",
 	":set wrap!<CR>",
 	{ noremap = true, silent = true, desc = "Toggle Line Wrap" }
 )
