@@ -197,20 +197,8 @@ vim.keymap.set(
 -- Move focus to the top split with Shift + F3 (F15)
 -- vim.keymap.set("n", "<C-F13>k", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Move focus to the top split" })
 
+-- Show messages
 vim.api.nvim_set_keymap("n", "<F13>m", ":messages<CR>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>tw", function()
-	vim.wo.wrap = not vim.wo.wrap -- Toggle the wrap setting
-	vim.wo.linebreak = vim.wo.wrap -- Enable linebreak only when wrap is enabled
-
-	if vim.wo.wrap then
-		-- vim.opt.colorcolumn = "80" -- Add a visual boundary to mimic padding
-		print("Wrap enabled with right-side padding.")
-	else
-		vim.opt.colorcolumn = "" -- Remove the boundary when wrap is disabled
-		print("Wrap disabled.")
-	end
-end, { desc = "Toggle Wrap with Right-Side Padding" })
 
 -- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
 vim.keymap.set("i", "<C-b>", "<C-o>de")
