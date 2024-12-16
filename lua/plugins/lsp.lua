@@ -77,7 +77,7 @@ return {
 					--  To jump back, press <C-t>.
 					map("gd", require("telescope.builtin").lsp_definitions, "LSP Definition")
 					map("gh", vim.lsp.buf.hover, "LSP Hover")
-					map("gr", require("telescope.builtin").lsp_references, "LSP References")
+					-- map("gr", require("telescope.builtin").lsp_references, "LSP References")
 					map("gI", require("telescope.builtin").lsp_implementations, "LSP - Implementation")
 					map("gt", require("telescope.builtin").lsp_type_definitions, "LSP - Type Definition")
 					map("gds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
