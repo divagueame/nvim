@@ -1,3 +1,11 @@
+local has_words_before = function()
+	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+		return false
+	end
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+end
+
 return {
 	{
 		"hrsh7th/nvim-cmp",
@@ -37,35 +45,28 @@ return {
 						ls.lsp_expand(args.body)
 					end,
 				},
+				mapping = {
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<C-e>"] = cmp.mapping.abort(),
 
-				mapping = cmp.mapping.preset.insert({
+					-- Manually trigger completion
+					["<C-Space>"] = cmp.mapping.complete(),
+
+					["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+					["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+
+					-- Scroll documentation
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete({}),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = true,
-					}),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif ls.expand_or_jumpable() then
-							ls.expand_or_jump()
+
+					["<Tab>"] = vim.schedule_wrap(function(fallback)
+						if cmp.visible() and has_words_before() then
+							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 						else
 							fallback()
 						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif ls.jumpable(-1) then
-							ls.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
+					end),
+				},
 				window = {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
@@ -87,8 +88,9 @@ return {
 					},
 				},
 				sources = cmp.config.sources({
+					{ name = "copilot", priority = 1002 },
 					{ name = "nvim_lsp", priority = 1000 },
-					{ name = "luasnip", priority = 750 },
+					{ name = "luasnip", priority = 550 },
 					{ name = "buffer", priority = 500 },
 					{ name = "path", priority = 250 },
 				}),
@@ -105,11 +107,13 @@ return {
 
 						require("tailwindcss-colorizer-cmp").formatter(entry, item)
 
+						vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 						local menu_icon = {
-							nvim_lsp = "[🍕]",
-							luasnip = "-> SNIP",
-							buffer = "+",
-							PATH = "[ ⤴⤴⤴ ⤴  ]",
+							Copilot = "🍆",
+							nvim_lsp = "🍕",
+							luasnip = "📥",
+							buffer = "📎",
+							path = " ",
 						}
 						item.menu = menu_icon[entry.source.name]
 

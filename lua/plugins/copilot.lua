@@ -26,12 +26,25 @@ local prompts = {
 -- This table contains the configuration for various plugins used in Neovim.
 return {
 	-- GitHub Copilot plugin
-	{ "github/copilot.vim" }, -- Load the GitHub Copilot plugin
 
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({})
+		end,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	},
 	-- Copilot Chat plugin configuration
 	{
 		"CopilotC-Nvim/CopilotChat.nvim", -- Load the Copilot Chat plugin
-		branch = "canary", -- Use the 'canary' branch
+		branch = "main", -- Use the 'canary' branch
 		dependencies = {
 			{ "nvim-telescope/telescope.nvim" }, -- Dependency on Telescope plugin
 			{ "nvim-lua/plenary.nvim" }, -- Dependency on Plenary plugin
