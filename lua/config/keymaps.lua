@@ -92,11 +92,11 @@ keymap.set("n", "U", ":redo<cr>", opts)
 keymap.set("n", "<C-r>", ':echo "Use U / u instead to do / redo"<cr>', opts)
 
 -- Quickfix
-vim.keymap.set("n", "<leader>qo", ":copen<CR>", { desc = "Open quickfix list" })
-vim.keymap.set("n", "<leader>qc", ":cclose<CR>", { desc = "Close quickfix list" })
+vim.keymap.set("n", "qo", ":copen<CR>", { desc = "Open quickfix list" })
+vim.keymap.set("n", "qc", ":cclose<CR>", { desc = "Close quickfix list" })
 
-vim.keymap.set("n", "]q", ":cnext<CR>", { desc = "Next quickfix item" })
-vim.keymap.set("n", "[q", ":cprev<CR>", { desc = "Previous quickfix item" })
+vim.keymap.set("n", "qj", ":cnext<CR>", { desc = "Next quickfix item" })
+vim.keymap.set("n", "qk", ":cprev<CR>", { desc = "Previous quickfix item" })
 
 -- Execute a command on each item in the quickfix list
 vim.keymap.set("n", "<leader>qd", ":cdo ", { desc = "Execute command on quickfix items" })
@@ -236,3 +236,15 @@ vim.api.nvim_create_user_command("ToggleWrap", function()
 	vim.wo.wrap = not vim.wo.wrap
 	print("Line wrap is now " .. (vim.wo.wrap and "on" or "off"))
 end, {})
+
+-- References
+vim.keymap.set("n", "gr", function()
+	local win = vim.api.nvim_get_current_win()
+	vim.lsp.buf.references(nil, {
+		on_list = function(items, title, context)
+			vim.fn.setqflist({}, " ", items)
+			vim.cmd.copen()
+			vim.api.nvim_set_current_win(win)
+		end,
+	})
+end)
