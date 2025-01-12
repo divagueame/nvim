@@ -49,7 +49,7 @@ return {
 			{ "williamboman/mason.nvim", config = true },
 			"williamboman/mason-lspconfig.nvim",
 			{ "j-hui/fidget.nvim", opts = {} },
-			"hrsh7th/cmp-nvim-lsp", -- Allows extra capabilities provided by nvim-cmp
+			-- "hrsh7th/cmp-nvim-lsp", -- Allows extra capabilities provided by nvim-cmp
 		},
 		config = function()
 			-- LspAttach
@@ -91,7 +91,6 @@ return {
 						vim.lsp.buf.format({ async = true })
 						vim.cmd("write")
 					end, "LSP - Format")
-
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
@@ -139,7 +138,7 @@ return {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
 			}
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 			local border = {
 				{ "┌", "FloatBorder" },
