@@ -17,7 +17,31 @@ return {
 				desc = "Find files (including hidden)",
 			},
 			{ "<Leader>g", "<cmd>Telescope live_grep<CR>", desc = "Grep files" },
-			{ "<Leader><leader>g", "<cmd>Telescope live_grep hidden=true<CR>", desc = "Grep files" },
+			-- { "<Leader><leader>g", "<cmd>Telescope live_grep hidden=true<CR>", desc = "Grep files" },
+			{
+				"<Leader><leader>g",
+				function()
+					require("telescope.builtin").live_grep({
+						vimgrep_arguments = {
+							"rg",
+							"--color=never",
+							"--no-heading",
+							"--with-filename",
+							"--line-number",
+							"--column",
+							"--smart-case",
+							"--hidden", -- Include hidden files
+							"--no-ignore",
+							"--glob",
+							"!.git/*", -- Exclude .git directory
+							-- "!node_modules/*", -- Exclude node_modules
+							-- ".nuxt/*", -- Explicitly include .nuxt
+							-- ".output/*",
+						},
+					})
+				end,
+				desc = "Grep files (Hidden Included)",
+			},
 			{ "<Leader>h", "<cmd>Telescope quickfix<CR>", desc = "Quickfix" },
 			{
 				"<Leader><leader>gg",
