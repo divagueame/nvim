@@ -42,7 +42,7 @@ return {
 			},
 		},
 	},
-	{ "Bilal2453/luvit-meta", lazy = true },
+	-- { "Bilal2453/luvit-meta", lazy = true },
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -139,6 +139,7 @@ return {
 				lineFoldingOnly = true,
 			}
 			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 			local border = {
 				{ "┌", "FloatBorder" },
