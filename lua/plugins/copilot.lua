@@ -22,17 +22,13 @@ local prompts = {
 	Concise = "Please rewrite the following text to make it more concise.", -- Prompt to make text concise
 }
 
--- Plugin configuration
--- This table contains the configuration for various plugins used in Neovim.
 return {
-	-- GitHub Copilot plugin
-
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
 		config = function()
-			require("copilot").setup({})
+			-- require("copilot").setup({})
 		end,
 	},
 	{
@@ -41,7 +37,6 @@ return {
 			require("copilot_cmp").setup()
 		end,
 	},
-	-- Copilot Chat plugin configuration
 	{
 		"CopilotC-Nvim/CopilotChat.nvim", -- Load the Copilot Chat plugin
 		branch = "main", -- Use the 'canary' branch
@@ -64,8 +59,8 @@ return {
 				accept_diff = { normal = "<C-y>", insert = "<C-y>" }, -- Keybinding to accept diff
 				yank_diff = { normal = "gmy" }, -- Keybinding to yank diff
 				show_diff = { normal = "gmd" }, -- Keybinding to show diff
-				show_system_prompt = { normal = "gmp" }, -- Keybinding to show system prompt
-				show_user_selection = { normal = "gms" }, -- Keybinding to show user selection
+				-- show_system_prompt = { normal = "gmp" }, -- Keybinding to show system prompt
+				-- show_user_selection = { normal = "gms" }, -- Keybinding to show user selection
 				show_help = { normal = "gmh" }, -- Keybinding to show help
 			},
 		},
@@ -91,7 +86,7 @@ return {
 
 			-- Setup Copilot Chat with the provided options
 			chat.setup(opts)
-			require("CopilotChat.integrations.cmp").setup()
+			-- require("CopilotChat.integrations.cmp").setup()
 
 			-- Create user commands for different chat modes
 			vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
