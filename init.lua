@@ -4,12 +4,6 @@ vim.g.maplocalleader = " "
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
--- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
@@ -65,11 +59,21 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Exit Neovim Enter + q
+vim.api.nvim_set_keymap("n", "<CR>q", ":wqa<CR>", { noremap = true, silent = true, desc = "Save and Exit" })
+
 -- [[ Basic Keymaps ]]
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
+
+-- Exit insert
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
+
+-- No Hightlight search
 keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- Save like your are used to
+keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>silent! w<cr><esc>", { silent = true, desc = "Save file" })
 
 -- Move lines up and down
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", opts)
