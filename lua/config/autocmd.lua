@@ -28,14 +28,13 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_set_keymap("n", "<leader>tt", [[:lua RunTestFile()<CR>]], { noremap = true, silent = true })
 
 function RunTestFile()
-	local file = vim.fn.expand("%:t")
-	local joviva_home = os.getenv("JOVIVA_HOME")
+	local current_file_dir = vim.fn.expand("%:p:h")
+
+	local test_file_pattern = current_file_dir .. "/*.nuxt.test.ts"
+	local test_file = vim.fn.glob(test_file_pattern)
 
 	local wezterm_command =
-		string.format("wezterm start -- bash -c 'cd %s && yarn vitest %s; exec bash'", joviva_home, file)
+		string.format("wezterm start -- bash -c 'cd %s && yarn vitest %s; exec bash'", current_file_dir, test_file)
 
-	local i3_command = string.format("i3-msg 'workspace number 3; exec \"%s\"'", wezterm_command)
-
-	-- Execute the i3-msg command
-	os.execute(i3_command)
+	os.execute(wezterm_command)
 end
