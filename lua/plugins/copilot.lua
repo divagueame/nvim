@@ -64,8 +64,8 @@ return {
 				accept_diff = { normal = "<C-y>", insert = "<C-y>" }, -- Keybinding to accept diff
 				yank_diff = { normal = "gmy" }, -- Keybinding to yank diff
 				show_diff = { normal = "gmd" }, -- Keybinding to show diff
-				show_system_prompt = { normal = "gmp" }, -- Keybinding to show system prompt
-				show_user_selection = { normal = "gms" }, -- Keybinding to show user selection
+				-- show_system_prompt = { normal = "gmp" }, -- Keybinding to show system prompt
+				-- show_user_selection = { normal = "gms" }, -- Keybinding to show user selection
 				show_help = { normal = "gmh" }, -- Keybinding to show help
 			},
 		},
@@ -91,7 +91,7 @@ return {
 
 			-- Setup Copilot Chat with the provided options
 			chat.setup(opts)
-			require("CopilotChat.integrations.cmp").setup()
+			-- require("CopilotChat.integrations.cmp").setup()
 
 			-- Create user commands for different chat modes
 			vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
