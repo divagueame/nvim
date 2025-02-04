@@ -49,7 +49,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.undofile = true
 
 vim.opt.guifont = "monospace:h17"
-
+vim.opt.shortmess:append("I")
 -- vim.cmd "set whichwrap+=<,>,[,],h,l"
 
 -- sync buffers automatically
