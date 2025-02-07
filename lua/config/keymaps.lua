@@ -138,7 +138,7 @@ vim.api.nvim_set_keymap(
 	':lua require("config.utils").Display_error("CAPS + v")<CR>',
 	{ noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap("n", "<F13>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
+vim.api.nvim_set_keymap("n", "<F6>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
 
 -- Move focus to the left split with CAPS + j
 vim.api.nvim_set_keymap(
@@ -149,28 +149,28 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
 	"n",
-	"<F13>h",
+	"<F6>h",
 	":wincmd h<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the left split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F13>l",
+	"<F6>l",
 	":wincmd l<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the right split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F13>k",
+	"<F6>k",
 	":wincmd k<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F13>j",
+	"<F6>j",
 	":wincmd j<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
@@ -183,22 +183,8 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true }
 )
 
--- Move focus to the left split with Shift + F1 (F13)
-vim.keymap.set("n", "<F13>t", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Move focus to the left split" })
-vim.keymap.set(
-	"n",
-	"<F13>r",
-	":wincmd j<CR>",
-	{ noremap = true, silent = true, desc = "Move focus to the bottom split" }
-)
--- Move focus to the right split with Shift + F2 (F14)
--- vim.keymap.set("n", "<C-F13>l", ":wincmd l<CR>", { noremap = true, silent = true, desc = "Move focus to the right split" })
-
--- Move focus to the top split with Shift + F3 (F15)
--- vim.keymap.set("n", "<C-F13>k", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Move focus to the top split" })
-
 -- Show messages
-vim.api.nvim_set_keymap("n", "<F13>m", ":messages<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F6>m", ":messages<CR>", { noremap = true, silent = true })
 
 -- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
 vim.keymap.set("i", "<C-b>", "<C-o>de")
