@@ -1,6 +1,7 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "CopilotChat.nvim": { "branch": "main", "commit": "1b375c24602680b5fe28c3c223a822111857dc37" },
+  "blink-cmp-copilot": { "branch": "main", "commit": "5d4ed42c5d7d144012792bb6cc4ac7899a108169" },
   "blink.cmp": { "branch": "main", "commit": "85d0ca07184d783f6646d19c1af2c4ba970d98b2" },
   "conform.nvim": { "branch": "master", "commit": "363243c03102a531a8203311d4f2ae704c620d9b" },
   "copilot-cmp": { "branch": "master", "commit": "15fc12af3d0109fa76b60b5cffa1373697e261d1" },
@@ -51,6 +52,5 @@
   "transparent.nvim": { "branch": "main", "commit": "8a2749a2fa74f97fe6557f61b89ac7fd873f3c21" },
   "treewalker.nvim": { "branch": "main", "commit": "b50bff84fd2ff67ec873b00710d26231fa2cc2f2" },
   "undotree": { "branch": "master", "commit": "2556c6800b210b2096b55b66e74b4cc1d9ebbe4f" },
-  "vague.nvim": { "branch": "main", "commit": "8a33468ca4fc73adc1b111b19f89b7663fdfd137" },
   "which-key.nvim": { "branch": "main", "commit": "0e76a87ac51772569aec678dc74baa8e2a86100c" }
 }
