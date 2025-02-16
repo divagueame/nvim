@@ -19,7 +19,6 @@ return {
 		"williamboman/mason.nvim",
 		opts = {
 			ensure_installed = {
-				"volar",
 				"ts_ls",
 				"yamlls",
 				"rust_analyzer",
@@ -177,7 +176,8 @@ return {
 							{
 								name = "@vue/typescript-plugin",
 								location = vue_language_server_path,
-								languages = { "vue" },
+								-- languages = { "vue" },
+								languages = { "javascript", "typescript", "vue" },
 							},
 						},
 					},

@@ -117,8 +117,6 @@ keymap.set("v", "p", '"_dP', { noremap = true })
 vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true }) -- Disable the default 'q' binding
 
-vim.keymap.set("n", "qj", ":lua print('yay')", { desc = "Execute command on quickfix items" })
-
 ---------------------------------------------------
 -- Map CapsLock (F13) + g to some action
 --
