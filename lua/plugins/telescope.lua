@@ -29,7 +29,7 @@ return {
 								local actions = require("telescope.actions")
 								local selection = action_state.get_selected_entry()
 								actions.close(prompt_bufnr)
-								local current_file = vim.fn.expand("%")  --
+								local current_file = vim.fn.expand("%") --
 								print(selection.value) -- gets me the branch name: line 'main'
 								-- require("diffview").open(selection.value .. ":" .. current_file)
 							end)
