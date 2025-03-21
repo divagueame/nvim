@@ -1,3 +1,4 @@
+-- return {}
 return {
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -138,7 +139,7 @@ return {
 				lineFoldingOnly = true,
 			}
 			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+			-- capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 			local border = {
 				{ "┌", "FloatBorder" },

@@ -11,11 +11,11 @@ return {
 		},
 		keys = {
 			{ "<Leader>f", "<cmd>Telescope find_files<CR>", desc = "Find files" },
-			{
-				"<Leader><leader>f",
-				"<cmd>Telescope find_files hidden=true<CR>",
-				desc = "Find files (including hidden)",
-			},
+			-- {
+			-- 	"<Leader><leader>f",
+			-- 	"<cmd>Telescope find_files hidden=true<CR>",
+			-- 	desc = "Find files (including hidden)",
+			-- },
 			{ "<Leader>g", "<cmd>Telescope live_grep<CR>", desc = "Grep files" },
 			-- { "<Leader><leader>g", "<cmd>Telescope live_grep hidden=true<CR>", desc = "Grep files" },
 
@@ -122,6 +122,7 @@ return {
 			local file_ignore_patterns = {
 				"yarn%.lock",
 				"node_modules/",
+				"./node_modules",
 				"raycast/",
 				"dist/",
 				"%.next",
