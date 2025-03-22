@@ -51,22 +51,22 @@ return {
 			end,
 			desc = "Notification History",
 		},
-		{
-			"<Tab>l",
-			function()
-				vim.cmd("silent! write")
-				Snacks.bufdelete()
-			end,
-			desc = "Delete Buffer",
-		},
-		{
-			"<Tab>u",
-			function()
-				vim.cmd("silent! write")
-				Snacks.bufdelete()
-			end,
-			desc = "Delete Buffer",
-		},
+		-- {
+		-- 	"<Tab>l",
+		-- 	function()
+		-- 		vim.cmd("silent! write")
+		-- 		Snacks.bufdelete()
+		-- 	end,
+		-- 	desc = "Delete Buffer",
+		-- },
+		-- {
+		-- 	"<Tab>u",
+		-- 	function()
+		-- 		vim.cmd("silent! write")
+		-- 		Snacks.bufdelete()
+		-- 	end,
+		-- 	desc = "Delete Buffer",
+		-- },
 		-- {
 		-- 	"<leader>gB",
 		-- 	function()
