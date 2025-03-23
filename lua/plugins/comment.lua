@@ -12,16 +12,16 @@ return {
 		toggler = {
 			---Line-comment toggle keymap
 			-- line = "gcc",
-			line = "c",
+			line = ";;",
 			---Block-comment toggle keymap
-			block = "gbc",
+			block = ";y",
 		},
 		---LHS of operator-pending mappings in NORMAL and VISUAL mode
 		opleader = {
 			---Line-comment keymap
-			line = "gc",
+			line = ";n",
 			---Block-comment keymap
-			block = "gb",
+			block = ";e",
 		},
 		---LHS of extra mappings
 		extra = {

@@ -8,12 +8,8 @@ local mappings = {
 	{ modes = { "n", "o", "x" }, lhs = "i", rhs = "l", desc = "Right (l)" },
 
 	-- Beginning/end of line
-	{ modes = { "n", "o", "x" }, lhs = "U", rhs = "^", desc = "First non-blank character" },
+	{ modes = { "n", "o", "x" }, lhs = "L", rhs = "^", desc = "First non-blank character" },
 	{ modes = { "n", "o", "x" }, lhs = "Y", rhs = "$", desc = "End of line" },
-
-	-- PageUp/PageDown
-	{ modes = { "n", "x" }, lhs = "j", rhs = "<PageUp>", desc = "DESC" },
-	{ modes = { "n", "x" }, lhs = "h", rhs = "<PageDown>", desc = "DESC" },
 
 	-- Jumplist navigation
 	{ modes = { "n" }, lhs = "<C-u>", rhs = "<C-i>", desc = "Jumplist forward" },
@@ -22,49 +18,52 @@ local mappings = {
 	-- Undo/redo
 	{ modes = { "n" }, lhs = "U", rhs = "<C-r>" },
 
-	-- -- Word left/right
-	-- { modes = { "n", "o", "x" }, lhs = "l", rhs = "b", desc = "Word back" },
-	-- { modes = { "n", "o", "x" }, lhs = "y", rhs = "w", desc = "Word forward" },
+	-- Move half page
+	{ modes = { "n" }, lhs = "<C-n>", rhs = ":normal! 20j<CR>" },
+	{ modes = { "n" }, lhs = "<C-e>", rhs = ":normal! 20k<CR>" },
+
+	-- Word left/right
+	{ modes = { "n", "o", "x" }, lhs = "l", rhs = "b", desc = "Word back" },
+	{ modes = { "n", "o", "x" }, lhs = "y", rhs = "w", desc = "Word forward" },
 	-- { modes = { "n", "o", "v" }, lhs = "<C-l>", rhs = "B", desc = "WORD back" },
 	-- { modes = { "n", "o", "v" }, lhs = "<C-y>", rhs = "W", desc = "WORD forward" },
-	--
+
 	--  End of word left/right
 	-- { modes = { "n", "o", "x" }, lhs = "N", rhs = "ge", desc = "End of word back" },
 	-- { modes = { "n", "o", "x" }, lhs = "<M-n>", rhs = "gE", desc = "End of WORD back" },
 	-- { modes = { "n", "o", "x" }, lhs = "I", rhs = "e", desc = "End of word forward" },
 	-- { modes = { "n", "o", "x" }, lhs = "<M-i>", rhs = "E", desc = "End of WORD forward" },
-	--
+
 	--  Text objects
 	-- diw is drw. daw is now dtw.
-	-- { modes = { "o", "v" }, lhs = "r", rhs = "i", desc = "O/V mode: inner (i)" },
-	-- { modes = { "o", "v" }, lhs = "t", rhs = "a", desc = "O/V mode: a/an (a)" },
-	-- -- Move visual replace from 'r' to 'R'
-	-- { modes = { "o", "v" }, lhs = "R", rhs = "r", desc = "Replace" },
-	--
+	{ modes = { "o", "v" }, lhs = "r", rhs = "i", desc = "O/V mode: inner (i)" },
+	{ modes = { "o", "v" }, lhs = "t", rhs = "a", desc = "O/V mode: a/an (a)" },
+	-- Move visual replace from 'r' to 'R'
+	{ modes = { "o", "v" }, lhs = "R", rhs = "r", desc = "Replace" },
+
 	-- Folds
 	-- { modes = { "n", "x" }, lhs = "b", rhs = "z" },
 	-- { modes = { "n", "x" }, lhs = "bb", rhs = "zb", desc = "Scroll line and cursor to bottom" },
 	-- { modes = { "n", "x" }, lhs = "bu", rhs = "zk", desc = "Move up to fold" },
 	-- { modes = { "n", "x" }, lhs = "be", rhs = "zj", desc = "Move down to fold" },
-	--
+
 	-- Copy/paste
-	-- { modes = { "n", "o", "x" }, lhs = "c", rhs = "y" },
-	-- { modes = { "n", "x" }, lhs = "v", rhs = "p" },
-	-- { modes = { "n" }, lhs = "C", rhs = "y$" },
+	{ modes = { "n", "o", "x" }, lhs = "c", rhs = "y" },
+	{ modes = { "n", "x" }, lhs = "v", rhs = "p" },
+	{ modes = { "n" }, lhs = "C", rhs = "y$" },
 	-- { modes = { "x" }, lhs = "C", rhs = "y" },
-	-- { modes = { "n", "x" }, lhs = "V", rhs = "P" },
+	{ modes = { "n", "x" }, lhs = "V", rhs = "P" },
 
 	-- inSert/append (T)
-	--
-	-- { modes = { "n" }, lhs = "s", rhs = "i" },
-	-- { modes = { "n" }, lhs = "S", rhs = "I" },
+	{ modes = { "n" }, lhs = "j", rhs = "i" },
+	{ modes = { "n" }, lhs = "J", rhs = "I" },
 	-- { modes = { "n" }, lhs = "t", rhs = "a" },
 	-- { modes = { "n" }, lhs = "T", rhs = "A" },
-	--
+
 	-- Change
 	-- { modes = { "n", "o", "x" }, lhs = "w", rhs = "c" },
 	-- { modes = { "n", "x" }, lhs = "W", rhs = "C" },
-	--
+
 	-- Visual mode
 	-- { modes = { "n", "x" }, lhs = "a", rhs = "v" },
 	-- { modes = { "n", "x" }, lhs = "A", rhs = "V" },
@@ -84,12 +83,12 @@ local mappings = {
 	--
 	-- -- Fix diffput (t for 'transfer')
 	-- { modes = { "n" }, lhs = "dt", rhs = "dp", desc = "diffput (t for 'transfer')" },
-	--
+
 	-- -- Macros (replay the macro recorded by qq)
 	-- { modes = { "n" }, lhs = "Q", rhs = "@q", desc = "replay the 'q' macro" },
-	--
-	-- -- Cursor to bottom of screen
-	-- -- H and M haven't been remapped, only L needs to be mapped
+
+	-- Cursor to bottom of screen
+	-- H and M haven't been remapped, only L needs to be mapped
 	-- { modes = { "n" }, lhs = "B", rhs = "L" },
 	-- { modes = { "v" }, lhs = "B", rhs = "L" },
 	--

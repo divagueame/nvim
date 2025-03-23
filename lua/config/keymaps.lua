@@ -78,9 +78,6 @@ keymap.set({ "v", "n" }, "<Tab>u", SaveAndCloseBuffer, { noremap = true, silent 
 -- 	{ desc = "Delete other buffers but the current one" }
 -- )
 --
--- -- Move half page
-keymap.set("n", "<C-n>", ":normal! 20j<CR>", opts)
-keymap.set("n", "<C-e>", ":normal! 20k<CR>", opts)
 --
 -- -- Position cursor at the middle of the screen after scrolling half page
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Scroll down half a page and center the cursor
