@@ -1,5 +1,3 @@
-local colemak = {}
-
 local mappings = {
 	-- Up/down/left/right
 	{ modes = { "n", "o", "x" }, lhs = "h", rhs = "h", desc = "Left (h)" },
@@ -61,11 +59,11 @@ local mappings = {
 	-- { modes = { "n" }, lhs = "T", rhs = "A" },
 
 	-- Change
-	-- { modes = { "n", "o", "x" }, lhs = "w", rhs = "c" },
+	{ modes = { "n", "o", "x" }, lhs = "w", rhs = "c" },
 	-- { modes = { "n", "x" }, lhs = "W", rhs = "C" },
 
 	-- Visual mode
-	-- { modes = { "n", "x" }, lhs = "a", rhs = "v" },
+	{ modes = { "n", "x" }, lhs = "a", rhs = "v" },
 	-- { modes = { "n", "x" }, lhs = "A", rhs = "V" },
 	--
 	-- Insert in Visual mode
@@ -73,8 +71,8 @@ local mappings = {
 	--
 	--
 	-- Search
-	-- { modes = { "n", "o", "x" }, lhs = "k", rhs = "n" },
-	-- { modes = { "n", "o", "x" }, lhs = "K", rhs = "N" },
+	{ modes = { "n", "o", "x" }, lhs = "k", rhs = "n" },
+	{ modes = { "n", "o", "x" }, lhs = "K", rhs = "N" },
 	--
 	-- 'til
 	--  Breaks diffput
