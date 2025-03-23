@@ -1,7 +1,6 @@
 -- return {}
 return {
 	"numToStr/Comment.nvim",
-
 	opts = {
 		---Add a space b/w comment and the line
 		padding = true,
@@ -12,18 +11,18 @@ return {
 		---LHS of toggle mappings in NORMAL mode
 		toggler = {
 			---Line-comment toggle keymap
-			line = ";;",
+			-- line = "gcc",
+			line = "c",
 			---Block-comment toggle keymap
-			-- block = ";y",
+			block = "gbc",
 		},
 		---LHS of operator-pending mappings in NORMAL and VISUAL mode
 		opleader = {
 			---Line-comment keymap
 			line = "gc",
 			---Block-comment keymap
-			block = ";n",
+			block = "gb",
 		},
-
 		---LHS of extra mappings
 		extra = {
 			---Add comment on the line above
