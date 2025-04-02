@@ -18,6 +18,10 @@ keymap.set("i", "KK", "<Esc>:m .-2<CR>==gi", { noremap = true })
 keymap.set("n", "J", ":m .+1<CR>==", { noremap = true })
 keymap.set("n", "K", ":m .-2<CR>==", { noremap = true })
 
+-- Move to the end and beginning
+keymap.set("n", "<C-m>", "^", { noremap = true })
+keymap.set("n", "<C-,>", "g_", { noremap = true })
+
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 
@@ -113,21 +117,13 @@ vim.api.nvim_set_keymap("n", "dd", '"_dd', { noremap = true })
 -- Prevent losing yanked worked when pasting
 keymap.set("v", "p", '"_dP', { noremap = true })
 
+-- Paste below
+vim.api.nvim_set_keymap("n", "<Leader>p", "o<Esc>p", { noremap = true, silent = true })
+
 -- Start/Stop recording register
 vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true }) -- Disable the default 'q' binding
 
----------------------------------------------------
--- Map CapsLock (F13) + g to some action
---
--- Add these lines to ~/.Xmodmap and run
---
--- remove Lock = Caps_Lock
--- keycode 66 = F13
---
--- Add this line to i3 config:
--- exec --no-startup-id xmodmap -e 'clear Lock' -e 'keycode 66 = F13'
----------------------------------------------------
 
 -- Change Ctrl+w + o to call the print function
 vim.api.nvim_set_keymap(
