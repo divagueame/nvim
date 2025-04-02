@@ -37,13 +37,13 @@ return {
 			end,
 			desc = "Toggle Scratch Buffer",
 		},
-		{
-			"<leader>S",
-			function()
-				Snacks.scratch.select()
-			end,
-			desc = "Select Scratch Buffer",
-		},
+		-- {
+		-- 	"<leader>S",
+		-- 	function()
+		-- 		Snacks.scratch.select()
+		-- 	end,
+		-- 	desc = "Select Scratch Buffer",
+		-- },
 		{
 			"<leader>n",
 			function()
@@ -51,14 +51,14 @@ return {
 			end,
 			desc = "Notification History",
 		},
-		{
-			"<Tab>u",
-			function()
-				vim.cmd("silent! write")
-				Snacks.bufdelete()
-			end,
-			desc = "Delete Buffer",
-		},
+		-- {
+		-- 	"<Tab>u",
+		-- 	function()
+		-- 		vim.cmd("silent! write")
+		-- 		Snacks.bufdelete()
+		-- 	end,
+		-- 	desc = "Delete Buffer",
+		-- },
 		-- {
 		-- 	"<leader>gB",
 		-- 	function()

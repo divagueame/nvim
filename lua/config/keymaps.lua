@@ -29,19 +29,19 @@ keymap.set("n", "sv", ":vsplit<Return>", opts)
 -- keymap.set('n', '<C-w>o', '', { noremap = true, silent = true })
 
 -- Buffer navigation
-vim.keymap.set("n", "<Tab>j", ":bnext<CR>", { desc = "Go to the next buffer" })
-vim.keymap.set("n", "<Tab>k", ":bprev<CR>", { desc = "Go to the previous buffer" })
-
-vim.keymap.set("n", "<Tab>m", ":tabnext<CR>", { desc = "Go to the next tab" })
-vim.keymap.set("n", "<Tab>n", ":tabnew<CR>", { desc = "Open a new tab" })
-vim.keymap.set("n", "<Tab>b", ":tabclose<CR>", { desc = "Close the current tab" })
+-- vim.keymap.set("n", "<Tab>j", ":bnext<CR>", { desc = "Go to the next buffer" })
+-- vim.keymap.set("n", "<Tab>k", ":bprev<CR>", { desc = "Go to the previous buffer" })
+--
+-- vim.keymap.set("n", "<Tab>m", ":tabnext<CR>", { desc = "Go to the next tab" })
+-- vim.keymap.set("n", "<Tab>n", ":tabnew<CR>", { desc = "Open a new tab" })
+-- vim.keymap.set("n", "<Tab>b", ":tabclose<CR>", { desc = "Close the current tab" })
 function SaveAndCloseBuffer()
 	vim.cmd("silent! write")
 	vim.cmd("silent! bdelete")
 end
 
-keymap.set({ "v", "n" }, "<Tab>u", SaveAndCloseBuffer, { noremap = true, silent = true, desc = "Save & Close buffer" })
-keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
+-- keymap.set({ "v", "n" }, "<Tab>u", SaveAndCloseBuffer, { noremap = true, silent = true, desc = "Save & Close buffer" })
+-- keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
 
 -- Delete all buffers but the current one
 vim.keymap.set(
@@ -117,8 +117,6 @@ keymap.set("v", "p", '"_dP', { noremap = true })
 vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true }) -- Disable the default 'q' binding
 
-vim.keymap.set("n", "qj", ":lua print('yay')", { desc = "Execute command on quickfix items" })
-
 ---------------------------------------------------
 -- Map CapsLock (F13) + g to some action
 --
@@ -138,7 +136,7 @@ vim.api.nvim_set_keymap(
 	':lua require("config.utils").Display_error("CAPS + v")<CR>',
 	{ noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap("n", "<F13>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
+vim.api.nvim_set_keymap("n", "<F6>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
 
 -- Move focus to the left split with CAPS + j
 vim.api.nvim_set_keymap(
@@ -149,28 +147,28 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
 	"n",
-	"<F13>h",
+	"<F6>h",
 	":wincmd h<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the left split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F13>l",
+	"<F6>l",
 	":wincmd l<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the right split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F13>k",
+	"<F6>k",
 	":wincmd k<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F13>j",
+	"<F6>j",
 	":wincmd j<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
@@ -183,22 +181,8 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true }
 )
 
--- Move focus to the left split with Shift + F1 (F13)
-vim.keymap.set("n", "<F13>t", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Move focus to the left split" })
-vim.keymap.set(
-	"n",
-	"<F13>r",
-	":wincmd j<CR>",
-	{ noremap = true, silent = true, desc = "Move focus to the bottom split" }
-)
--- Move focus to the right split with Shift + F2 (F14)
--- vim.keymap.set("n", "<C-F13>l", ":wincmd l<CR>", { noremap = true, silent = true, desc = "Move focus to the right split" })
-
--- Move focus to the top split with Shift + F3 (F15)
--- vim.keymap.set("n", "<C-F13>k", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Move focus to the top split" })
-
 -- Show messages
-vim.api.nvim_set_keymap("n", "<F13>m", ":messages<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F6>m", ":messages<CR>", { noremap = true, silent = true })
 
 -- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
 vim.keymap.set("i", "<C-b>", "<C-o>de")

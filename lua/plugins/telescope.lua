@@ -11,13 +11,67 @@ return {
 		},
 		keys = {
 			{ "<Leader>f", "<cmd>Telescope find_files<CR>", desc = "Find files" },
-			{
-				"<Leader><leader>f",
-				"<cmd>Telescope find_files hidden=true<CR>",
-				desc = "Find files (including hidden)",
-			},
+			-- {
+			-- 	"<Leader><leader>f",
+			-- 	"<cmd>Telescope find_files hidden=true<CR>",
+			-- 	desc = "Find files (including hidden)",
+			-- },
 			{ "<Leader>g", "<cmd>Telescope live_grep<CR>", desc = "Grep files" },
 			-- { "<Leader><leader>g", "<cmd>Telescope live_grep hidden=true<CR>", desc = "Grep files" },
+
+			{
+				"<Leader>gd",
+				function()
+					require("telescope.builtin").git_branches({
+						attach_mappings = function(_, map)
+							map("i", "<CR>", function(prompt_bufnr)
+								local action_state = require("telescope.actions.state")
+								local actions = require("telescope.actions")
+								local selection = action_state.get_selected_entry()
+								actions.close(prompt_bufnr)
+								local current_file = vim.fn.expand("%") --
+								print(selection.value) -- gets me the branch name: line 'main'
+								-- require("diffview").open(selection.value .. ":" .. current_file)
+							end)
+							return true
+						end,
+					})
+				end,
+				desc = "Diff File in Different Branches",
+			},
+			-- Grep text in hidden nuxt folders
+			{
+				"<Leader>F",
+				function()
+					require("telescope.builtin").live_grep({
+						vimgrep_arguments = {
+							"rg",
+							"--color=never",
+							"--no-heading",
+							"--with-filename",
+							"--line-number",
+							"--column",
+							"--smart-case",
+							"--hidden", -- Include hidden files
+							"--no-ignore",
+							"--glob=!.nuxt/analyze/**",
+							"--glob=!.git/**",
+							"--glob=!**lock**",
+							"--glob=!node_modules",
+						},
+
+						layout_strategy = "vertical",
+						layout_config = {
+							width = 0.9,
+							height = 0.9,
+
+							preview_cutoff = 0, -- Always show preview
+							prompt_position = "top",
+						},
+					})
+				end,
+				desc = "Grep files (Hidden Included)",
+			},
 			{
 				"<Leader><leader>g",
 				function()
@@ -68,6 +122,7 @@ return {
 			local file_ignore_patterns = {
 				"yarn%.lock",
 				"node_modules/",
+				"./node_modules",
 				"raycast/",
 				"dist/",
 				"%.next",

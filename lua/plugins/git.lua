@@ -11,6 +11,22 @@ return {
 		},
 
 		on_attach = function(bufnr)
+			local function next_hunk_or_buffer()
+				local gs = require("gitsigns")
+				if not gs.next_hunk() then
+					vim.cmd("bnext")
+					gs.next_hunk()
+				end
+			end
+
+			-- vim.keymap.set("n", "<leader>sH, function()
+			-- 	vim.cmd("DiffviewFileHistory")
+			-- end, { desc = "View File History"})
+
+			vim.keymap.set("n", "<leader>sJ", function()
+				next_hunk_or_buffer()
+			end, { desc = "Next Hunk or Buffer" })
+
 			vim.keymap.set("n", "<leader>sj", function()
 				require("gitsigns").nav_hunk("next")
 			end, { desc = "Next Hunk" })

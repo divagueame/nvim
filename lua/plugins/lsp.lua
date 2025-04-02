@@ -1,3 +1,4 @@
+-- return {}
 return {
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -19,7 +20,6 @@ return {
 		"williamboman/mason.nvim",
 		opts = {
 			ensure_installed = {
-				"volar",
 				"ts_ls",
 				"yamlls",
 				"rust_analyzer",
@@ -139,7 +139,7 @@ return {
 				lineFoldingOnly = true,
 			}
 			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+			-- capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 			local border = {
 				{ "┌", "FloatBorder" },
@@ -177,7 +177,8 @@ return {
 							{
 								name = "@vue/typescript-plugin",
 								location = vue_language_server_path,
-								languages = { "vue" },
+								-- languages = { "vue" },
+								languages = { "javascript", "typescript", "vue" },
 							},
 						},
 					},
