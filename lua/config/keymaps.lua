@@ -124,7 +124,6 @@ vim.api.nvim_set_keymap("n", "<Leader>p", "o<Esc>p", { noremap = true, silent = 
 vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true }) -- Disable the default 'q' binding
 
-
 -- Change Ctrl+w + o to call the print function
 vim.api.nvim_set_keymap(
 	"n",
@@ -143,28 +142,28 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
 	"n",
-	"<F6>h",
+	"H",
 	":wincmd h<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the left split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F6>l",
+	"L",
 	":wincmd l<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the right split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F6>k",
+	"K",
 	":wincmd k<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F6>j",
+	"J",
 	":wincmd j<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
