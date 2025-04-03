@@ -133,15 +133,6 @@ vim.keymap.set("n", "<leader>Q", function()
 	vim.cmd("norm! " .. count .. "@f")
 end, { noremap = true, silent = true })
 
--- Change Ctrl+w + o to call the print function
-vim.api.nvim_set_keymap(
-	"n",
-	"<C-w>o",
-	':lua require("config.utils").Display_error("CAPS + v")<CR>',
-	{ noremap = true, silent = true }
-)
-
---
 vim.api.nvim_set_keymap("n", "<leader>ww", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
 
 -- Move focus to the left split with CAPS + j
@@ -188,7 +179,7 @@ vim.api.nvim_set_keymap(
 )
 
 -- Show messages
-vim.api.nvim_set_keymap("n", "<F6>m", ":messages<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-S-M>", ":messages<CR>", { noremap = true, silent = true })
 
 -- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
 vim.keymap.set("i", "<C-b>", "<C-o>de")
