@@ -122,10 +122,16 @@ keymap.set("v", "p", '"_dP', { noremap = true })
 
 -- Paste below
 vim.api.nvim_set_keymap("n", "<Leader>p", "o<Esc>p", { noremap = true, silent = true })
-
--- Start/Stop recording register
-vim.api.nvim_set_keymap("n", "<Leader>q", "q", opts)
 vim.api.nvim_set_keymap("n", "q", "b", opts) -- Go to previous word
+
+-- Macros
+-- 1. Remap 'f' to start/stop recording macros (instead of 'q')
+vim.keymap.set("n", "<leader>q", "qf", { noremap = true }) -- Start/stop recording in register 'f'
+-- 2. Run macro in 'f' when pressing <leader>m
+vim.keymap.set("n", "<leader>Q", function()
+	local count = vim.v.count1 -- Capture repeat count (defaults to 1)
+	vim.cmd("norm! " .. count .. "@f")
+end, { noremap = true, silent = true })
 
 -- Change Ctrl+w + o to call the print function
 vim.api.nvim_set_keymap(
