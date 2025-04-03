@@ -11,7 +11,7 @@ vim.api.nvim_set_keymap("n", "<CR>q", ":wqa<CR>", { noremap = true, silent = tru
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
 
 -- fast change
-keymap.set("n", "jl", "ciw", { desc = "Quick change" })
+keymap.set("n", "lj", "ciw", { desc = "Quick change" })
 
 -- Move lines up and down
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
