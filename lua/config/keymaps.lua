@@ -140,7 +140,9 @@ vim.api.nvim_set_keymap(
 	':lua require("config.utils").Display_error("CAPS + v")<CR>',
 	{ noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap("n", "<F6>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
+
+--
+vim.api.nvim_set_keymap("n", "<leader>ww", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
 
 -- Move focus to the left split with CAPS + j
 vim.api.nvim_set_keymap(
@@ -193,25 +195,25 @@ vim.keymap.set("i", "<C-b>", "<C-o>de")
 
 -- Accessories
 -- Toggle display mode for cursor location
-local display_cursor_mode = false
-function ToggleCursorLocation()
-	vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2D3B3B", fg = "#CFD9E6" })
-	vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#2D3B3B", fg = "#CFD9E6" })
-	display_cursor_mode = not display_cursor_mode
-
-	if display_cursor_mode then
-		vim.o.ruler = true -- Show cursor position in the status line
-		vim.o.cursorline = true -- Highlight the current line
-		vim.o.cursorcolumn = true -- Highlight the current column
-		print("Cursor location display: ON")
-	else
-		vim.o.ruler = false
-		vim.o.cursorline = false
-		vim.o.cursorcolumn = false
-		print("Cursor location display: OFF")
-	end
-end
-vim.keymap.set("n", "<leader>ac", ToggleCursorLocation, { desc = "Toggle cursor location display" })
+-- local display_cursor_mode = false
+-- function ToggleCursorLocation()
+-- 	vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2D3B3B", fg = "#CFD9E6" })
+-- 	vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#2D3B3B", fg = "#CFD9E6" })
+-- 	display_cursor_mode = not display_cursor_mode
+--
+-- 	if display_cursor_mode then
+-- 		vim.o.ruler = true -- Show cursor position in the status line
+-- 		vim.o.cursorline = true -- Highlight the current line
+-- 		vim.o.cursorcolumn = true -- Highlight the current column
+-- 		print("Cursor location display: ON")
+-- 	else
+-- 		vim.o.ruler = false
+-- 		vim.o.cursorline = false
+-- 		vim.o.cursorcolumn = false
+-- 		print("Cursor location display: OFF")
+-- 	end
+-- end
+-- vim.keymap.set("n", "<leader>ac", ToggleCursorLocation, { desc = "Toggle cursor location display" })
 
 -- Toggle line wrapping
 vim.api.nvim_set_keymap(
