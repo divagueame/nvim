@@ -99,11 +99,11 @@ keymap.set("n", "U", ":redo<cr>", opts)
 keymap.set("n", "<C-r>", ':echo "Use U / u instead to do / redo"<cr>', opts)
 
 -- Quickfix
-vim.keymap.set("n", "qo", ":copen<CR>", { desc = "Open quickfix list" })
-vim.keymap.set("n", "qc", ":cclose<CR>", { desc = "Close quickfix list" })
-
-vim.keymap.set("n", "qj", ":cnext<CR>", { desc = "Next quickfix item" })
-vim.keymap.set("n", "qk", ":cprev<CR>", { desc = "Previous quickfix item" })
+-- vim.keymap.set("n", "qo", ":copen<CR>", { desc = "Open quickfix list" })
+-- vim.keymap.set("n", "qc", ":cclose<CR>", { desc = "Close quickfix list" })
+--
+-- vim.keymap.set("n", "qj", ":cnext<CR>", { desc = "Next quickfix item" })
+-- vim.keymap.set("n", "qk", ":cprev<CR>", { desc = "Previous quickfix item" })
 
 -- Execute a command on each item in the quickfix list
 vim.keymap.set("n", "<leader>qd", ":cdo ", { desc = "Execute command on quickfix items" })
@@ -124,8 +124,8 @@ keymap.set("v", "p", '"_dP', { noremap = true })
 vim.api.nvim_set_keymap("n", "<Leader>p", "o<Esc>p", { noremap = true, silent = true })
 
 -- Start/Stop recording register
-vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
-vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true }) -- Disable the default 'q' binding
+vim.api.nvim_set_keymap("n", "<Leader>q", "q", opts)
+vim.api.nvim_set_keymap("n", "q", "b", opts) -- Go to previous word
 
 -- Change Ctrl+w + o to call the print function
 vim.api.nvim_set_keymap(
