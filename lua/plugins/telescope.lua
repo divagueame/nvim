@@ -11,34 +11,35 @@ return {
 		},
 		keys = {
 			{ "<Leader>f", "<cmd>Telescope find_files<CR>", desc = "Find files" },
+			{ "<Leader>g", "<cmd>Telescope live_grep<CR>", desc = "Grep files" },
 			-- {
 			-- 	"<Leader><leader>f",
 			-- 	"<cmd>Telescope find_files hidden=true<CR>",
 			-- 	desc = "Find files (including hidden)",
 			-- },
-			{ "<Leader>g", "<cmd>Telescope live_grep<CR>", desc = "Grep files" },
+
 			-- { "<Leader><leader>g", "<cmd>Telescope live_grep hidden=true<CR>", desc = "Grep files" },
 
-			{
-				"<Leader>gd",
-				function()
-					require("telescope.builtin").git_branches({
-						attach_mappings = function(_, map)
-							map("i", "<CR>", function(prompt_bufnr)
-								local action_state = require("telescope.actions.state")
-								local actions = require("telescope.actions")
-								local selection = action_state.get_selected_entry()
-								actions.close(prompt_bufnr)
-								local current_file = vim.fn.expand("%") --
-								print(selection.value) -- gets me the branch name: line 'main'
-								-- require("diffview").open(selection.value .. ":" .. current_file)
-							end)
-							return true
-						end,
-					})
-				end,
-				desc = "Diff File in Different Branches",
-			},
+			-- {
+			-- 	"<Leader>gd",
+			-- 	function()
+			-- 		require("telescope.builtin").git_branches({
+			-- 			attach_mappings = function(_, map)
+			-- 				map("i", "<CR>", function(prompt_bufnr)
+			-- 					local action_state = require("telescope.actions.state")
+			-- 					local actions = require("telescope.actions")
+			-- 					local selection = action_state.get_selected_entry()
+			-- 					actions.close(prompt_bufnr)
+			-- 					local current_file = vim.fn.expand("%") --
+			-- 					print(selection.value) -- gets me the branch name: line 'main'
+			-- 					-- require("diffview").open(selection.value .. ":" .. current_file)
+			-- 				end)
+			-- 				return true
+			-- 			end,
+			-- 		})
+			-- 	end,
+			-- 	desc = "Diff File in Different Branches",
+			-- },
 			-- Grep text in hidden nuxt folders
 			{
 				"<Leader>F",
@@ -98,7 +99,7 @@ return {
 			},
 			{ "<Leader>h", "<cmd>Telescope quickfix<CR>", desc = "Quickfix" },
 			{
-				"<Leader><leader>gg",
+				"<Leader>G",
 				"<cmd>lua require('telescope.builtin').live_grep({ additional_args = function() return { '--case-sensitive' } end })<CR>",
 				desc = "Grep Case Sensitive",
 			},
