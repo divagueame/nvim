@@ -62,10 +62,6 @@ vim.keymap.set(
 keymap.set("n", "<C-j>", ":normal! 20j<CR>", opts)
 keymap.set("n", "<C-k>", ":normal! 20k<CR>", opts)
 
--- Position cursor at the middle of the screen after scrolling half page
-vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Scroll down half a page and center the cursor
-vim.keymap.set("n", "<C-u>", "<C-u>zz") -- Scroll up half a page and center the cursor
-
 -- Resize panes
 keymap.set("n", "<leader>wk", function()
 	vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
@@ -144,30 +140,30 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
 	"n",
-	"H",
+	"<C-h>",
 	":wincmd h<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the left split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"L",
+	"<C-l>",
 	":wincmd l<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the right split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"K",
+	"<C-k>",
 	":wincmd k<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"J",
+	"<C-j>",
 	":wincmd j<CR>",
-	{ noremap = true, silent = true, desc = "Move focus to the top split" }
+	{ noremap = true, silent = true, desc = "Move focus to the bottom split" }
 )
 
 -- Toggle diagnostics
