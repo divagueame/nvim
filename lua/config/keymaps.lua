@@ -10,8 +10,8 @@ vim.api.nvim_set_keymap("n", "<CR>q", ":wqa<CR>", { noremap = true, silent = tru
 -- Exit insert mode
 keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
 
--- fast change
-keymap.set("n", "lj", "ciw", { desc = "Quick change" })
+-- Quick word change
+keymap.set("n", "<leader><CR>", "ciw", { desc = "Exit Insert Mode" })
 
 -- Move lines up and down
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
@@ -59,8 +59,12 @@ vim.keymap.set(
 )
 
 -- Move half page
-keymap.set("n", "<C-j>", ":normal! 20j<CR>", opts)
-keymap.set("n", "<C-k>", ":normal! 20k<CR>", opts)
+keymap.set("n", "J", ":normal! 20j<CR>", opts)
+keymap.set("n", "K", ":normal! 20k<CR>", opts)
+
+-- Position cursor at the middle of the screen after scrolling half page
+vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Scroll down half a page and center the cursor
+vim.keymap.set("n", "<C-u>", "<C-u>zz") -- Scroll up half a page and center the cursor
 
 -- Resize panes
 keymap.set("n", "<leader>wk", function()
@@ -95,11 +99,11 @@ keymap.set("n", "U", ":redo<cr>", opts)
 keymap.set("n", "<C-r>", ':echo "Use U / u instead to do / redo"<cr>', opts)
 
 -- Quickfix
--- vim.keymap.set("n", "qo", ":copen<CR>", { desc = "Open quickfix list" })
--- vim.keymap.set("n", "qc", ":cclose<CR>", { desc = "Close quickfix list" })
---
--- vim.keymap.set("n", "qj", ":cnext<CR>", { desc = "Next quickfix item" })
--- vim.keymap.set("n", "qk", ":cprev<CR>", { desc = "Previous quickfix item" })
+vim.keymap.set("n", "qo", ":copen<CR>", { desc = "Open quickfix list" })
+vim.keymap.set("n", "qc", ":cclose<CR>", { desc = "Close quickfix list" })
+
+vim.keymap.set("n", "qj", ":cnext<CR>", { desc = "Next quickfix item" })
+vim.keymap.set("n", "qk", ":cprev<CR>", { desc = "Previous quickfix item" })
 
 -- Execute a command on each item in the quickfix list
 vim.keymap.set("n", "<leader>qd", ":cdo ", { desc = "Execute command on quickfix items" })
@@ -118,18 +122,27 @@ keymap.set("v", "p", '"_dP', { noremap = true })
 
 -- Paste below
 vim.api.nvim_set_keymap("n", "<Leader>p", "o<Esc>p", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "q", "b", opts) -- Go to previous word
 
--- Macros
--- 1. Remap 'f' to start/stop recording macros (instead of 'q')
-vim.keymap.set("n", "<leader>q", "qf", { noremap = true }) -- Start/stop recording in register 'f'
--- 2. Run macro in 'f' when pressing <leader>m
-vim.keymap.set("n", "<leader>Q", function()
-	local count = vim.v.count1 -- Capture repeat count (defaults to 1)
-	vim.cmd("norm! " .. count .. "@f")
-end, { noremap = true, silent = true })
+-- Start/Stop recording register
+vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
+vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true }) -- Disable the default 'q' binding
 
-vim.api.nvim_set_keymap("n", "<leader>ww", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
+-- Change Ctrl+w + o to call the print function
+vim.api.nvim_set_keymap(
+	"n",
+	"<C-w>o",
+	':lua require("config.utils").Display_error("CAPS + v")<CR>',
+	{ noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap("n", "<F6>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
+
+-- Lua function to redirect the output of :verbose map to a new buffer
+function ShowVerboseMap()
+	local output = vim.fn.systemlist('nvim -u NONE -c "verbose map"')
+	vim.cmd("new")
+	vim.api.nvim_buf_set_lines(0, 0, -1, false, output)
+end
+vim.api.nvim_set_keymap("n", "<Leader>m", ":lua ShowVerboseMap()<CR>", { noremap = true, silent = true })
 
 -- Move focus to the left split with CAPS + j
 vim.api.nvim_set_keymap(
@@ -154,16 +167,16 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<C-k>",
-	":wincmd k<CR>",
-	{ noremap = true, silent = true, desc = "Move focus to the top split" }
+	"<C-j>",
+	":wincmd j<CR>",
+	{ noremap = true, silent = true, desc = "Move focus to the bottom split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<C-j>",
-	":wincmd j<CR>",
-	{ noremap = true, silent = true, desc = "Move focus to the bottom split" }
+	"<C-k>",
+	":wincmd k<CR>",
+	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
 
 -- Toggle diagnostics
@@ -175,32 +188,32 @@ vim.api.nvim_set_keymap(
 )
 
 -- Show messages
-vim.api.nvim_set_keymap("n", "<C-S-M>", ":messages<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F6>m", ":messages<CR>", { noremap = true, silent = true })
 
 -- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
 vim.keymap.set("i", "<C-b>", "<C-o>de")
 
 -- Accessories
 -- Toggle display mode for cursor location
--- local display_cursor_mode = false
--- function ToggleCursorLocation()
--- 	vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2D3B3B", fg = "#CFD9E6" })
--- 	vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#2D3B3B", fg = "#CFD9E6" })
--- 	display_cursor_mode = not display_cursor_mode
---
--- 	if display_cursor_mode then
--- 		vim.o.ruler = true -- Show cursor position in the status line
--- 		vim.o.cursorline = true -- Highlight the current line
--- 		vim.o.cursorcolumn = true -- Highlight the current column
--- 		print("Cursor location display: ON")
--- 	else
--- 		vim.o.ruler = false
--- 		vim.o.cursorline = false
--- 		vim.o.cursorcolumn = false
--- 		print("Cursor location display: OFF")
--- 	end
--- end
--- vim.keymap.set("n", "<leader>ac", ToggleCursorLocation, { desc = "Toggle cursor location display" })
+local display_cursor_mode = false
+function ToggleCursorLocation()
+	vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2D3B3B", fg = "#CFD9E6" })
+	vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#2D3B3B", fg = "#CFD9E6" })
+	display_cursor_mode = not display_cursor_mode
+
+	if display_cursor_mode then
+		vim.o.ruler = true -- Show cursor position in the status line
+		vim.o.cursorline = true -- Highlight the current line
+		vim.o.cursorcolumn = true -- Highlight the current column
+		print("Cursor location display: ON")
+	else
+		vim.o.ruler = false
+		vim.o.cursorline = false
+		vim.o.cursorcolumn = false
+		print("Cursor location display: OFF")
+	end
+end
+vim.keymap.set("n", "<leader>ac", ToggleCursorLocation, { desc = "Toggle cursor location display" })
 
 -- Toggle line wrapping
 vim.api.nvim_set_keymap(
