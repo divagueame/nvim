@@ -26,14 +26,14 @@ keymap.set("n", "<C-m>", "^", { noremap = true })
 keymap.set("n", "<C-,>", "g_", { noremap = true })
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
+keymap.set("n", "<M-a>", "gg<S-v>G", { desc = "Select all" })
 
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
 
 -- Close all other splits and focus on the current one
--- keymap.set('n', '<C-w>o', '', { noremap = true, silent = true })
+keymap.set("n", "so", ":wincmd o<CR>", { noremap = true, silent = true })
 
 -- Buffer navigation
 -- vim.keymap.set("n", "<Tab>j", ":bnext<CR>", { desc = "Go to the next buffer" })
@@ -99,9 +99,20 @@ keymap.set("n", "U", ":redo<cr>", opts)
 keymap.set("n", "<C-r>", ':echo "Use U / u instead to do / redo"<cr>', opts)
 
 -- Quickfix
-vim.keymap.set("n", "qo", ":copen<CR>", { desc = "Open quickfix list" })
-vim.keymap.set("n", "qc", ":cclose<CR>", { desc = "Close quickfix list" })
-
+vim.keymap.set("n", "qh", function()
+	local is_open = false
+	for _, win in ipairs(vim.fn.getwininfo()) do
+		if win.quickfix == 1 then
+			is_open = true
+			break
+		end
+	end
+	if is_open then
+		vim.cmd("cclose")
+	else
+		vim.cmd("copen")
+	end
+end, { desc = "Toggle quickfix list" })
 vim.keymap.set("n", "qj", ":cnext<CR>", { desc = "Next quickfix item" })
 vim.keymap.set("n", "qk", ":cprev<CR>", { desc = "Previous quickfix item" })
 
@@ -109,7 +120,7 @@ vim.keymap.set("n", "qk", ":cprev<CR>", { desc = "Previous quickfix item" })
 vim.keymap.set("n", "<leader>qd", ":cdo ", { desc = "Execute command on quickfix items" })
 
 -- Clear quickfix list
-vim.keymap.set("n", "<leader>qx", function()
+vim.keymap.set("n", "qx", function()
 	vim.fn.setqflist({})
 	print("Quickfix list cleared")
 end, { desc = "Clear quickfix list" })
