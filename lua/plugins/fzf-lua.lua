@@ -1,26 +1,27 @@
-return {
-	"ibhagwan/fzf-lua",
-	-- optional for icon support
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-	-- or if using mini.icons/mini.nvim
-	-- dependencies = { "echasnovski/mini.icons" },
-	opts = {},
-	config = function()
-		require("fzf-lua").setup({
-			"telescope",
-
-			defaults = {
-				git_icons = false,
-				file_icons = false,
-				color_icons = false,
-			},
-
-			winopts = { preview = { default = "bat" } },
-		})
-
-		vim.keymap.set("n", "<leader>f", require("fzf-lua").files, { desc = "FZF Files" })
-		vim.keymap.set("n", "<leader>g", require("fzf-lua").live_grep, { desc = "FZF Grep" })
-		vim.keymap.set("n", "<leader><leader>f", require("fzf-lua").grep_cword, { desc = "FZF Word" })
-		vim.keymap.set("v", "<leader><leader>g", require("fzf-lua").grep_visual, { desc = "FZF Selection" })
-	end,
-}
+-- return {
+-- 	"ibhagwan/fzf-lua",
+-- 	-- optional for icon support
+-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+-- 	-- or if using mini.icons/mini.nvim
+-- 	-- dependencies = { "echasnovski/mini.icons" },
+-- 	opts = {},
+-- 	config = function()
+-- 		require("fzf-lua").setup({
+-- 			"telescope",
+--
+-- 			defaults = {
+-- 				git_icons = false,
+-- 				file_icons = false,
+-- 				color_icons = false,
+-- 			},
+--
+-- 			winopts = { preview = { default = "bat" } },
+-- 		})
+--
+-- 		vim.keymap.set("n", "<leader>f", require("fzf-lua").files, { desc = "FZF Files" })
+-- 		vim.keymap.set("n", "<leader>g", require("fzf-lua").live_grep, { desc = "FZF Grep" })
+-- 		vim.keymap.set("n", "<leader><leader>f", require("fzf-lua").grep_cword, { desc = "FZF Word" })
+-- 		vim.keymap.set("v", "<leader><leader>g", require("fzf-lua").grep_visual, { desc = "FZF Selection" })
+-- 	end,
+-- }
+return {}

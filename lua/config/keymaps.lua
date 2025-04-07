@@ -26,7 +26,7 @@ keymap.set("n", "<C-m>", "^", { noremap = true })
 keymap.set("n", "<C-,>", "g_", { noremap = true })
 
 -- Select all
-keymap.set("n", "<M-a>", "gg<S-v>G", { desc = "Select all" })
+keymap.set("n", "<M-g>", "gg<S-v>G", { desc = "Select all" })
 
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
