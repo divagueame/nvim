@@ -29,7 +29,7 @@ return {
 			---Add comment on the line below
 			below = "gco",
 			---Add comment at the end of line
-			eol = ";a",
+			eol = ";aa",
 		},
 		---Enable keybindings
 		---NOTE: If given `false` then the plugin won't create any mappings
