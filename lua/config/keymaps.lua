@@ -131,8 +131,11 @@ vim.api.nvim_set_keymap("n", "dd", '"_dd', { noremap = true })
 -- Prevent losing yanked worked when pasting
 keymap.set("v", "p", '"_dP', { noremap = true })
 
+-- Change current word for the last yanked word
+vim.api.nvim_set_keymap("n", "<Leader>pp", [["_diwP"]], { noremap = true, silent = true })
+
 -- Paste below
-vim.api.nvim_set_keymap("n", "<Leader>p", "o<Esc>p", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>P", "o<Esc>p", { noremap = true, silent = true })
 
 -- Start/Stop recording register
 vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
