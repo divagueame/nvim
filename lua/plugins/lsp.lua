@@ -52,6 +52,13 @@ return {
 			-- "hrsh7th/cmp-nvim-lsp", -- Allows extra capabilities provided by nvim-cmp
 		},
 		config = function()
+			vim.diagnostic.config({
+				virtual_text = true, -- Show inline text
+				signs = true, -- Show signs in gutter
+				underline = true, -- Underline problem areas
+				update_in_insert = false, -- Optional: delay updates while typing
+			})
+
 			-- LspAttach
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
