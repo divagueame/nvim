@@ -51,37 +51,37 @@ keymap.set({ "v", "n" }, "su", SaveAndCloseBuffer, { noremap = true, silent = tr
 -- keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
 
 -- Delete all buffers but the current one
-vim.keymap.set(
-	"n",
-	"<leader>bq",
-	'<Esc>:%bdelete|edit #|normal`"<Return>',
-	{ desc = "Delete other buffers but the current one" }
-)
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>bq",
+-- 	'<Esc>:%bdelete|edit #|normal`"<Return>',
+-- 	{ desc = "Delete other buffers but the current one" }
+-- )
 
 -- Move half page
 keymap.set("n", "J", ":normal! 20j<CR>", opts)
 keymap.set("n", "K", ":normal! 20k<CR>", opts)
 
 -- Position cursor at the middle of the screen after scrolling half page
-vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Scroll down half a page and center the cursor
-vim.keymap.set("n", "<C-u>", "<C-u>zz") -- Scroll up half a page and center the cursor
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Scroll down half a page and center the cursor
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz") -- Scroll up half a page and center the cursor
 
 -- Resize panes
-keymap.set("n", "<leader>wk", function()
-	vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
-end, vim.tbl_extend("force", opts, { desc = " + window height" }))
-
-keymap.set("n", "<leader>wj", function()
-	vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
-end, vim.tbl_extend("force", opts, { desc = " - window height" }))
-
-keymap.set("n", "<leader>wh", function()
-	vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
-end, vim.tbl_extend("force", opts, { desc = " + window width" }))
-
-keymap.set("n", "<leader>wl", function()
-	vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
-end, vim.tbl_extend("force", opts, { desc = " - window width" }))
+-- keymap.set("n", "<leader>wk", function()
+-- 	vim.cmd("exe 'resize ' .. (winheight(0) + 6)")
+-- end, vim.tbl_extend("force", opts, { desc = " + window height" }))
+--
+-- keymap.set("n", "<leader>wj", function()
+-- 	vim.cmd("exe 'resize ' .. (winheight(0) - 6)")
+-- end, vim.tbl_extend("force", opts, { desc = " - window height" }))
+--
+-- keymap.set("n", "<leader>wh", function()
+-- 	vim.cmd("exe 'vertical resize ' .. (winwidth(0) + 6)")
+-- end, vim.tbl_extend("force", opts, { desc = " + window width" }))
+--
+-- keymap.set("n", "<leader>wl", function()
+-- 	vim.cmd("exe 'vertical resize ' .. (winwidth(0) - 6)")
+-- end, vim.tbl_extend("force", opts, { desc = " - window width" }))
 
 -- Toggle Diagnostics
 local diagnostics_active = true
@@ -134,6 +134,9 @@ keymap.set("v", "p", '"_dP', { noremap = true })
 -- Change current word for the last yanked word
 vim.api.nvim_set_keymap("n", "<Leader>pp", [["_diwP"]], { noremap = true, silent = true })
 
+-- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
+vim.keymap.set("i", "<C-b>", "<C-o>de")
+
 -- Paste below
 vim.api.nvim_set_keymap("n", "<Leader>P", "o<Esc>p", { noremap = true, silent = true })
 
@@ -142,21 +145,21 @@ vim.api.nvim_set_keymap("n", "qq", "q", { noremap = true })
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true }) -- Disable the default 'q' binding
 
 -- Change Ctrl+w + o to call the print function
-vim.api.nvim_set_keymap(
-	"n",
-	"<C-w>o",
-	':lua require("config.utils").Display_error("CAPS + v")<CR>',
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap("n", "<F6>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"<C-w>o",
+-- 	':lua require("config.utils").Display_error("CAPS + v")<CR>',
+-- 	{ noremap = true, silent = true }
+-- )
+-- vim.api.nvim_set_keymap("n", "<F6>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
 
 -- Lua function to redirect the output of :verbose map to a new buffer
-function ShowVerboseMap()
-	local output = vim.fn.systemlist('nvim -u NONE -c "verbose map"')
-	vim.cmd("new")
-	vim.api.nvim_buf_set_lines(0, 0, -1, false, output)
-end
-vim.api.nvim_set_keymap("n", "<Leader>m", ":lua ShowVerboseMap()<CR>", { noremap = true, silent = true })
+-- function ShowVerboseMap()
+-- 	local output = vim.fn.systemlist('nvim -u NONE -c "verbose map"')
+-- 	vim.cmd("new")
+-- 	vim.api.nvim_buf_set_lines(0, 0, -1, false, output)
+-- end
+-- vim.api.nvim_set_keymap("n", "<Leader>m", ":lua ShowVerboseMap()<CR>", { noremap = true, silent = true })
 
 -- Move focus to the left split with CAPS + j
 vim.api.nvim_set_keymap(
@@ -194,61 +197,58 @@ vim.api.nvim_set_keymap(
 )
 
 -- Toggle diagnostics
-vim.api.nvim_set_keymap(
-	"n",
-	"<C-b>",
-	":lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>",
-	{ noremap = true, silent = true }
-)
-
--- Show messages
-vim.api.nvim_set_keymap("n", "<F6>m", ":messages<CR>", { noremap = true, silent = true })
-
--- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
-vim.keymap.set("i", "<C-b>", "<C-o>de")
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"<C-b>",
+-- 	":lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>",
+-- 	{ noremap = true, silent = true }
+-- )
+--
+-- -- Show messages
+-- vim.api.nvim_set_keymap("n", "<F6>m", ":messages<CR>", { noremap = true, silent = true })
 
 -- Accessories
 -- Toggle display mode for cursor location
-local display_cursor_mode = false
-function ToggleCursorLocation()
-	vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2D3B3B", fg = "#CFD9E6" })
-	vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#2D3B3B", fg = "#CFD9E6" })
-	display_cursor_mode = not display_cursor_mode
-
-	if display_cursor_mode then
-		vim.o.ruler = true -- Show cursor position in the status line
-		vim.o.cursorline = true -- Highlight the current line
-		vim.o.cursorcolumn = true -- Highlight the current column
-		print("Cursor location display: ON")
-	else
-		vim.o.ruler = false
-		vim.o.cursorline = false
-		vim.o.cursorcolumn = false
-		print("Cursor location display: OFF")
-	end
-end
-vim.keymap.set("n", "<leader>ac", ToggleCursorLocation, { desc = "Toggle cursor location display" })
+-- local display_cursor_mode = false
+-- function ToggleCursorLocation()
+-- 	vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2D3B3B", fg = "#CFD9E6" })
+-- 	vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#2D3B3B", fg = "#CFD9E6" })
+-- 	display_cursor_mode = not display_cursor_mode
+--
+-- 	if display_cursor_mode then
+-- 		vim.o.ruler = true -- Show cursor position in the status line
+-- 		vim.o.cursorline = true -- Highlight the current line
+-- 		vim.o.cursorcolumn = true -- Highlight the current column
+-- 		print("Cursor location display: ON")
+-- 	else
+-- 		vim.o.ruler = false
+-- 		vim.o.cursorline = false
+-- 		vim.o.cursorcolumn = false
+-- 		print("Cursor location display: OFF")
+-- 	end
+-- end
+-- vim.keymap.set("n", "<leader>ac", ToggleCursorLocation, { desc = "Toggle cursor location display" })
 
 -- Toggle line wrapping
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>al",
-	":set wrap!<CR>",
-	{ noremap = true, silent = true, desc = "Toggle Line Wrap" }
-)
-vim.api.nvim_create_user_command("ToggleWrap", function()
-	vim.wo.wrap = not vim.wo.wrap
-	print("Line wrap is now " .. (vim.wo.wrap and "on" or "off"))
-end, {})
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"<leader>al",
+-- 	":set wrap!<CR>",
+-- 	{ noremap = true, silent = true, desc = "Toggle Line Wrap" }
+-- )
+-- vim.api.nvim_create_user_command("ToggleWrap", function()
+-- 	vim.wo.wrap = not vim.wo.wrap
+-- 	print("Line wrap is now " .. (vim.wo.wrap and "on" or "off"))
+-- end, {})
 
 -- References
-vim.keymap.set("n", "gr", function()
-	local win = vim.api.nvim_get_current_win()
-	vim.lsp.buf.references(nil, {
-		on_list = function(items, title, context)
-			vim.fn.setqflist({}, " ", items)
-			vim.cmd.copen()
-			vim.api.nvim_set_current_win(win)
-		end,
-	})
-end)
+-- vim.keymap.set("n", "gr", function()
+-- 	local win = vim.api.nvim_get_current_win()
+-- 	vim.lsp.buf.references(nil, {
+-- 		on_list = function(items, title, context)
+-- 			vim.fn.setqflist({}, " ", items)
+-- 			vim.cmd.copen()
+-- 			vim.api.nvim_set_current_win(win)
+-- 		end,
+-- 	})
+-- end)

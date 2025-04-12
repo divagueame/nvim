@@ -18,9 +18,9 @@ vim.api.nvim_create_autocmd({
 }, { desc = "autosave", pattern = "*", command = "silent! update" })
 
 -- Help full window
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "help",
-	callback = function()
-		vim.cmd("only") -- Close all other splits
-	end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "help",
+-- 	callback = function()
+-- 		vim.cmd("only") -- Close all other splits
+-- 	end,
+-- })

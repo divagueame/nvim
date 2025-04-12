@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "global": "^4.4.0",
-    "tree-sitter-cli": "^0.22.6"
-  }
-}
