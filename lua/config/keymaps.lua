@@ -248,7 +248,11 @@ vim.api.nvim_set_keymap(
 -- 		on_list = function(items, title, context)
 -- 			vim.fn.setqflist({}, " ", items)
 -- 			vim.cmd.copen()
--- 			vim.api.nvim_set_current_win(win)
+-- 			vim.api.nvim_set_current_win(win)	
 -- 		end,
 -- 	})
 -- end)
+--
+
+
+vim.keymap.set("n", "-", "<cmd>Oil --float<CR>", { desc = "Open oil parent folder" })
