@@ -255,4 +255,4 @@ vim.api.nvim_set_keymap(
 --
 
 
-vim.keymap.set("n", "-", "<cmd>Oil --float<CR>", { desc = "Open oil parent folder" })
+vim.keymap.set("n", ")", "<cmd>Oil --float<CR>", { desc = "Open oil parent folder" })
