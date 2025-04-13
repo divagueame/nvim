@@ -25,8 +25,8 @@
 -- vim.opt.tabstop = 2
 -- vim.opt.shiftwidth = 2
 --
--- -- Clipboard
--- vim.opt.clipboard = "unnamedplus"
+-- Clipboard
+vim.opt.clipboard = "unnamedplus"
 --
 -- -- Scroll offset - Max will keep the scroll centered when possible
 -- vim.opt.scrolloff = 12

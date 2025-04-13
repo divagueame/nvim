@@ -1,3 +1,13 @@
+local function live_grep_cwd()
+  require("fzf-lua").fzf_exec("fd --type d", {
+  actions = {
+    ["default"] = function(sel, opts)
+      require("fzf-lua").live_grep({ cwd = sel[1] })
+    end,
+  },
+})
+end
+
 return {
     "ibhagwan/fzf-lua",
     -- optional for icon support
@@ -7,6 +17,12 @@ return {
     opts = {},
     keys={
         { 
+            "<leader>fq",
+            live_grep_cwd,
+            desc="Grep in a folder"
+        },
+
+        { 
             "<leader>ff",
             function() require('fzf-lua').files() end,
             desc="Find Files in project directory"
@@ -14,12 +30,12 @@ return {
         { 
             "<leader>fg",
             function() require('fzf-lua').live_grep() end,
-            desc="Find by grepping in project directory"
+            desc="[F]ind by grepping in project directory"
         },
         { 
             "<leader>fc",
             function() require('fzf-lua').files({cwd=vim.fn.stdpath("config")}) end,
-            desc="Find in neovim configuration"
+            desc="[F]ind in neovim configuration"
         },
         {
             "<leader>fh",
