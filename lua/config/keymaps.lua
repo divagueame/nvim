@@ -256,3 +256,11 @@ vim.api.nvim_set_keymap(
 
 
 vim.keymap.set("n", ")", "<cmd>Oil --float<CR>", { desc = "Open oil parent folder" })
+vim.keymap.set("n", "gl", function()
+	vim.diagnostic.open_float()
+end, { desc = "Open diagnostics in a float" })
+vim.keymap.set("n", "<leader>cf", function()
+	require("conform").format({
+		lsp_format = "fallback",
+	})
+end, { desc = "Format current file" })
