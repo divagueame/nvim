@@ -162,6 +162,32 @@ return {
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+		local border = {
+			{ "┌", "FloatBorder" },
+			{ "─", "FloatBorder" },
+			{ "┐", "FloatBorder" },
+			{ "│", "FloatBorder" },
+			{ "┘", "FloatBorder" },
+			{ "─", "FloatBorder" },
+			{ "└", "FloatBorder" },
+			{ "│", "FloatBorder" },
+		}
+
+		local handlers = {
+			["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+				border = border,
+
+				width = 800,
+			}),
+			["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+				border = border,
+				width = 80,
+			}),
+		}
+		local mason_registry = require("mason-registry")
+		local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+			.. "/node_modules/@vue/language-server"
 		local servers = {
 			bashls = {},
 			marksman = {},
@@ -175,9 +201,21 @@ return {
 			--    https://github.com/pmizio/typescript-tools.nvim
 			--
 			-- But for many setups, the LSP (`ts_ls`) will work just fine
-			-- ts_ls = {},
 			--
-
+			ts_ls = {
+				handlers = handlers,
+				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+				init_options = {
+					plugins = {
+						{
+							name = "@vue/typescript-plugin",
+							location = vue_language_server_path,
+							-- languages = { "vue" },
+							languages = { "javascript", "typescript", "vue" },
+						},
+					},
+				},
+			},
 			lua_ls = {
 				-- cmd = { ... },
 				-- filetypes = { ... },
@@ -194,8 +232,6 @@ return {
 			},
 		}
 
-		-- You can add other tools here that you want Mason to install
-		-- for you, so that they are available from within Neovim.
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
 			"stylua", -- Used to format Lua code
