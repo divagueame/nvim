@@ -18,8 +18,8 @@ keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true })
 keymap.set("i", "JJ", "<Esc>:m .+1<CR>==gi", { noremap = true })
 keymap.set("i", "KK", "<Esc>:m .-2<CR>==gi", { noremap = true })
-keymap.set("n", "J", ":m .+1<CR>==", { noremap = true })
-keymap.set("n", "K", ":m .-2<CR>==", { noremap = true })
+keymap.set("n", "<A-j>", ":m .+1<CR>==", { noremap = true })
+keymap.set("n", "<A-k>", ":m .-2<CR>==", { noremap = true })
 
 -- Move to the end and beginning
 keymap.set("n", "<C-m>", "^", { noremap = true })
