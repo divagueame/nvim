@@ -2,7 +2,7 @@ return {
 	"folke/flash.nvim",
 	event = "VeryLazy",
 	opts = {},
-	eys = {
+	keys = {
 		{
 			"e",
 			mode = { "n", "x", "o" },
