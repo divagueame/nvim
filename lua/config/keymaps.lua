@@ -18,6 +18,9 @@ keymap.set("i", "KK", "<Esc>:m .-2<CR>==gi", { noremap = true })
 keymap.set("n", "J", ":m .+1<CR>==", { noremap = true })
 keymap.set("n", "K", ":m .-2<CR>==", { noremap = true })
 
+-- Quick word change
+keymap.set("n", "<leader><CR>", "ciw", { desc = "Exit Insert Mode" })
+
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 
