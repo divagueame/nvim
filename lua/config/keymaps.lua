@@ -26,7 +26,10 @@ keymap.set("n", "<C-m>", "^", { noremap = true })
 keymap.set("n", "<C-,>", "g_", { noremap = true })
 
 -- Select all
-keymap.set("n", "<M-g>", "gg<S-v>G", { desc = "Select all" })
+keymap.set("n", "<M-G>", "gg<S-v>G", { desc = "Select all" })
+
+-- Yank all
+keymap.set("n", "<M-g>", "gg<S-v>Gy", { desc = "Copy all" })
 
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)

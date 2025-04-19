@@ -6,19 +6,12 @@
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 --
--- -- Line number
--- vim.opt.number = true
--- vim.opt.relativenumber = true
---
 -- -- Split target
 -- vim.opt.splitbelow = true
 -- vim.opt.splitright = true
 --
 -- -- Line wrap
 -- vim.opt.wrap = false
---
--- -- Hide Model on cmd line
--- vim.opt.showmode = false
 --
 -- -- Tab
 -- vim.opt.expandtab = true
@@ -34,8 +27,6 @@ vim.opt.clipboard = "unnamedplus"
 -- -- Split when sustitute
 -- vim.opt.inccommand = "split"
 --
--- -- Ignore case when search / :commands
--- vim.opt.ignorecase = true
 --
 -- -- Set highlight on search
 -- vim.o.hlsearch = false
@@ -52,15 +43,17 @@ vim.opt.clipboard = "unnamedplus"
 -- vim.opt.shortmess:append("I")
 -- -- vim.cmd "set whichwrap+=<,>,[,],h,l"
 --
--- -- sync buffers automatically
--- vim.opt.autoread = true
 -- -- disable neovim generating a swapfile and showing the error
 -- vim.opt.swapfile = false
---
--- -- Remove 'file saved message'
--- vim.opt.shortmess:append("ac")
 
+-- sync buffers automatically
+vim.opt.autoread = true
 
+-- Remove 'file saved message'
+vim.opt.shortmess:append("ac")
+
+-- Ignore case when search / :commands
+vim.opt.ignorecase = true
 
 vim.opt.expandtab = true -- Convert tabs to spaces
 vim.opt.shiftwidth = 4 -- Amount to indent with << and >>
@@ -104,12 +97,11 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.list = false
+-- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
-
-
+-- Hide Mode on cmd line
+vim.opt.showmode = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 5
-
+vim.opt.scrolloff = 10
