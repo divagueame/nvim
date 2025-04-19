@@ -33,7 +33,7 @@ keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
 
 -- Close all other splits and focus on the current one
-keymap.set("n", "so", ":wincmd o<CR>", { noremap = true, silent = true })
+keymap.set("n", "sy", ":wincmd o<CR>", { noremap = true, silent = true })
 
 -- Buffer navigation
 -- vim.keymap.set("n", "<Tab>j", ":bnext<CR>", { desc = "Go to the next buffer" })
@@ -47,7 +47,7 @@ function SaveAndCloseBuffer()
 	vim.cmd("silent! bdelete")
 end
 
-keymap.set({ "v", "n" }, "su", SaveAndCloseBuffer, { noremap = true, silent = true, desc = "Save & Close buffer" })
+keymap.set({ "v", "n" }, "sh", SaveAndCloseBuffer, { noremap = true, silent = true, desc = "Save & Close buffer" })
 -- keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
 
 -- Delete all buffers but the current one
@@ -248,12 +248,11 @@ vim.api.nvim_set_keymap(
 -- 		on_list = function(items, title, context)
 -- 			vim.fn.setqflist({}, " ", items)
 -- 			vim.cmd.copen()
--- 			vim.api.nvim_set_current_win(win)	
+-- 			vim.api.nvim_set_current_win(win)
 -- 		end,
 -- 	})
 -- end)
 --
-
 
 vim.keymap.set("n", ")", "<cmd>Oil --float<CR>", { desc = "Open oil parent folder" })
 vim.keymap.set("n", "gl", function()
