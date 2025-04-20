@@ -50,7 +50,7 @@ function SaveAndCloseBuffer()
 	vim.cmd("silent! bdelete")
 end
 
-keymap.set({ "v", "n" }, "sh", SaveAndCloseBuffer, { noremap = true, silent = true, desc = "Save & Close buffer" })
+keymap.set({ "v", "n" }, "sa", SaveAndCloseBuffer, { noremap = true, silent = true, desc = "Save & Close buffer" })
 -- keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
 
 -- Delete all buffers but the current one
@@ -123,7 +123,7 @@ vim.keymap.set("n", "qk", ":cprev<CR>", { desc = "Previous quickfix item" })
 vim.keymap.set("n", "<leader>qd", ":cdo ", { desc = "Execute command on quickfix items" })
 
 -- Clear quickfix list
-vim.keymap.set("n", "qx", function()
+vim.keymap.set("n", "qy", function()
 	vim.fn.setqflist({})
 	print("Quickfix list cleared")
 end, { desc = "Clear quickfix list" })

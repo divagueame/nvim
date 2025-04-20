@@ -20,14 +20,14 @@ return {
 		-- 	end,
 		-- },
 		{
-			"<leader>db",
+			"<leader>dh",
 			function()
 				require("dap").toggle_breakpoint()
 			end,
 			desc = "Toggle breakpoint",
 		},
 		{
-			"<leader>dw",
+			"<leader>dy",
 			function()
 				require("dap").run_to_cursor()
 			end,
@@ -35,13 +35,12 @@ return {
 			desc = "Run to cursor",
 		},
 		{
-			"<leader>dc",
+			"<leader>d<leader>",
 			function()
 				require("dap").continue()
 			end,
 			desc = "Continue",
 		},
-
 		{
 			"<leader>dj",
 			function()
@@ -71,18 +70,32 @@ return {
 			desc = "Pause",
 		},
 		{
-			"<leader>dt",
+			"<leader>d<tab>",
 			function()
 				require("dap").terminate()
 			end,
 			desc = "Terminate",
 		},
 		{
-			"<leader>dr",
+			"<leader>dl",
 			function()
 				require("dap").restart()
 			end,
 			desc = "Restart",
+		},
+		{
+			"<leader>dm",
+			function()
+				require("dap").up()
+			end,
+			desc = "Move up the stack",
+		},
+		{
+			"<leader>d,",
+			function()
+				require("dap").down()
+			end,
+			desc = "Move down the stack",
 		},
 		-- {
 		-- 	"<leader>d;",
@@ -241,13 +254,13 @@ return {
 		local frames = widgets.sidebar(widgets.frames, { height = 10 }, "belowright split")
 		local repl = require("dap.repl")
 
-		vim.keymap.set("n", "<leader>da", function()
+		vim.keymap.set("n", "<leader>d/", function()
 			return repl.toggle({}, "belowright split")
 		end)
 
 		vim.keymap.set("n", "<leader>ds", scopes.toggle)
-		vim.keymap.set("n", "<leader>du", frames.toggle)
-		vim.keymap.set("n", "<leader>dh", widgets.hover)
+		vim.keymap.set("n", "<leader>df", frames.toggle)
+		vim.keymap.set("n", "<leader>dn", widgets.hover)
 		-- Setup Dap UI
 		-- dapui.setup()
 		-- require("dapui").setup({
