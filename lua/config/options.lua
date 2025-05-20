@@ -102,3 +102,5 @@ vim.opt.showmode = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+-- views can only be fully collapsed with the global statusline -- avante nvim
+vim.opt.laststatus = 3
