@@ -12,8 +12,8 @@ keymap.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
 
 -- Move lines up and down
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
-keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true })
 keymap.set("i", "JJ", "<Esc>:m .+1<CR>==gi", { noremap = true })
+keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true })
 keymap.set("i", "KK", "<Esc>:m .-2<CR>==gi", { noremap = true })
 keymap.set("n", "J", ":m .+1<CR>==", { noremap = true })
 keymap.set("n", "K", ":m .-2<CR>==", { noremap = true })
@@ -55,8 +55,8 @@ vim.keymap.set(
 )
 
 -- Move half page
-keymap.set("n", "<C-j>", ":normal! 20j<CR>", opts)
-keymap.set("n", "<C-k>", ":normal! 20k<CR>", opts)
+keymap.set("n", "<C-d>", ":normal! 20j<CR>", opts)
+keymap.set("n", "<C-u>", ":normal! 20k<CR>", opts)
 
 -- Position cursor at the middle of the screen after scrolling half page
 vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Scroll down half a page and center the cursor
@@ -142,39 +142,41 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap("n", "<F6>v", ":only<CR>", { noremap = true, silent = true, desc = "Remove all splits" })
 
 -- Move focus to the left split with CAPS + j
+-- vim.api.nvim_set_keymap(
+-- 	"n",
+-- 	"<C-w>h",
+-- 	':lua require("config.utils").Display_error("CAPS + j")<CR>',
+-- 	{ noremap = true, silent = true }
+-- )
 vim.api.nvim_set_keymap(
 	"n",
-	"<C-w>h",
-	':lua require("config.utils").Display_error("CAPS + j")<CR>',
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<F6>h",
+	"<C-h>",
 	":wincmd h<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the left split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F6>l",
+	"<C-l>",
 	":wincmd l<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the right split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F6>k",
+	"<C-k>",
 	":wincmd k<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
 
 vim.api.nvim_set_keymap(
 	"n",
-	"<F6>j",
+	"<C-j>",
 	":wincmd j<CR>",
 	{ noremap = true, silent = true, desc = "Move focus to the top split" }
 )
+
+keymap.set("n", "sy", ":wincmd o<CR>", { noremap = true, silent = true })
 
 -- Toggle diagnostics
 vim.api.nvim_set_keymap(
