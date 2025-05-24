@@ -2,7 +2,8 @@ return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		"nvim-neotest/nvim-nio",
-		"rcarriga/nvim-dap-ui",
+		-- "rcarriga/nvim-dap-ui",
+		"theHamsta/nvim-dap-virtual-text",
 		-- build debugger from source
 		{
 			"microsoft/vscode-js-debug",
@@ -11,21 +12,22 @@ return {
 		},
 	},
 	keys = {
+		-- {
+		-- 	"<leader>du",
+		-- 	function()
+		-- 		print("--- to")
+		-- 		require("dapui").toggle()
+		-- 	end,
+		-- },
 		{
-			"<leader>du",
-			function()
-				require("dapui").toggle()
-			end,
-		},
-		{
-			"<leader>db",
+			"<leader>dh",
 			function()
 				require("dap").toggle_breakpoint()
 			end,
 			desc = "Toggle breakpoint",
 		},
 		{
-			"<leader>dw",
+			"<leader>dy",
 			function()
 				require("dap").run_to_cursor()
 			end,
@@ -33,13 +35,12 @@ return {
 			desc = "Run to cursor",
 		},
 		{
-			"<leader>dc",
+			"<leader>d<leader>",
 			function()
 				require("dap").continue()
 			end,
 			desc = "Continue",
 		},
-
 		{
 			"<leader>dj",
 			function()
@@ -69,23 +70,62 @@ return {
 			desc = "Pause",
 		},
 		{
-			"<leader>dt",
+			"<leader>d<tab>",
 			function()
 				require("dap").terminate()
 			end,
 			desc = "Terminate",
 		},
 		{
-			"<leader>dr",
+			"<leader>dl",
 			function()
 				require("dap").restart()
 			end,
 			desc = "Restart",
 		},
+		{
+			"<leader>dm",
+			function()
+				require("dap").up()
+			end,
+			desc = "Move up the stack",
+		},
+		{
+			"<leader>d,",
+			function()
+				require("dap").down()
+			end,
+			desc = "Move down the stack",
+		},
+		-- {
+		-- 	"<leader>d;",
+		-- 	function()
+		-- 		require("dap").repl.open()
+		-- 		-- require("dap").repl.toggle(nil, "tab split")
+		-- 	end,
+		-- 	desc = "Toggle DAP REPL",
+		-- },
+		-- {
+		-- 	"<leader>do",
+		-- 	function()
+		-- 		local widgets = require("dap.ui.widgets")
+		-- 		widgets.centered_float(widgets.frames)
+		-- 	end,
+		-- 	desc = "DAP Scopes",
+		-- },
+		-- {
+		-- 	"<leader>ds",
+		-- 	function()
+		-- 		local widgets = require("dap.ui.widgets")
+		-- 		widgets.centered_float(widgets.scopes, { border = "rounded" })
+		-- 	end,
+		-- 	desc = "DAP Scopes",
+		-- },
 	},
 
-	config = function()
-		local dap, dapui = require("dap"), require("dapui")
+	config = function(_, opts)
+		local dap = require("dap")
+		-- local dap, dapui = require("dap"), require("dapui")
 		--- Gets a path to a package in the Mason registry.
 		--- Prefer this to `get_package`, since the package might not always be
 		--- available yet and trigger errors.
@@ -173,12 +213,80 @@ return {
 				},
 			}
 		end
+		-- Setup Virtual Text
+		require("nvim-dap-virtual-text").setup({
+			comment = true,
+			virt_text_pos = "eol",
+		})
 
-		dapui.setup()
-		dap.listeners.after.event_initialized["dapui_config"] = function()
-			dapui.open({ reset = true })
-		end
-		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-		dap.listeners.before.event_exited["dapui_config"] = dapui.close
+		vim.fn.sign_define("DapBreakpoint", {
+			text = "🔴",
+			texthl = "DapBreakpoint",
+			linehl = "",
+			numhl = "",
+		})
+
+		vim.fn.sign_define("DapBreakpointCondition", {
+			text = "🟡",
+			texthl = "DapBreakpointCondition",
+			linehl = "",
+			numhl = "",
+		})
+
+		vim.fn.sign_define("DapBreakpointRejected", {
+			text = "⭕",
+			texthl = "DapBreakpointRejected",
+			linehl = "",
+			numhl = "",
+		})
+
+		vim.fn.sign_define("DapStopped", {
+			text = "->",
+			texthl = "DiagnosticHint",
+			numhl = "",
+		})
+
+		local widgets = require("dap.ui.widgets")
+
+		-- set scopes as right pane
+		local scopes = widgets.sidebar(widgets.scopes, {}, "vsplit")
+		-- set frames as bottom pane
+		local frames = widgets.sidebar(widgets.frames, { height = 10 }, "belowright split")
+		local repl = require("dap.repl")
+
+		vim.keymap.set("n", "<leader>d/", function()
+			return repl.toggle({}, "belowright split")
+		end)
+
+		vim.keymap.set("n", "<leader>ds", scopes.toggle)
+		vim.keymap.set("n", "<leader>df", frames.toggle)
+		vim.keymap.set("n", "<leader>dn", widgets.hover)
+		-- Setup Dap UI
+		-- dapui.setup()
+		-- require("dapui").setup({
+		-- 	layouts = {
+		-- 		{
+		-- 			elements = {
+		-- 				{ id = "scopes", size = 1.0 }, -- 100% of the layout
+		-- 			},
+		-- 			size = 16, -- Height of the bottom window in lines
+		-- 			position = "bottom", -- Can be "top", "left", "right", or "bottom"
+		-- 		},
+		-- 	},
+		-- })
+		-- dapui.setup({
+		-- 	layouts = {
+		-- 		elements = {
+		-- 			{ id = "scopes", size = 1.0 }, -- 100% of the layout
+		-- 		},
+		-- 		size = 10, -- Height of the bottom window in lines
+		-- 		position = "bottom", -- Can be "top", "left", "right", or "bottom"
+		-- 	},
+		-- })
+		-- dap.listeners.after.event_initialized["dapui_config"] = function()
+		-- 	dapui.open({ reset = true })
+		-- end
+		-- dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+		-- dap.listeners.before.event_exited["dapui_config"] = dapui.close
 	end,
 }
