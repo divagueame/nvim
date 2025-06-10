@@ -189,6 +189,7 @@ return {
 				end,
 				desc = "CopilotChat - Ask input",
 			},
+			{ "<leader>c<leader>", "<cmd>CopilotChatToggle<CR>", desc = "Toggle Chat panel" },
 			{
 				"<leader>cm",
 				"<cmd>CopilotChatCommit<cr>",

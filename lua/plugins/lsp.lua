@@ -234,7 +234,7 @@ return {
 				lua = { "stylua" },
 				json = { "prettier" },
 				javascript = { "prettier" },
-				typescript = { "prettier" },
+				typescript = { "biome" },
 				python = { "ruff", "black" },
 				markdown = { "prettier" },
 				sql = { "sqlfmt" },
