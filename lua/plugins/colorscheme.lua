@@ -1,4 +1,3 @@
--- return {
 -- 	{
 -- 		"sainnhe/gruvbox-material",
 -- 		lazy = false,
@@ -60,6 +59,8 @@ return {
 			end,
 		})
 		vim.cmd("colorscheme kanagawa")
+
+		vim.api.nvim_set_hl(0, "Visual", { bg = "#232323" }) -- Replace "#ff79c6" with a brighter background color
 	end,
 	build = function()
 		vim.cmd("KanagawaCompile")

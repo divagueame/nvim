@@ -44,7 +44,7 @@ function SaveAndCloseBuffer()
 end
 
 keymap.set({ "v", "n" }, "<Tab>u", SaveAndCloseBuffer, { noremap = true, silent = true, desc = "Save & Close buffer" })
-keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
+-- keymap.set("n", "<Tab>i", ":Telescope buffers<CR>", { noremap = true })
 
 -- Delete all buffers but the current one
 vim.keymap.set(
