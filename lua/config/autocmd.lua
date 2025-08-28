@@ -24,3 +24,16 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.cmd("only") -- Close all other splits
 	end,
 })
+
+local log_group = vim.api.nvim_create_augroup("LogFileSettings", { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = log_group,
+	pattern = "*.log",
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.linebreak = true
+		vim.opt_local.breakindent = true
+		vim.opt_local.showbreak = "↳ "
+	end,
+})

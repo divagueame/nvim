@@ -53,9 +53,13 @@ return {
 				require("gitsigns").preview_hunk()
 			end, { desc = "Preview buffer" })
 
-			vim.keymap.set("n", "<leader>sb", function()
+			vim.keymap.set("n", "<leader><leader>bb", function()
 				require("gitsigns").toggle_current_line_blame()
 			end, { desc = "Toggle line blame" })
+
+			vim.keymap.set("n", "MMM", function()
+				require("gitsigns").blame_line()
+			end, { desc = "Blame line" })
 
 			vim.keymap.set("n", "<leader>sc", function()
 				require("gitsigns").preview_hunk_inline()

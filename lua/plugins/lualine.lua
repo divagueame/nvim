@@ -38,7 +38,53 @@ return {
           },
         },
         -- lualine_x = { 'fileformat', 'filetype'},
-        lualine_x = {},
+        lualine_x = {
+				{
+					function()
+						-- Function to get current linter (same logic as in lint-format.lua)
+						local function get_project_linter_for_statusline()
+							local eslint_configs = {
+								".eslintrc.js", ".eslintrc.cjs", ".eslintrc.yaml", ".eslintrc.yml",
+								".eslintrc.json", ".eslintrc", "eslint.config.js", "eslint.config.mjs"
+							}
+							
+							for _, config in ipairs(eslint_configs) do
+								if vim.fn.filereadable(config) == 1 then
+									return "ESLint"
+								end
+							end
+							
+							-- Check package.json
+							if vim.fn.filereadable("package.json") == 1 then
+								local package_json = vim.fn.readfile("package.json")
+								if package_json and #package_json > 0 then
+									local content = table.concat(package_json, "")
+									if content:find('"eslintConfig"') or content:find('"eslint"') then
+										return "ESLint"
+									end
+								end
+							end
+							
+							local biome_configs = { "biome.json", "biome.jsonc" }
+							for _, config in ipairs(biome_configs) do
+								if vim.fn.filereadable(config) == 1 then
+									return "Biome"
+								end
+							end
+							
+							return "Biome" -- default
+						end
+						
+						-- Only show for relevant file types
+						local ft = vim.bo.filetype
+						if ft == "javascript" or ft == "typescript" or ft == "javascriptreact" or ft == "typescriptreact" or ft == "vue" then
+							return "󰁨 " .. get_project_linter_for_statusline()
+						end
+						return ""
+					end,
+					color = { fg = "#61AFEF" }, -- Blue color
+				},
+			},
         lualine_y = { "progress" },
         -- lualine_z = { "location" },
         lualine_z = { "branch" },
