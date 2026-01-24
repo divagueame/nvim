@@ -254,6 +254,7 @@ return {
 				zsh = { "beautysh" },
 				lua = { "stylua" },
 				json = { "prettier" },
+				html = { "prettier" },
 				javascript = { "prettier" },
 				typescript = { "biome" },
 				python = { "ruff", "black" },
