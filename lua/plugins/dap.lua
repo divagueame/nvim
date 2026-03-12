@@ -139,7 +139,8 @@ return {
 			return ret
 		end
 
-		require("dap").adapters["pwa-node"] = {
+		-- PWA - Node
+		dap.adapters["pwa-node"] = {
 			type = "server",
 			host = "localhost",
 			port = "${port}",
@@ -211,6 +212,19 @@ return {
 					type = "",
 					request = "launch",
 				},
+				{
+					type = "pwa-node",
+					request = "attach",
+					name = "Attach to Alokai Middleware",
+					port = 9229,
+					cwd = "${workspaceFolder}/../shop-middleware/apps/storefront-middleware",
+					sourceMaps = true,
+					skipFiles = { "<node_internals>/**" },
+					resolveSourceMapLocations = {
+						"${workspaceFolder}/**",
+						"!**/node_modules/**",
+					},
+				},
 			}
 		end
 		-- Setup Virtual Text
@@ -261,6 +275,21 @@ return {
 		vim.keymap.set("n", "<leader>ds", scopes.toggle)
 		vim.keymap.set("n", "<leader>df", frames.toggle)
 		vim.keymap.set("n", "<leader>dn", widgets.hover)
+
+		-- Auto-open on breakpoint hit
+		dap.listeners.after.event_initialized["dap_sidebar"] = function()
+			scopes.open()
+			frames.open()
+		end
+		dap.listeners.before.event_terminated["dap_sidebar"] = function()
+			scopes.close()
+			frames.close()
+		end
+		dap.listeners.before.event_exited["dap_sidebar"] = function()
+			scopes.close()
+			frames.close()
+		end
+
 		-- Setup Dap UI
 		-- dapui.setup()
 		-- require("dapui").setup({
@@ -288,5 +317,50 @@ return {
 		-- end
 		-- dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 		-- dap.listeners.before.event_exited["dapui_config"] = dapui.close
+
+		-- Go / Delve adapter
+		dap.adapters.delve = {
+			type = "server",
+			port = "${port}",
+			executable = {
+				command = "dlv",
+				args = { "dap", "-l", "127.0.0.1:${port}" },
+			},
+		}
+
+		-- Add a SEPARATE adapter for headless/remote connection:
+		dap.adapters.delve_headless = {
+			type = "server",
+			host = "127.0.0.1",
+			port = 2345,
+			-- no executable! just connect to the already-running dlv
+		}
+
+		dap.configurations.go = {
+			{
+				type = "delve",
+				name = "Debug",
+				request = "launch",
+				program = "${file}",
+			},
+			{
+				type = "delve",
+				name = "Debug GO",
+				request = "launch",
+				program = "${fileDirname}",
+			},
+			{
+				type = "delve",
+				name = "Attach",
+				request = "attach",
+				processId = require("dap.utils").pick_process,
+			},
+			{
+				type = "delve_headless",
+				name = "Attach headless (BubbleTea)",
+				request = "attach",
+				mode = "remote",
+			},
+		}
 	end,
 }
